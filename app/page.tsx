@@ -77,7 +77,7 @@ export default function HomePage() {
     }
   };
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen  text-foreground relative">
       {/* Top Banner */}
       <div className="bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-8 py-3 text-center">
@@ -99,7 +99,7 @@ export default function HomePage() {
       </div>
 
       {/* Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
+      <header className="sticky top-0 z-50 backdrop-blur  ">
         <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-1">
             <Feather className="w-7 h-7 text-primary " />
@@ -108,14 +108,17 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3">
             <Link href="#demo">
-              <Button className="px-5">Try It Live</Button>
+              <Button className="px-5 rounded-none">Try It Live</Button>
             </Link>
             <a
               href="https://github.com/Hookflo/tern"
               target="_blank"
               rel="noreferrer"
             >
-              <Button variant="outline" className="px-5 bg-transparent">
+              <Button
+                variant="outline"
+                className="px-5 bg-transparent rounded-none"
+              >
                 <Github className="w-4 h-4" />
                 GitHub
               </Button>
@@ -159,14 +162,14 @@ export default function HomePage() {
 
                 <div className="mt-4 flex gap-3">
                   <Link href="#demo">
-                    <Button>Try it live</Button>
+                    <Button className="rounded-none">Try it live</Button>
                   </Link>
                   <a
                     href="https://github.com/Hookflo/tern"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Button variant="outline">
+                    <Button variant="outline" className="rounded-none">
                       <Github className="w-5 h-5" />
                       View on GitHub
                     </Button>
@@ -299,7 +302,7 @@ if (result.isValid) {
                   {copied ? "Copied!" : "Copy"}
                 </Button>
               </div>
-              <pre className="p-6 text-xl font-mono text-primary-foreground bg-primary rounded-b-2xl overflow-auto">
+              <pre className="p-6 text-base font-mono text-primary-foreground bg-primary rounded-b-2xl overflow-auto">
                 npm install @hookflo/tern
               </pre>
             </div>
