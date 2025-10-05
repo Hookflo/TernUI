@@ -1,298 +1,334 @@
-import { Button } from "@/components/ui/button"
-import { Github, Shield, Zap, Code, Settings, Package, Star, GitBranch, Cpu } from "lucide-react"
+"use client";
+
+import type React from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Cpu,
+  Zap,
+  Github,
+  Code,
+  Settings,
+  Package,
+  Star,
+  GitBranch,
+  Feather,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { Geist_Mono } from "next/font/google";
+
+const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["300"] });
+
+const features = [
+  {
+    icon: <Cpu className="w-6 h-6" />,
+    title: "Self-healing architecture",
+    body: "Automatically detects and adapts to platform signature changes. No more broken webhooks when providers update their systems.",
+    bgColor: "var(--accent)",
+    fgColor: "var(--accent-foreground)",
+  },
+  {
+    icon: <Zap className="w-6 h-6" />,
+    title: "Algorithm agnostic",
+    body: "Supports HMAC-SHA256, HMAC-SHA1, HMAC-SHA512, and custom algorithms. One framework for all signature types.",
+    bgColor: "var(--accent-2)",
+    fgColor: "var(--accent-2-foreground)",
+  },
+  {
+    icon: <Settings className="w-6 h-6" />,
+    title: "Platform specific",
+    body: "Battle-tested implementations for Stripe, GitHub, Supabase, Clerk, and more — out of the box.",
+    bgColor: "var(--accent-3)",
+    fgColor: "var(--accent-3-foreground)",
+  },
+  {
+    icon: <Code className="w-6 h-6" />,
+    title: "Type safe",
+    body: "Full TypeScript support with comprehensive types. Catch errors at compile time, not runtime.",
+    bgColor: "var(--accent-4)",
+    fgColor: "var(--accent-4-foreground)",
+  },
+  {
+    icon: <GitBranch className="w-6 h-6" />,
+    title: "Framework agnostic",
+    body: "Works with Express.js, Next.js, Cloudflare Workers, Deno, and any modern JS runtime.",
+    bgColor: "var(--accent-5)",
+    fgColor: "var(--accent-5-foreground)",
+  },
+  {
+    icon: <Package className="w-6 h-6" />,
+    title: "Zero dependencies",
+    body: "Lightweight core with no external deps. Keep your bundle minimal and secure.",
+    bgColor: "var(--accent-6)",
+    fgColor: "var(--accent-6-foreground)",
+  },
+];
 
 export default function HomePage() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (textToCopy: string) => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#f5f1eb" }}>
-      {/* Header Banner */}
-      <div className="bg-zinc-900 text-white text-center py-3 px-4">
-        <p className="text-sm font-medium">
-          <a
-            href="https://github.com/Hookflo/tern"
-            className="underline hover:no-underline inline-flex items-center gap-1"
-          >
-            <Star className="w-4 h-4" />
-            Star us on GitHub
-          </a>{" "}
-          for the latest updates on Tern - Self-Healing Autonomous Webhook Verification
-        </p>
+    <div className="min-h-screen bg-background text-foreground relative">
+      {/* Top Banner */}
+      <div className="bg-primary text-primary-foreground">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-center">
+          <p className="text-sm font-medium">
+            <a
+              href="https://github.com/Hookflo/tern"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:underline underline-offset-2 no-underline inline-flex items-center gap-1"
+            >
+              Tern takes flight with your{" "}
+              <Star className="w-4 h-4 fill-yellow-400 stroke-0" /> — support us
+              on GitHub!
+            </a>
+          </p>
+        </div>
       </div>
 
       {/* Navigation */}
-      <header className="bg-transparent sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <Shield className="w-8 h-8 text-zinc-900" />
-              <span className="text-2xl font-bold text-zinc-900">Tern</span>
-            </div>
+      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <Feather className="w-7 h-7 text-primary " />
+            <span className="text-xl font-semibold tracking-tight">Tern</span>
+          </div>
 
-            {/* Navigation Links */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#home" className="font-medium text-zinc-900 hover:text-zinc-700 transition-colors">
-                Home
-              </a>
-              <a href="#features" className="font-medium text-zinc-900 hover:text-zinc-700 transition-colors">
-                Features
-              </a>
-              <a href="#examples" className="font-medium text-zinc-900 hover:text-zinc-700 transition-colors">
-                Examples
-              </a>
-              <a href="#docs" className="font-medium text-zinc-900 hover:text-zinc-700 transition-colors">
-                Docs
-              </a>
-            </nav>
-
-            {/* CTA Buttons */}
-            <div className="flex items-center space-x-3">
-              <Button className="bg-zinc-900 hover:bg-zinc-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                Try It Live
-              </Button>
-              <Button
-                variant="outline"
-                className="border-zinc-900 text-zinc-900 hover:bg-zinc-100 bg-transparent px-6 py-2 rounded-lg font-medium transition-colors"
-              >
-                <Github className="w-4 h-4 mr-2" />
+          <div className="flex items-center gap-3">
+            <Link href="#demo">
+              <Button className="px-5">Try It Live</Button>
+            </Link>
+            <a
+              href="https://github.com/Hookflo/tern"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant="outline" className="px-5 bg-transparent">
+                <Github className="w-4 h-4" />
                 GitHub
               </Button>
-            </div>
+            </a>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <div className="text-center max-w-6xl mx-auto">
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 bg-zinc-900 text-white px-4 py-2 rounded-full text-sm font-medium">
-              <Cpu className="w-4 h-4" />
-              Self-Healing • Autonomous • Algorithm-Agnostic
-            </span>
-          </div>
-
-          <h1 className="text-7xl mb-8 text-zinc-900 md:text-7xl font-serif tracking-normal leading-[] bg-transparent mt-0 font-light">
-            Verify Less,
-            <br />
-            <span className="bg-gradient-to-r from-zinc-900 to-zinc-600 bg-clip-text text-transparent">Build More</span>
-          </h1>
-
-          <p className="mb-12 leading-relaxed max-w-4xl mx-auto text-zinc-700 font-medium font-mono tracking-tighter text-xl">
-            The next-generation webhook verification framework that adapts, heals, and scales automatically.
-            <span className="text-zinc-900 font-semibold"> Zero maintenance, infinite possibilities.</span>
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-            <Button className="bg-zinc-900 hover:bg-zinc-800 text-white px-10 py-4 text-lg rounded-xl font-semibold transition-all hover:scale-105">
-              <Zap className="w-5 h-5 mr-2" />
-              Try it live
-            </Button>
-            <Button
-              variant="outline"
-              className="border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white px-10 py-4 text-lg bg-transparent rounded-xl font-semibold transition-all hover:scale-105"
-            >
-              <Github className="w-5 h-5 mr-2" />
-              View on GitHub
-            </Button>
-          </div>
-
-          {/* Loading Animation */}
-          <div className="flex justify-center mb-16">
-            <div className="flex space-x-2">
-              <div className="w-3 h-12 bg-zinc-900 rounded-full animate-pulse"></div>
-              <div className="w-3 h-12 bg-zinc-700 rounded-full animate-pulse" style={{ animationDelay: "0.2s" }}></div>
-              <div className="w-3 h-12 bg-zinc-500 rounded-full animate-pulse" style={{ animationDelay: "0.4s" }}></div>
-            </div>
-          </div>
-
-          {/* Code Demo */}
-          <div className="rounded-3xl p-10 text-left max-w-5xl mx-auto shadow-2xl opacity-100 shadow border-slate-50 border bg-sidebar-accent-foreground">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex space-x-3">
-                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-              </div>
-              <div className="text-zinc-400 text-sm font-mono">webhook-verification.ts</div>
-            </div>
-            <div className="font-mono text-base text-zinc-300 space-y-3 leading-relaxed">
-              <div className="text-emerald-400">import {"{ WebhookVerificationService }"} from '@hookflo/tern';</div>
-              <div className="text-zinc-500">
-                // Self-healing verification - adapts to platform changes automatically
-              </div>
+      {/* Hero */}
+      <main>
+        <section id="home" className="border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
-                <span className="text-blue-400">const</span> result = <span className="text-blue-400">await</span>{" "}
-                WebhookVerificationService
-              </div>
-              <div className="ml-4">
-                .<span className="text-yellow-400">verifyWithPlatformConfig</span>(
-              </div>
-              <div className="ml-8">
-                request, <span className="text-emerald-400">'stripe'</span>,{" "}
-                <span className="text-emerald-400">'whsec_your_secret'</span>
-              </div>
-              <div className="ml-4">);</div>
-              <div className="mt-6">
-                <span className="text-blue-400">if</span> (result.<span className="text-yellow-400">isValid</span>){" "}
-                {"{"}
-              </div>
-              <div className="ml-4">
-                console.<span className="text-yellow-400">log</span>(
-                <span className="text-emerald-400">'Webhook verified autonomously!'</span>, result.
-                <span className="text-yellow-400">payload</span>);
-              </div>
-              <div>{"}"}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <section id="features" className="mt-40">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-8 text-zinc-900">Why Tern Leads the Future</h2>
-            <p className="text-xl max-w-4xl mx-auto leading-relaxed text-zinc-700 font-medium">
-              Most webhook verifiers break when platforms change. Tern evolves with them,
-              <span className="text-zinc-900 font-semibold"> automatically healing and adapting</span> to keep your
-              systems running.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <Cpu className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Self-Healing Architecture</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Automatically detects and adapts to platform signature changes. No more broken webhooks when providers
-                update their systems.
-              </p>
-            </div>
-
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <Zap className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Algorithm Agnostic</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Supports HMAC-SHA256, HMAC-SHA1, HMAC-SHA512, and custom algorithms. One framework for all signature
-                types.
-              </p>
-            </div>
-
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <Settings className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Platform Specific</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Battle-tested implementations for Stripe, GitHub, Supabase, Clerk, and 20+ major platforms out of the
-                box.
-              </p>
-            </div>
-
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <Code className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Type Safe</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Full TypeScript support with comprehensive type definitions. Catch errors at compile time, not runtime.
-              </p>
-            </div>
-
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <GitBranch className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Framework Agnostic</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Works seamlessly with Express.js, Next.js, Cloudflare Workers, Deno, and any JavaScript runtime.
-              </p>
-            </div>
-
-            <div className="bg-white/60 p-10 rounded-3xl border-2 border-zinc-200 hover:border-zinc-300 transition-all hover:shadow-lg">
-              <div className="bg-zinc-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
-                <Package className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-900">Zero Dependencies</h3>
-              <p className="text-zinc-700 leading-relaxed font-medium">
-                Lightweight TypeScript framework with no external dependencies. Keep your bundle size minimal and
-                secure.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Supported Platforms */}
-        <section className="mt-40">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-8 text-zinc-900">Trusted by Major Platforms</h2>
-            <p className="text-xl text-zinc-700 font-medium">
-              Battle-tested with the world's leading webhook providers
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-            {[
-              { name: "Stripe", icon: "S" },
-              { name: "GitHub", icon: "G" },
-              { name: "Supabase", icon: "S" },
-              { name: "Clerk", icon: "C" },
-              { name: "Shopify", icon: "S" },
-              { name: "Vercel", icon: "V" },
-            ].map((platform) => (
-              <div key={platform.name} className="text-center group">
-                <div className="bg-white/60 p-8 rounded-3xl border-2 border-zinc-200 mb-4 group-hover:border-zinc-300 transition-all group-hover:shadow-lg">
-                  <div className="text-3xl font-black text-zinc-900">{platform.icon}</div>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground">
+                    <Cpu className="w-4 h-4" />
+                    Self-healing
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent-2 text-accent-2-foreground">
+                    Autonomous
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent-3 text-accent-3-foreground">
+                    Algorithm-agnostic
+                  </span>
                 </div>
-                <p className="text-sm font-semibold text-zinc-700">{platform.name}</p>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Installation */}
-        <section className="mt-40">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-8 text-zinc-900">Get Started in Seconds</h2>
-            <p className="text-xl text-zinc-700 font-medium">One command to unlock autonomous webhook verification</p>
-          </div>
-
-          <div className="bg-zinc-900 rounded-3xl p-10 max-w-3xl mx-auto border border-zinc-800">
-            <div className="flex items-center justify-between mb-6">
-              <div className="text-zinc-400 text-sm font-mono">Terminal</div>
-              <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-white hover:bg-zinc-800">
-                <Package className="w-4 h-4 mr-2" />
-                Copy
-              </Button>
-            </div>
-            <div className="font-mono text-emerald-400 text-xl">npm install @hookflo/tern</div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="mt-40 text-center">
-          <div className="rounded-3xl p-16 border bg-yellow-500 border-stone-400 text-white">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-5xl font-bold mb-8">Ready for Autonomous Webhooks?</h2>
-              <p className="text-xl text-zinc-300 mb-12 leading-relaxed font-medium">
-                Join thousands of developers who trust Tern for self-healing, scalable webhook verification.
-                <span className="text-white font-semibold"> No maintenance required.</span>
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Button className="bg-white text-zinc-900 hover:bg-zinc-100 px-10 py-4 text-lg rounded-xl font-semibold transition-all hover:scale-105">
-                  <Zap className="w-5 h-5 mr-2" />
-                  Try it live
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-zinc-900 px-10 py-4 text-lg bg-transparent rounded-xl font-semibold transition-all hover:scale-105"
+                <h1
+                  className={` ${geistMono.className} font-mono  text-5xl md:text-6xl font-light tracking-tight`}
                 >
-                  <Github className="w-5 h-5 mr-2" />
-                  View on GitHub
+                  Verify less,
+                  <br />
+                  <span className="text-primary">build more.</span>
+                </h1>
+
+                <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-xl">
+                  Tern is the next-generation webhook verification framework
+                  that adapts, heals, and scales automatically. Zero
+                  maintenance, infinite possibilities.
+                </p>
+
+                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                  <Link href="#demo">
+                    <Button>Try it live</Button>
+                  </Link>
+                  <a
+                    href="https://github.com/Hookflo/tern"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Button variant="outline">
+                      <Github className="w-5 h-5" />
+                      View on GitHub
+                    </Button>
+                  </a>
+                </div>
+
+                {/* Stats */}
+                <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6">
+                  <div>
+                    <div className="text-3xl font-bold">20+</div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      Platforms supported
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold">0</div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      Deps required
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold">∞</div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      Scale & resilience
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Code preview card */}
+              <div className="rounded-2xl border bg-card shadow-sm">
+                <div className="flex items-center justify-between px-5 py-3 border-b">
+                  <div className="flex gap-2">
+                    <span className="w-3 h-3 rounded-full bg-destructive/80" />
+                    <span className="w-3 h-3 rounded-full bg-chart-4/80" />
+                    <span className="w-3 h-3 rounded-full bg-chart-5/80" />
+                  </div>
+                  <span className="text-xs text-muted-foreground font-mono">
+                    webhook-verification.ts
+                  </span>
+                </div>
+                <pre className="p-6 text-sm leading-relaxed font-mono overflow-auto whitespace-pre-wrap break-words max-h-80 text-muted-foreground">
+                  {`import { WebhookVerificationService } from '@hookflo/tern'
+
+const result = await WebhookVerificationService
+  .verifyWithPlatformConfig(request, 'stripe', 'whsec_your_secret')
+
+if (result.isValid) {
+  console.log('Webhook verified autonomously!', result.payload)
+}`}
+                </pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section id="features" className="py-24 border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-4xl font-bold tracking-tight">
+                Why Tern leads the future
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Most verifiers break when platforms change. Tern evolves with
+                them, automatically healing and adapting to keep your systems
+                running.
+              </p>
+            </div>
+
+            <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {features.map((feature) => (
+                <FeatureCard
+                  key={feature.title}
+                  icon={feature.icon}
+                  title={feature.title}
+                  body={feature.body}
+                  bgColor={feature.bgColor}
+                  fgColor={feature.fgColor}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Live Demo */}
+        {/* <section id="demo" className="py-24 border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-4xl font-bold tracking-tight">Try the live demo</h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Simulate a webhook request and verify it using Tern. Use our sample payload or bring your own.
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <LiveDemo />
+            </div>
+          </div>
+        </section> */}
+
+        {/* Install */}
+        <section id="install" className="py-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-4xl font-bold tracking-tight">
+                Get started in seconds
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                One command to unlock autonomous webhook verification.
+              </p>
+            </div>
+
+            <div className="mt-10 max-w-3xl mx-auto rounded-2xl border  bg-accent-2">
+              <div className="flex items-center justify-between px-6 py-4 border-b">
+                <div className="text-xs  font-mono">Terminal</div>
+                <Button
+                  onClick={() => handleCopy("npm install @hookflo/tern")}
+                  variant="ghost"
+                  size="sm"
+                >
+                  <Package className="w-4 h-4" />
+                  {copied ? "Copied!" : "Copy"}
                 </Button>
+              </div>
+              <pre className="p-6 text-xl font-mono text-primary-foreground bg-primary rounded-b-2xl overflow-auto">
+                npm install @hookflo/tern
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* Colorful bottom banner to encourage stars and announce schema normalization */}
+        <section id="star-cta" className="py-20 border-t">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl border overflow-hidden shadow">
+              <div className="flex flex-col md:flex-row">
+                <div className="md:w-2/3 p-10 space-y-4 bg-accent text-accent-foreground">
+                  <h3 className="text-3xl md:text-4xl font-semibold text-pretty">
+                    Liked it? Show some love, give the repo a ⭐
+                  </h3>
+                  <p className="text-lg leading-relaxed/7">
+                    Your support helps us ship new features faster. <br />
+                    Next up: schema normalization to unify event payloads across
+                    platforms.
+                  </p>
+                  <a
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-2  w-fit border  hover:opacity-95"
+                    href="https://github.com/Hookflo/tern"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Star className="w-4 h-4 fill-yellow-400" />
+                    Star on GitHub
+                  </a>
+                </div>
+                <div className="md:w-1/3 p-10 space-y-3 bg-accent-3 text-accent-3-foreground">
+                  <h4 className="text-xl font-semibold">What’s coming</h4>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Schema normalization</li>
+                    <li>More platform presets</li>
+                    <li>Enhanced diagnostics</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -300,33 +336,72 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white/40 border-t-2 border-zinc-200 mt-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-3 mb-6 md:mb-0">
-              <Shield className="w-8 h-8 text-zinc-900" />
-              <span className="text-2xl font-bold text-zinc-900">Tern</span>
+      <footer className="border-t">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-2">
+              <Feather className="w-7 h-7 text-primary " />
+              <span className="font-semibold">Tern</span>
             </div>
-            <div className="flex items-center space-x-8 text-sm font-medium text-zinc-700">
-              <a href="#" className="hover:text-zinc-900 transition-colors">
-                Documentation
+            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+              <a
+                href="https://github.com/Hookflo/tern/blob/main/README.md"
+                className="hover:text-foreground"
+              >
+                README.md
               </a>
-              <a href="#" className="hover:text-zinc-900 transition-colors">
-                Examples
+              <a href="https://hookflo.com" className="hover:text-foreground">
+                Hookflo
               </a>
-              <a href="https://github.com/Hookflo/tern" className="hover:text-zinc-900 transition-colors">
+              <a
+                href="https://github.com/Hookflo/tern"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground"
+              >
                 GitHub
               </a>
-              <a href="#" className="hover:text-zinc-900 transition-colors">
+              <a
+                href="https://github.com/Hookflo/tern/blob/main/LICENSE"
+                className="hover:text-foreground"
+              >
                 MIT License
               </a>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-zinc-200 text-center text-sm text-zinc-600">
-            <p className="font-medium">© 2025 Hookflo. The same framework that powers webhook verification at scale.</p>
+          <div className="mt-10 pt-6 border-t text-center text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Hookflo|Tern. The self-healing webhook
+            verification framework.
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  body,
+  bgColor,
+  fgColor,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  body: string;
+  bgColor: string;
+  fgColor: string;
+}) {
+  return (
+    <div className="bg-card border rounded-2xl p-6 hover:shadow-sm transition-shadow">
+      <div
+        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+        style={{ background: bgColor, color: fgColor }}
+      >
+        {icon}
+      </div>
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="mt-2 text-muted-foreground leading-relaxed">{body}</p>
+    </div>
+  );
 }
