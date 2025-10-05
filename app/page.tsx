@@ -80,17 +80,19 @@ export default function HomePage() {
     <div className="min-h-screen bg-background text-foreground relative">
       {/* Top Banner */}
       <div className="bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-center">
+        <div className="max-w-7xl mx-auto px-8 py-3 text-center">
           <p className="text-sm font-medium">
             <a
               href="https://github.com/Hookflo/tern"
               target="_blank"
               rel="noreferrer"
-              className="hover:underline underline-offset-2 no-underline inline-flex items-center gap-1"
+              className=" inline-flex items-center gap-1"
             >
               Tern takes flight with your{" "}
-              <Star className="w-4 h-4 fill-yellow-400 stroke-0" /> — support us
-              on GitHub!
+              <Star className="w-4 h-4 fill-yellow-400 stroke-0" /> -{" "}
+              <span className="underline underline-offset-2 hover:no-underline">
+                Support us on GitHub!
+              </span>
             </a>
           </p>
         </div>
@@ -98,7 +100,7 @@ export default function HomePage() {
 
       {/* Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-1">
             <Feather className="w-7 h-7 text-primary " />
             <span className="text-xl font-semibold tracking-tight">Tern</span>
@@ -125,7 +127,7 @@ export default function HomePage() {
       {/* Hero */}
       <main>
         <section id="home" className="border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-7xl mx-auto px-8 py-20">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -155,7 +157,7 @@ export default function HomePage() {
                   maintenance, infinite possibilities.
                 </p>
 
-                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                <div className="mt-4 flex gap-3">
                   <Link href="#demo">
                     <Button>Try it live</Button>
                   </Link>
@@ -171,25 +173,32 @@ export default function HomePage() {
                   </a>
                 </div>
 
-                {/* Stats */}
-                <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6">
-                  <div>
-                    <div className="text-3xl font-bold">20+</div>
-                    <div className="text-sm text-muted-foreground mt-1">
+                {/* Stats Section */}
+                {/* Stats Section */}
+                <div className="mt-10 flex flex-wrap  gap-6 sm:gap-10 text-center">
+                  <div className="flex flex-col text-left">
+                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
+                      20+
+                    </span>
+                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
                       Platforms supported
-                    </div>
+                    </span>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold">0</div>
-                    <div className="text-sm text-muted-foreground mt-1">
+                  <div className="flex flex-col text-left">
+                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
+                      0
+                    </span>
+                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
                       Deps required
-                    </div>
+                    </span>
                   </div>
-                  <div>
-                    <div className="text-3xl font-bold">∞</div>
-                    <div className="text-sm text-muted-foreground mt-1">
+                  <div className="flex flex-col text-left">
+                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
+                      ∞
+                    </span>
+                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
                       Scale & resilience
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -223,9 +232,9 @@ if (result.isValid) {
 
         {/* Features */}
         <section id="features" className="py-24 border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl font-bold tracking-tight">
+              <h2 className="text-4xl  tracking-tight">
                 Why Tern leads the future
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -252,7 +261,7 @@ if (result.isValid) {
 
         {/* Live Demo */}
         {/* <section id="demo" className="py-24 border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-4xl font-bold tracking-tight">Try the live demo</h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -268,9 +277,9 @@ if (result.isValid) {
 
         {/* Install */}
         <section id="install" className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl font-bold tracking-tight">
+              <h2 className="text-4xl  tracking-tight">
                 Get started in seconds
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -299,7 +308,7 @@ if (result.isValid) {
 
         {/* Colorful bottom banner to encourage stars and announce schema normalization */}
         <section id="star-cta" className="py-20 border-t">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-8">
             <div className="rounded-3xl border overflow-hidden shadow">
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-2/3 p-10 space-y-4 bg-accent text-accent-foreground">
@@ -337,7 +346,7 @@ if (result.isValid) {
 
       {/* Footer */}
       <footer className="border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-8 py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
               <Feather className="w-7 h-7 text-primary " />
@@ -370,7 +379,7 @@ if (result.isValid) {
             </div>
           </div>
           <div className="mt-10 pt-6 border-t text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Hookflo|Tern. The self-healing webhook
+            © {new Date().getFullYear()} Hookflo Tern. The self-healing webhook
             verification framework.
           </div>
         </div>
