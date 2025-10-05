@@ -17,6 +17,9 @@ importers:
       '@monaco-editor/react':
         specifier: ^4.6.0
         version: 4.7.0(monaco-editor@0.53.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@next/font':
+        specifier: ^14.2.15
+        version: 14.2.15(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       '@radix-ui/react-accordion':
         specifier: 1.2.2
         version: 1.2.2(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -398,6 +401,11 @@ packages:
 
   '@next/env@15.2.4':
     resolution: {integrity: sha512-+SFtMgoiYP3WoSswuNmxJOCwi06TdWE733D+WPjpXIe4LXGULwEaofiiAy6kbS0+XjM5xF5n3lKuBwN2SnqD9g==}
+
+  '@next/font@14.2.15':
+    resolution: {integrity: sha512-QopYhBmCDDrNDynbi+ZD1hDZXmQXVFo7TmAFp4DQgO/kogz1OLbQ92hPigJbj572eZ3GaaVxNIyYVn3/eAsehg==}
+    peerDependencies:
+      next: '*'
 
   '@next/swc-darwin-arm64@15.2.4':
     resolution: {integrity: sha512-1AnMfs655ipJEDC/FHkSr0r3lXBgpqKo4K1kiwfUf3iE68rDFXZ1TtHdMvf7D0hMItgDZ7Vuq3JgNMbt/+3bYw==}
@@ -2526,6 +2534,10 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
 
   '@next/env@15.2.4': {}
+
+  '@next/font@14.2.15(next@15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+    dependencies:
+      next: 15.2.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   '@next/swc-darwin-arm64@15.2.4':
     optional: true

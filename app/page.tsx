@@ -88,6 +88,32 @@ const HomePage = () => {
               Tern provides robust, algorithm-agnostic webhook verification for modern applications.
               Support multiple platforms and signature algorithms out of the box.
             </p>
+            
+            {/* NPM Installation */}
+            <div className="bg-muted/50 p-4 rounded-lg mb-8 max-w-2xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <Package className="w-5 h-5 text-primary" />
+                  <span className="font-mono text-sm">npm install @Hookflo/tern</span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-xs gap-1"
+                  onClick={() => {
+                    navigator.clipboard.writeText('npm install @Hookflo/tern');
+                    // You might want to add a toast notification here
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  Copy
+                </Button>
+              </div>
+            </div>
+
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="gap-2">
                 <Zap className="w-5 h-5" />
@@ -126,6 +152,96 @@ const HomePage = () => {
           </div>
         </section>
       </main>
+
+      {/* Interactive Component Showcase */}
+      <section id="components" className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Interactive Component Playground</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explore Tern's components in action. Edit the code and see changes in real-time.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Component 1: Webhook Verification */}
+            <div className="bg-background rounded-lg border p-6 shadow-sm">
+              <h3 className="text-xl font-semibold mb-4">Webhook Verification</h3>
+              <div className="space-y-4">
+                <div className="p-4 bg-muted/50 rounded-md">
+                  <pre className="text-xs overflow-x-auto">
+                    <code>{
+`// Verify a webhook signature
+const isValid = verifyWebhook({
+  payload: req.body,
+  signature: req.headers['x-webhook-signature'],
+  secret: process.env.WEBHOOK_SECRET,
+  algorithm: 'sha256' // or 'sha1', 'sha512'
+});`}
+                    </code>
+                  </pre>
+                </div>
+                <div className="p-4 bg-muted/10 rounded-md">
+                  <h4 className="font-medium mb-2">Try it out:</h4>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-1">Payload</label>
+                      <textarea 
+                        className="w-full p-2 border rounded-md font-mono text-sm h-24"
+                        defaultValue={JSON.stringify({ event: 'user.created', id: '123' }, null, 2)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1">Secret</label>
+                      <input 
+                        type="password" 
+                        className="w-full p-2 border rounded-md font-mono text-sm"
+                        defaultValue="your-secret-key"
+                      />
+                    </div>
+                    <Button size="sm" className="gap-2">
+                      <Shield className="w-4 h-4" />
+                      Verify Signature
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Component 2: Signature Generation */}
+            <div className="bg-background rounded-lg border p-6 shadow-sm">
+              <h3 className="text-xl font-semibold mb-4">Signature Generation</h3>
+              <div className="space-y-4">
+                <div className="p-4 bg-muted/50 rounded-md">
+                  <pre className="text-xs overflow-x-auto">
+                    <code>{
+`// Generate a webhook signature
+const signature = signWebhook({
+  payload: { event: 'user.created', id: '123' },
+  secret: process.env.WEBHOOK_SECRET,
+  algorithm: 'sha256'
+});`}
+                    </code>
+                  </pre>
+                </div>
+                <div className="p-4 bg-muted/10 rounded-md">
+                  <h4 className="font-medium mb-2">Generated Signature:</h4>
+                  <div className="p-3 bg-background border rounded-md font-mono text-sm overflow-x-auto">
+                    sha256=4f7c9e6c4d4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b4f4b
+                  </div>
+                  <Button variant="outline" size="sm" className="mt-2 gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy Signature
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <footer className="border-t bg-background/50 mt-20">
         <div className="container mx-auto px-4 py-12">

@@ -8,6 +8,10 @@ module.exports = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['var(--font-sans)', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'monospace'],
+    },
     container: {
       center: true,
       padding: '2rem',
