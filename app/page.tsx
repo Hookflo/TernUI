@@ -14,11 +14,11 @@ import {
   Feather,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Doto } from "next/font/google";
+import CopyCommand from "@/components/copy-command";
 
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["300"] });
-
+const doto = Doto({ subsets: ["latin"], weight: ["500"] });
 const features = [
   {
     icon: <Cpu className="w-6 h-6" />,
@@ -65,17 +65,6 @@ const features = [
 ];
 
 export default function HomePage() {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async (textToCopy: string) => {
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  };
   return (
     <div className="min-h-screen  text-foreground relative">
       {/* Top Banner */}
@@ -176,9 +165,26 @@ export default function HomePage() {
                   </a>
                 </div>
 
+                <div
+                  className={`${geistMono.className} mt-6 rounded-xl border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md px-5 py-3 flex items-center gap-3 text-sm tracking-tight hover:shadow-lg hover:border-primary/30 transition-all max-w-sm`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className={` text-lg  select-none ${doto.className}`}>
+                      &gt;
+                    </span>
+                    <span className="text-muted-foreground select-none">
+                      npm i
+                    </span>
+                    <span className=" text-primary font-semibold">
+                      @hookflo/tern
+                    </span>
+                  </div>
+                  <div className="ml-auto opacity-80 group-hover:opacity-100 transition-opacity">
+                    <CopyCommand command="npm install @hookflo/tern" />
+                  </div>
+                </div>
                 {/* Stats Section */}
-                {/* Stats Section */}
-                <div className="mt-10 flex flex-wrap  gap-6 sm:gap-10 text-center">
+                <div className="mt-8 flex flex-wrap  gap-6 sm:gap-10 text-center">
                   <div className="flex flex-col text-left">
                     <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
                       20+
@@ -278,44 +284,13 @@ if (result.isValid) {
           </div>
         </section> */}
 
-        {/* Install */}
-        <section id="install" className="py-24">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl  tracking-tight">
-                Get started in seconds
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                One command to unlock autonomous webhook verification.
-              </p>
-            </div>
-
-            <div className="mt-10 max-w-3xl mx-auto rounded-2xl border  bg-accent-2">
-              <div className="flex items-center justify-between px-6 py-4 border-b">
-                <div className="text-xs  font-mono">Terminal</div>
-                <Button
-                  onClick={() => handleCopy("npm install @hookflo/tern")}
-                  variant="ghost"
-                  size="sm"
-                >
-                  <Package className="w-4 h-4" />
-                  {copied ? "Copied!" : "Copy"}
-                </Button>
-              </div>
-              <pre className="p-6 text-base font-mono text-primary-foreground bg-primary rounded-b-2xl overflow-auto">
-                npm install @hookflo/tern
-              </pre>
-            </div>
-          </div>
-        </section>
-
         {/* Colorful bottom banner to encourage stars and announce schema normalization */}
         <section id="star-cta" className="py-20 border-t">
           <div className="max-w-7xl mx-auto px-8">
             <div className="rounded-3xl border overflow-hidden shadow">
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-2/3 p-10 space-y-4 bg-accent text-accent-foreground">
-                  <h3 className="text-3xl md:text-4xl font-semibold text-pretty">
+                  <h3 className="text-3xl font-semibold text-pretty">
                     Liked it? Show some love, give the repo a ⭐
                   </h3>
                   <p className="text-lg leading-relaxed/7">
