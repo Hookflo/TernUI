@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { Geist_Mono, Doto } from "next/font/google";
 import CopyCommand from "@/components/copy-command";
+import { UseCaseSection } from "@/components/use-case";
 
 const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["300"] });
 const doto = Doto({ subsets: ["latin"], weight: ["500"] });
@@ -238,6 +239,8 @@ if (result.isValid) {
             </div>
           </div>
         </section>
+
+        <UseCaseSection />
 
         {/* Features */}
         <section id="features" className="py-24 border-b">
