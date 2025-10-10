@@ -244,9 +244,10 @@ if (result.isValid) {
 
         {/* Features */}
         <section id="features" className="py-24 border-b">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl  tracking-tight">
+          <div className="max-w-6xl mx-auto px-8">
+            <header className="max-w-3xl">
+              <h2 className="text-4xl tracking-tight text-balance">
+                {" "}
                 Why Tern leads the future
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
@@ -254,8 +255,7 @@ if (result.isValid) {
                 them, automatically healing and adapting to keep your systems
                 running.
               </p>
-            </div>
-
+            </header>
             <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature) => (
                 <FeatureCard
@@ -288,41 +288,59 @@ if (result.isValid) {
         </section> */}
 
         {/* Colorful bottom banner to encourage stars and announce schema normalization */}
-        <section id="star-cta" className="py-20 border-t">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="rounded-3xl border overflow-hidden shadow">
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-2/3 p-10 space-y-4 bg-accent text-accent-foreground">
-                  <h3 className="text-3xl font-semibold text-pretty">
-                    Liked it? Show some love, give the repo a ⭐
-                  </h3>
-                  <p className="text-lg leading-relaxed/7">
-                    Your support helps us ship new features faster. <br />
-                    Next up: schema normalization to unify event payloads across
-                    platforms.
-                  </p>
-                  <a
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-2  w-fit border  hover:opacity-95"
-                    href="https://github.com/Hookflo/tern"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Star className="w-4 h-4 fill-yellow-400" />
-                    Star on GitHub
-                  </a>
-                </div>
-                <div className="md:w-1/3 p-10 space-y-3 bg-accent-3 text-accent-3-foreground">
-                  <h4 className="text-xl font-semibold">What’s coming</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Schema normalization</li>
-                    <li>More platform presets</li>
-                    <li>Enhanced diagnostics</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+{/* Open Source — handcrafted banner */}
+<section id="star-cta" className="py-20 border-t bg-gradient-to-b from-background via-muted/30 to-background">
+  <div className="max-w-7xl mx-auto px-8">
+    <div className="rounded-3xl border border-border/60 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="flex flex-col md:flex-row">
+        
+        {/* Left: main message */}
+        <div className="md:w-2/3 p-10 space-y-5 bg-accent text-accent-foreground">
+          <h3 className="text-3xl font-semibold tracking-tight">
+            Liked it? <span className="text-foreground/90">Show some love with a ⭐</span>
+          </h3>
+
+          <p className="text-lg leading-relaxed text-accent-foreground/90">
+            Your support helps shape Tern’s next updates.  
+            Up next: <span className="font-medium text-foreground">schema normalization</span> — unify webhook event payloads across platforms.
+          </p>
+
+          <a
+            href="https://github.com/Hookflo/tern"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-accent-foreground/20 hover:border-accent-foreground/40 transition-all bg-accent-2 hover:bg-accent-2/90"
+          >
+            <Star className="w-4 h-4 fill-yellow-400" />
+            <span className="font-medium">Star on GitHub</span>
+          </a>
+        </div>
+
+        {/* Right: upcoming roadmap */}
+        <div className="md:w-1/3 p-10 bg-accent-3 text-accent-3-foreground border-l border-border/50">
+          <h4 className="text-lg font-semibold mb-3">What’s next</h4>
+          <ul className="space-y-2 text-base">
+            <li className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-yellow-400" />
+              Schema normalization
+            </li>
+            <li className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-400" />
+              More platform presets
+            </li>
+            <li className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-blue-400" />
+              Enhanced diagnostics
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
       </main>
 
       {/* Footer */}
