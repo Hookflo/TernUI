@@ -51,7 +51,6 @@ export function TernBottomBanner() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <GithubIcon className="w-4 h-4" />
                   Visit Hookflo
                 </Link>
               </Button>
