@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Feather } from "lucide-react";
 
 // ─── INLINE STYLES (same design system as HTML) ───────────────────────────────
 const css = `
@@ -418,16 +419,14 @@ export default function HomePage() {
   };
 
   return (
-    <div className="tern-root">
+    <div className="tern-root relative">
       <style>{css}</style>
 
       {/* ── NAV ── */}
       <nav className="t-nav">
         <Link href="/" className="t-nav-logo">
-          <div className="t-nav-icon">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 7h10M7 2l5 5-5 5" stroke="#1a1714" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+          <div >
+            <Feather className="w-7 h-7 text-orange-500 -mr-1 " />
           </div>
           <span className="t-nav-name">Tern</span>
         </Link>
