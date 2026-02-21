@@ -17,7 +17,7 @@ const css = `
     --ink4:    #9e9488;
     --border:  #d8d0c4;
     --border2: #c4baad;
-    --green:   #1a6b3c;
+  --green: #059669;
     --green-bg:#edf5f0;
     --red:     #c0392b;
     --red-bg:  #fdf1ef;
@@ -63,8 +63,10 @@ const css = `
     padding: clamp(60px,10vw,120px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
     max-width:1200px; margin:0 auto;
     display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;
+    
   }
-  @media(max-width:900px){ .t-hero { grid-template-columns:1fr; gap:40px; } .t-hero-right { order:-1; } }
+  @media(max-width:900px){ .t-hero { grid-template-columns:1fr; gap:40px; } }
+
 
   .t-eyebrow {
     display:inline-flex; align-items:center; gap:8px;
@@ -168,7 +170,7 @@ const css = `
   .dl.rem .dp { color:var(--red); }
   .dl.add .dp { color:var(--green); }
   .dl.neu .dp { color:var(--ink4); }
-  .dc { flex:1; white-space:pre; overflow:hidden; }
+  .dc { flex:1; white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; overflow:hidden; }
   .dl.rem .dc { color:#a93226; }
   .dl.add .dc { color:#1a6b3c; }
   .dl.neu .dc { color:var(--ink3); }
@@ -212,6 +214,7 @@ const css = `
   /* MIDDLEWARE SECTION */
   .t-mw-section { background:var(--paper2); border-top:1px solid var(--border); }
   .t-mw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  @media(max-width:640px){ .t-mw-grid { grid-template-columns:1fr; } }
   .t-mw-card { background:white; border:1px solid var(--border); border-radius:10px; overflow:hidden; transition:box-shadow .2s, transform .15s; }
   .t-mw-card:hover { box-shadow:3px 4px 0 var(--border); transform:translateY(-1px); }
   .t-mw-card-head { padding:16px 18px 12px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
@@ -220,7 +223,7 @@ const css = `
   .t-mw-card-badge.stable { background:var(--green-bg); color:var(--green); }
   .t-mw-card-badge.beta { background:#fef9e7; color:#b7770d; }
   .t-mw-card-body { padding:14px 18px; }
-  .t-mw-card-import { font-family:var(--mono); font-size:10.5px; background:var(--paper2); border:1px solid var(--border); border-radius:4px; padding:8px 12px; margin-bottom:10px; color:var(--ink2); white-space:pre; overflow-x:auto; }
+  .t-mw-card-import { font-family:var(--mono); font-size:10.5px; background:var(--paper2); border:1px solid var(--border); border-radius:4px; padding:8px 12px; margin-bottom:10px; color:var(--ink2); white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; overflow-x:auto; }
   .t-mw-card-desc { font-size:12.5px; color:var(--ink3); line-height:1.5; }
 
   /* PLATFORMS */
@@ -250,8 +253,9 @@ const css = `
   .t-step-num { display:flex; align-items:flex-start; justify-content:center; padding-top:24px; font-family:var(--display); font-size:22px; font-style:italic; color:var(--ink4); border-right:1px solid var(--border); }
   .t-step-body { padding:22px 24px; }
   .t-step-title { font-family:var(--serif); font-size:15px; font-weight:600; color:var(--ink); margin-bottom:6px; }
-  .t-step-desc { font-size:13.5px; color:var(--ink3); line-height:1.55; margin-bottom:12px; }
-  .t-step-code { font-family:var(--mono); font-size:11px; background:var(--paper2); border:1px solid var(--border); border-radius:5px; padding:10px 14px; color:var(--ink2); line-height:1.6; overflow-x:auto; white-space:pre; }
+  .t-step-desc { font-size:13.5px; color:var(--ink3); line-height:1.55; margin-bottom:12px; word-wrap:break-word; overflow-wrap:break-word; }
+  .t-step-code { font-family:var(--mono); font-size:11px; background:var(--paper2); border:1px solid var(--border); border-radius:5px; padding:10px 14px; color:var(--ink2); line-height:1.6; overflow-x:auto; white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; }
+  @media(max-width:640px){ .t-step { grid-template-columns:1fr; } .t-step-num { padding-top:16px; padding-bottom:12px; border-right:none; border-bottom:1px solid var(--border); justify-content:flex-start; padding-left:24px; } }
   .t-step-code .skw { color:#7c3aed; }
   .t-step-code .sstr { color:#166534; }
   .t-step-code .sfn { color:#1d4ed8; }
@@ -449,85 +453,87 @@ export default function HomePage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div className="t-hero">
-        {/* Left */}
-        <div>
-          <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
-          <h1 className="t-h1 fade-up-2">
-            Stop writing<br /><em>the same code</em><br />twice.
-          </h1>
-          <p className="t-hero-desc fade-up-3">
-            Tern is a zero-dependency TypeScript framework for webhook signature verification. One API, every platform. No boilerplate, no fragile hand-rolled crypto.
-          </p>
-          <div className="t-actions fade-up-4">
-            <a href="#how" className="t-btn-primary">Get started</a>
-            <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-secondary">
-              View on GitHub
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              </svg>
-            </a>
-          </div>
-          <div className="t-install fade-up-5">
-            <div className="t-install-cmd">
-              <span>$</span> npm i @hookflo/tern
-            </div>
-            <button className="t-copy-btn" onClick={copyInstall} title="Copy">
-              {copied ? (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7l3.5 3.5L12 4" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <rect x="4.5" y="1" width="8" height="9" rx="1" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M1 5h4v8h7v-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
+      <div>
+        <div className="t-hero">
+          {/* Left */}
+          <div>
+            <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
+            <h1 className="t-h1 fade-up-2">
+              Verify Every Webhook,<br /> <em>Across Every Platform.</em><br />
+            </h1>
 
-        {/* Right: Code Card */}
-        <div className="t-hero-right fade-up-r">
-          <div className="t-code-card">
-            <div className="t-code-bar">
-              <div className="t-dots">
-                <div className="t-dot" style={{ background: "#ff6058" }} />
-                <div className="t-dot" style={{ background: "#ffbd2e" }} />
-                <div className="t-dot" style={{ background: "#29c440" }} />
-              </div>
-              <span className="t-code-filename">app/api/webhooks/route.ts</span>
+            <p className="t-hero-desc fade-up-3">
+              Tern is a zero-dependency TypeScript framework for webhook signature verification. One API, every platform. No boilerplate, no fragile hand-rolled crypto.
+            </p>
+            <div className="t-actions fade-up-4">
+              <a href="#how" className="t-btn-primary">Get started</a>
+              <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-secondary">
+                View on GitHub
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </a>
             </div>
-            <div className="t-code-body">
-              <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
-              <div><span className="ck">import</span> <span className="ct">{"{ platform, webhooksecret }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
-              <div>&nbsp;</div>
-              <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
-              <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
-              <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">webhooksecret</span><span className="ct">(),</span></div>
-              <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
-              <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
-              <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
-              <div><span className="ct">{"})"}</span></div>
+            <div className="t-install fade-up-5">
+              <div className="t-install-cmd">
+                <span>$</span> npm i @hookflo/tern
+              </div>
+              <button className="t-copy-btn" onClick={copyInstall} title="Copy">
+                {copied ? (
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7l3.5 3.5L12 4" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : (
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <rect x="4.5" y="1" width="8" height="9" rx="1" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M1 5h4v8h7v-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
-          <div className="t-hero-stats">
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">10+</div>
-              <div className="t-hero-stat-lbl">Platforms</div>
+
+          {/* Right: Code Card */}
+          <div className="t-hero-right fade-up-r">
+            <div className="t-code-card">
+              <div className="t-code-bar">
+                <div className="t-dots">
+                  <div className="t-dot" style={{ background: "#ff6058" }} />
+                  <div className="t-dot" style={{ background: "#ffbd2e" }} />
+                  <div className="t-dot" style={{ background: "#29c440" }} />
+                </div>
+                <span className="t-code-filename">app/api/webhooks/route.ts</span>
+              </div>
+              <div className="t-code-body">
+                <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
+                <div><span className="ck">import</span> <span className="ct">{"{ platform, webhooksecret }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
+                <div>&nbsp;</div>
+                <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
+                <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
+                <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">webhooksecret</span><span className="ct">(),</span></div>
+                <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
+                <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
+                <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
+                <div><span className="ct">{"})"}</span></div>
+              </div>
             </div>
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">0</div>
-              <div className="t-hero-stat-lbl">Dependencies</div>
-            </div>
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">∞</div>
-              <div className="t-hero-stat-lbl">Custom configs</div>
+            <div className="t-hero-stats">
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">10+</div>
+                <div className="t-hero-stat-lbl">Platforms</div>
+              </div>
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">0</div>
+                <div className="t-hero-stat-lbl">Dependencies</div>
+              </div>
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">∞</div>
+                <div className="t-hero-stat-lbl">Custom configs</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       {/* ── BEFORE / AFTER DIFF ── */}
       <section className="t-diff-section t-section">
         <div className="t-section-inner">
@@ -714,7 +720,7 @@ export default function HomePage() {
           <div className="t-platforms-grid">
             {PLATFORMS.map((p) => (
               <div className="t-platform-chip" key={p.name}>
-                <div className="t-platform-icon" style={{ background: p.bg }}>
+                <div className="t-platform-icon">
                   <img src={`/assets${p.icon}`} alt={`${p.name} logo`} style={{ width: "20px", height: "20px", objectFit: "contain" }} />
                 </div>
                 {p.name}
