@@ -1,18 +1,27 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Lora, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const lora = Lora({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-lora",
+  weight: ["400", "500", "600"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "700"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument-serif",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -154,7 +163,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${lora.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} scroll-smooth antialiased`}
     >
       <head>
         {/* Additional SEO tags */}
@@ -255,34 +264,33 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans bg-[#fdfff4]">
-          <div className="fixed inset-0 z-0 h-full pointer-events-none">
-                <svg id="noice" className="fixed inset-0 w-full h-full">
-                  <filter id="noise-filter">
-                    <feTurbulence
-                      type="fractalNoise"
-                      baseFrequency="1.26"
-                      numOctaves="5"
-                      stitchTiles="stitch"
-                    ></feTurbulence>
-                    <feColorMatrix type="saturate" values="0"></feColorMatrix>
-                    <feComponentTransfer>
-                      <feFuncR type="linear" slope="1.51"></feFuncR>
-                      <feFuncG type="linear" slope="1.51"></feFuncG>
-                      <feFuncB type="linear" slope="1.51"></feFuncB>
-                      <feFuncA type="linear" slope="0.61"></feFuncA>
-                    </feComponentTransfer>
-                    <feComponentTransfer>
-                      <feFuncR type="linear" slope="2.55" intercept="-0.77" />
-                      <feFuncG type="linear" slope="2.55" intercept="-0.77" />
-                      <feFuncB type="linear" slope="2.55" intercept="-0.77" />
-                    </feComponentTransfer>
-                  </filter>
-                  <rect width="100%" height="100%" filter="url(#noise-filter)"></rect>
-                  <rect width="100%" height="100%" filter="url(#noise-filter)"></rect>
-                </svg>
-              </div>
-              {children}</body>
+      <body className="bg-[#f7f4ef] text-[#1a1714] font-serif leading-relaxed antialiased overflow-x-hidden">
+        <svg id="noice" className="fixed inset-0 w-full h-full">
+          <filter id="noise-filter">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="1.26"
+              numOctaves="5"
+              stitchTiles="stitch"
+            ></feTurbulence>
+            <feColorMatrix type="saturate" values="0"></feColorMatrix>
+            <feComponentTransfer>
+              <feFuncR type="linear" slope="1.51"></feFuncR>
+              <feFuncG type="linear" slope="1.51"></feFuncG>
+              <feFuncB type="linear" slope="1.51"></feFuncB>
+              <feFuncA type="linear" slope="0.61"></feFuncA>
+            </feComponentTransfer>
+            <feComponentTransfer>
+              <feFuncR type="linear" slope="2.55" intercept="-0.77" />
+              <feFuncG type="linear" slope="2.55" intercept="-0.77" />
+              <feFuncB type="linear" slope="2.55" intercept="-0.77" />
+            </feComponentTransfer>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise-filter)"></rect>
+          <rect width="100%" height="100%" filter="url(#noise-filter)"></rect>
+        </svg>
+        {children}
+      </body>
     </html>
   );
 }
