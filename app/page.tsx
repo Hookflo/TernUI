@@ -63,9 +63,10 @@ const css = `
     padding: clamp(60px,10vw,120px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
     max-width:1200px; margin:0 auto;
     display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;
+    
   }
   @media(max-width:900px){ .t-hero { grid-template-columns:1fr; gap:40px; } }
-  @media(max-width:768px){ .t-hero-right { order:-1; } }
+
 
   .t-eyebrow {
     display:inline-flex; align-items:center; gap:8px;
@@ -452,85 +453,87 @@ export default function HomePage() {
       </nav>
 
       {/* ── HERO ── */}
-      <div className="t-hero">
-        {/* Left */}
-        <div>
-          <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
-          <h1 className="t-h1 fade-up-2">
-            Stop writing<br /><em>the same code</em><br />twice.
-          </h1>
-          <p className="t-hero-desc fade-up-3">
-            Tern is a zero-dependency TypeScript framework for webhook signature verification. One API, every platform. No boilerplate, no fragile hand-rolled crypto.
-          </p>
-          <div className="t-actions fade-up-4">
-            <a href="#how" className="t-btn-primary">Get started</a>
-            <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-secondary">
-              View on GitHub
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              </svg>
-            </a>
-          </div>
-          <div className="t-install fade-up-5">
-            <div className="t-install-cmd">
-              <span>$</span> npm i @hookflo/tern
-            </div>
-            <button className="t-copy-btn" onClick={copyInstall} title="Copy">
-              {copied ? (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7l3.5 3.5L12 4" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <rect x="4.5" y="1" width="8" height="9" rx="1" stroke="currentColor" strokeWidth="1.2" />
-                  <path d="M1 5h4v8h7v-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
+      <div>
+        <div className="t-hero">
+          {/* Left */}
+          <div>
+            <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
+            <h1 className="t-h1 fade-up-2">
+              Verify webhooks<br /> <em>Across every platform.</em><br />
+            </h1>
 
-        {/* Right: Code Card */}
-        <div className="t-hero-right fade-up-r">
-          <div className="t-code-card">
-            <div className="t-code-bar">
-              <div className="t-dots">
-                <div className="t-dot" style={{ background: "#ff6058" }} />
-                <div className="t-dot" style={{ background: "#ffbd2e" }} />
-                <div className="t-dot" style={{ background: "#29c440" }} />
-              </div>
-              <span className="t-code-filename">app/api/webhooks/route.ts</span>
+            <p className="t-hero-desc fade-up-3">
+              Tern is a zero-dependency TypeScript framework for webhook signature verification. One API, every platform. No boilerplate, no fragile hand-rolled crypto.
+            </p>
+            <div className="t-actions fade-up-4">
+              <a href="#how" className="t-btn-primary">Get started</a>
+              <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-secondary">
+                View on GitHub
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+              </a>
             </div>
-            <div className="t-code-body">
-              <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
-              <div><span className="ck">import</span> <span className="ct">{"{ platform, webhooksecret }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
-              <div>&nbsp;</div>
-              <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
-              <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
-              <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">webhooksecret</span><span className="ct">(),</span></div>
-              <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
-              <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
-              <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
-              <div><span className="ct">{"})"}</span></div>
+            <div className="t-install fade-up-5">
+              <div className="t-install-cmd">
+                <span>$</span> npm i @hookflo/tern
+              </div>
+              <button className="t-copy-btn" onClick={copyInstall} title="Copy">
+                {copied ? (
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7l3.5 3.5L12 4" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : (
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <rect x="4.5" y="1" width="8" height="9" rx="1" stroke="currentColor" strokeWidth="1.2" />
+                    <path d="M1 5h4v8h7v-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
-          <div className="t-hero-stats">
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">10+</div>
-              <div className="t-hero-stat-lbl">Platforms</div>
+
+          {/* Right: Code Card */}
+          <div className="t-hero-right fade-up-r">
+            <div className="t-code-card">
+              <div className="t-code-bar">
+                <div className="t-dots">
+                  <div className="t-dot" style={{ background: "#ff6058" }} />
+                  <div className="t-dot" style={{ background: "#ffbd2e" }} />
+                  <div className="t-dot" style={{ background: "#29c440" }} />
+                </div>
+                <span className="t-code-filename">app/api/webhooks/route.ts</span>
+              </div>
+              <div className="t-code-body">
+                <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
+                <div><span className="ck">import</span> <span className="ct">{"{ platform, webhooksecret }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
+                <div>&nbsp;</div>
+                <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
+                <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
+                <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">webhooksecret</span><span className="ct">(),</span></div>
+                <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
+                <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
+                <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
+                <div><span className="ct">{"})"}</span></div>
+              </div>
             </div>
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">0</div>
-              <div className="t-hero-stat-lbl">Dependencies</div>
-            </div>
-            <div className="t-hero-stat">
-              <div className="t-hero-stat-val">∞</div>
-              <div className="t-hero-stat-lbl">Custom configs</div>
+            <div className="t-hero-stats">
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">10+</div>
+                <div className="t-hero-stat-lbl">Platforms</div>
+              </div>
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">0</div>
+                <div className="t-hero-stat-lbl">Dependencies</div>
+              </div>
+              <div className="t-hero-stat">
+                <div className="t-hero-stat-val">∞</div>
+                <div className="t-hero-stat-lbl">Custom configs</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       {/* ── BEFORE / AFTER DIFF ── */}
       <section className="t-diff-section t-section">
         <div className="t-section-inner">
