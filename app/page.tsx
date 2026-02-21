@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#f7f4ef]">
       {/* ─── NAV ─── */}
-      <nav className="sticky top-0 z-100 bg-[rgba(247,244,239,0.92)] backdrop-blur-[12px] border-b border-[#d8d0c4] px-5vw md:px-20 h-14 flex items-center justify-between">
+      <nav className="sticky top-0 z-50 bg-[rgba(247,244,239,0.92)] backdrop-blur-md border-b border-[#d8d0c4] px-4 md:px-8 lg:px-16 h-14 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 no-underline text-[#1a1714]">
           <div className="w-7 h-7 border-[1.5px] border-[#1a1714] rounded-[6px] flex items-center justify-center flex-shrink-0">
             <LeafLogo className="w-4 h-4" />
@@ -52,7 +52,7 @@ export default function HomePage() {
       </nav>
 
       {/* ─── HERO ─── */}
-      <section className="py-[max(60px,10vw)] px-5vw md:px-20">
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-start">
           {/* Hero Left */}
           <div className="pt-2 animate-fadeUp" style={{ animationDelay: "0s", animation: "fadeUp 0.5s ease both" }}>
@@ -157,7 +157,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── PLATFORMS ─── */}
-      <section className="py-20 px-5vw md:px-20 bg-[#f0ebe2] border-t border-[#d8d0c4]">
+      <section className="py-20 px-4 md:px-8 lg:px-16 bg-[#f0ebe2] border-t border-[#d8d0c4]">
         <div className="max-w-7xl mx-auto">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
             Platforms
@@ -197,7 +197,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FEATURES ─── */}
-      <section className="py-20 px-5vw md:px-20 bg-white border-t border-[#d8d0c4]">
+      <section className="py-20 px-4 md:px-8 lg:px-16 bg-white border-t border-[#d8d0c4]">
         <div className="max-w-7xl mx-auto">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
             Features
@@ -235,7 +235,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
-      <section className="py-20 px-5vw md:px-20 bg-[#f7f4ef] border-t border-[#d8d0c4]">
+      <section className="py-20 px-4 md:px-8 lg:px-16 bg-[#f7f4ef] border-t border-[#d8d0c4]">
         <div className="max-w-7xl mx-auto">
           <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
             How It Works
@@ -289,7 +289,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="py-20 px-5vw md:px-20 bg-[#1a1714]">
+      <section className="py-20 px-4 md:px-8 lg:px-16 bg-[#1a1714]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
             <h2 className="font-display text-[clamp(28px,4vw,44px)] font-normal text-[#f7f4ef] leading-[1.15]">
@@ -311,7 +311,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FOOTER ─── */}
-      <footer className="bg-[#1a1714] border-t border-[rgba(255,255,255,0.07)] py-7 px-5vw md:px-20">
+      <footer className="bg-[#1a1714] border-t border-[rgba(255,255,255,0.07)] py-7 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
           <div className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[rgba(247,244,239,0.5)]">
             Tern
