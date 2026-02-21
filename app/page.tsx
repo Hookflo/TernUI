@@ -17,7 +17,7 @@ const css = `
     --ink4:    #9e9488;
     --border:  #d8d0c4;
     --border2: #c4baad;
-    --green:   #1a6b3c;
+  --green: #059669;
     --green-bg:#edf5f0;
     --red:     #c0392b;
     --red-bg:  #fdf1ef;
@@ -459,7 +459,7 @@ export default function HomePage() {
           <div>
             <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
             <h1 className="t-h1 fade-up-2">
-              Verify webhooks<br /> <em>Across every platform.</em><br />
+              Verify Every Webhook,<br /> <em>Across Every Platform.</em><br />
             </h1>
 
             <p className="t-hero-desc fade-up-3">
@@ -720,7 +720,7 @@ export default function HomePage() {
           <div className="t-platforms-grid">
             {PLATFORMS.map((p) => (
               <div className="t-platform-chip" key={p.name}>
-                <div className="t-platform-icon" style={{ background: p.bg }}>
+                <div className="t-platform-icon">
                   <img src={`/assets${p.icon}`} alt={`${p.name} logo`} style={{ width: "20px", height: "20px", objectFit: "contain" }} />
                 </div>
                 {p.name}
