@@ -1,363 +1,368 @@
 "use client";
 
-import type React from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Cpu,
-  Zap,
-  Github,
-  Code,
-  Settings,
-  Package,
-  Star,
-  GitBranch,
-  Feather,
-} from "lucide-react";
+import { LeafLogo } from "@/components/leaf-logo";
+import { Copy } from "lucide-react";
 import Link from "next/link";
-import { Geist_Mono, Doto } from "next/font/google";
-import CopyCommand from "@/components/copy-command";
-import { UseCaseSection } from "@/components/use-case";
-import { TernBottomBanner } from "@/components/bottom-banner";
-
-const geistMono = Geist_Mono({ subsets: ["latin"], weight: ["300"] });
-const doto = Doto({ subsets: ["latin"], weight: ["500"] });
-const features = [
-  {
-    icon: <Cpu className="w-6 h-6" />,
-    title: "Self-healing architecture",
-    body: "Automatically detects and adapts to platform signature changes. No more broken webhooks when providers update their systems.",
-    bgColor: "var(--accent)",
-    fgColor: "var(--accent-foreground)",
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    title: "Algorithm agnostic",
-    body: "Supports HMAC-SHA256, HMAC-SHA1, HMAC-SHA512, and custom algorithms. One framework for all signature types.",
-    bgColor: "var(--accent-2)",
-    fgColor: "var(--accent-2-foreground)",
-  },
-  {
-    icon: <Settings className="w-6 h-6" />,
-    title: "Platform specific",
-    body: "Battle-tested implementations for Stripe, GitHub, Supabase, Clerk, and more — out of the box.",
-    bgColor: "var(--accent-3)",
-    fgColor: "var(--accent-3-foreground)",
-  },
-  {
-    icon: <Code className="w-6 h-6" />,
-    title: "Type safe",
-    body: "Full TypeScript support with comprehensive types. Catch errors at compile time, not runtime.",
-    bgColor: "var(--accent-4)",
-    fgColor: "var(--accent-4-foreground)",
-  },
-  {
-    icon: <GitBranch className="w-6 h-6" />,
-    title: "Framework agnostic",
-    body: "Works with Express.js, Next.js, Cloudflare Workers, Deno, and any modern JS runtime.",
-    bgColor: "var(--accent-5)",
-    fgColor: "var(--accent-5-foreground)",
-  },
-  {
-    icon: <Package className="w-6 h-6" />,
-    title: "Zero dependencies",
-    body: "Lightweight core with no external deps. Keep your bundle minimal and secure.",
-    bgColor: "var(--accent-6)",
-    fgColor: "var(--accent-6-foreground)",
-  },
-];
 
 export default function HomePage() {
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   return (
-    <div className="min-h-screen  text-foreground relative">
-      {/* Top Banner */}
-      <div className="bg-primary text-primary-foreground">
-        <div className="max-w-7xl mx-auto px-8 py-3 text-center">
-          <p className="text-sm font-medium">
-            <a
-              href="https://github.com/Hookflo/tern"
-              target="_blank"
-              rel="noreferrer"
-              className=" inline-flex items-center gap-1"
-            >
-              Tern takes flight with your{" "}
-              <Star className="w-4 h-4 fill-yellow-400 stroke-0" /> -{" "}
-              <span className="underline underline-offset-2 hover:no-underline">
-                Support us on GitHub!
-              </span>
-            </a>
-          </p>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur  ">
-        <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <Feather className="w-7 h-7 text-primary " />
-            <span className="text-xl font-semibold tracking-tight">Tern</span>
+    <div className="min-h-screen bg-[#f7f4ef]">
+      {/* ─── NAV ─── */}
+      <nav className="sticky top-0 z-100 bg-[rgba(247,244,239,0.92)] backdrop-blur-[12px] border-b border-[#d8d0c4] px-5vw md:px-20 h-14 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 no-underline text-[#1a1714]">
+          <div className="w-7 h-7 border-[1.5px] border-[#1a1714] rounded-[6px] flex items-center justify-center flex-shrink-0">
+            <LeafLogo className="w-4 h-4" />
           </div>
+          <span className="font-mono text-[13px] font-bold uppercase tracking-[0.12em]">Tern</span>
+        </Link>
 
-          <div className="flex items-center gap-3">
-            <Link href="#demo">
-              <Button className="px-5 rounded-none">Try It Live</Button>
-            </Link>
-            <a
-              href="https://github.com/Hookflo/tern"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button
-                variant="outline"
-                className="px-5 bg-transparent rounded-none"
+        <ul className="flex items-center gap-7 list-none">
+          <li>
+            <a href="#" className="font-mono text-[11px] font-medium tracking-[0.06em] text-[#6b6358] no-underline transition-colors hover:text-[#1a1714]">
+              Docs
+            </a>
+          </li>
+          <li>
+            <a href="#" className="font-mono text-[11px] font-medium tracking-[0.06em] text-[#6b6358] no-underline transition-colors hover:text-[#1a1714]">
+              Platforms
+            </a>
+          </li>
+          <li>
+            <a href="#" className="font-mono text-[11px] font-medium tracking-[0.06em] text-[#6b6358] no-underline transition-colors hover:text-[#1a1714]">
+              Blog
+            </a>
+          </li>
+        </ul>
+
+        <a
+          href="https://github.com/Hookflo/tern"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.06em] text-[#1a1714] border-[1.5px] border-[#1a1714] px-3.5 py-1.5 rounded no-underline transition-all hover:bg-[#1a1714] hover:text-[#f7f4ef]"
+        >
+          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v-3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
+          GitHub
+        </a>
+      </nav>
+
+      {/* ─── HERO ─── */}
+      <section className="py-[max(60px,10vw)] px-5vw md:px-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[60px] items-start">
+          {/* Hero Left */}
+          <div className="pt-2 animate-fadeUp" style={{ animationDelay: "0s", animation: "fadeUp 0.5s ease both" }}>
+            <div className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#6b6358] mb-6">
+              <span className="block w-6 h-px bg-[#6b6358]"></span>
+              Open Source Framework
+            </div>
+
+            <h1 className="font-display text-[clamp(38px,5vw,60px)] font-normal leading-[1.1] tracking-[-0.02em] text-[#1a1714] mb-5">
+              Webhook Verification <em className="italic text-[#3d3830]">Made Simple</em>
+            </h1>
+
+            <p className="text-[clamp(15px,1.8vw,17px)] text-[#6b6358] leading-[1.65] max-w-[480px] mb-9">
+              Tern is a universal webhook verification framework that adapts to any platform. Zero dependencies, pure security, infinite possibilities.
+            </p>
+
+            <div className="flex items-center gap-4 flex-wrap mb-7">
+              <button className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#f7f4ef] bg-[#1a1714] border-none px-6 py-3 rounded no-underline transition-all hover:opacity-85 hover:-translate-y-0.5 cursor-pointer">
+                Get Started
+              </button>
+              <a href="https://github.com/Hookflo/tern" className="font-mono text-[12px] font-medium tracking-[0.06em] text-[#3d3830] no-underline flex items-center gap-1.5 border-b border-[#c4baad] pb-0.5 transition-all hover:text-[#1a1714] hover:border-[#1a1714]">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v-3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                View on GitHub
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3 mt-7">
+              <div className="flex items-center gap-2.5 font-mono text-[12px] font-medium text-[#3d3830] bg-[#f0ebe2] border border-[#d8d0c4] px-4 py-2 rounded">
+                <span>npm i @hookflo/tern</span>
+              </div>
+              <button
+                onClick={() => copyToClipboard("npm i @hookflo/tern")}
+                className="bg-none border-none cursor-pointer text-[#9e9488] p-0.5 transition-colors hover:text-[#1a1714]"
               >
-                <Github className="w-4 h-4" />
-                GitHub
-              </Button>
+                <Copy className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-20 grid grid-cols-3 gap-0 border border-[#d8d0c4] rounded-lg bg-white overflow-hidden">
+              <div className="p-4 text-center border-r border-[#d8d0c4]">
+                <div className="font-display text-2xl font-italic text-[#1a1714]">20+</div>
+                <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Platforms</div>
+              </div>
+              <div className="p-4 text-center border-r border-[#d8d0c4]">
+                <div className="font-display text-2xl font-italic text-[#1a1714]">0</div>
+                <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Dependencies</div>
+              </div>
+              <div className="p-4 text-center">
+                <div className="font-display text-2xl font-italic text-[#1a1714]">∞</div>
+                <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Scalability</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Right - Code Card */}
+          <div className="relative" style={{ animation: "fadeUp 0.5s ease 0.2s both" }}>
+            <div className="bg-[#1a1714] rounded-[10px] overflow-hidden shadow-lg">
+              <div className="bg-[#2a2520] px-4 py-2.5 flex items-center gap-2 border-b border-[rgba(255,255,255,0.06)]">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff6058]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#29c440]"></div>
+                </div>
+                <span className="font-mono text-[10px] text-[rgba(255,255,255,0.3)] ml-2 tracking-[0.04em]">
+                  webhook-verification.ts
+                </span>
+              </div>
+              <pre className="p-5 font-mono text-[12px] leading-[1.75] text-[rgba(255,255,255,0.8)] overflow-auto">
+                <span className="text-[#c792ea]">import</span>{" "}
+                <span className="text-[#c3e88d]">{"{ WebhookVerifier }"}</span>{" "}
+                <span className="text-[#c792ea]">from</span>{" "}
+                <span className="text-[#c3e88d]">"@hookflo/tern"</span>
+                {"\n\n"}
+                <span className="text-[#82aaff]">const</span>{" "}
+                <span className="text-[#ffcb6b]">result</span> <span className="text-[#82aaff]">=</span>{" "}
+                <span className="text-[#82aaff]">await</span>{" "}
+                <span className="text-[#ffcb6b]">WebhookVerifier</span>
+                {"\n"}<span className="ml-4">.</span>
+                <span className="text-[#ffcb6b]">verify</span>
+                {"\n"}<span className="ml-8">(request, secret)"}
+              </pre>
+              <div className="grid grid-cols-3 gap-0 border-t border-[#d8d0c4] bg-white">
+                <div className="p-4 text-center border-r border-[#d8d0c4]">
+                  <div className="font-display text-xl italic text-[#1a1714]">0.5ms</div>
+                  <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Verify Time</div>
+                </div>
+                <div className="p-4 text-center border-r border-[#d8d0c4]">
+                  <div className="font-display text-xl italic text-[#1a1714]">1KB</div>
+                  <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Bundle Size</div>
+                </div>
+                <div className="p-4 text-center">
+                  <div className="font-display text-xl italic text-[#1a1714]">100%</div>
+                  <div className="font-mono text-[9px] text-[#9e9488] mt-1 uppercase tracking-[0.08em]">Type Safe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PLATFORMS ─── */}
+      <section className="py-20 px-5vw md:px-20 bg-[#f0ebe2] border-t border-[#d8d0c4]">
+        <div className="max-w-7xl mx-auto">
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
+            Platforms
+            <span className="flex-1 max-w-[60px] h-px bg-[#d8d0c4]"></span>
+          </div>
+
+          <h2 className="font-display text-[clamp(28px,4vw,42px)] font-normal leading-[1.15] text-[#1a1714] mb-4">
+            Webhook verification for the platforms that matter
+          </h2>
+          <p className="text-[16px] text-[#6b6358] max-w-[560px] leading-[1.6] mb-12">
+            Support for Stripe, GitHub, Clerk, Shopify, and 20+ other platforms out of the box.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
+            {[
+              "Stripe",
+              "GitHub",
+              "Clerk",
+              "Shopify",
+              "Supabase",
+              "Vercel",
+              "Polar",
+              "Dodo Pay",
+              "Linear",
+              "Discord",
+            ].map((platform, idx) => (
+              <div
+                key={platform}
+                className="flex items-center gap-2.5 px-4 py-3 bg-white border border-[#d8d0c4] rounded-lg font-mono text-[11px] font-medium text-[#3d3830] transition-all hover:border-[#c4baad] hover:shadow-sm hover:-translate-y-0.5 cursor-default"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1a6b3c] flex-shrink-0"></span>
+                {platform}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FEATURES ─── */}
+      <section className="py-20 px-5vw md:px-20 bg-white border-t border-[#d8d0c4]">
+        <div className="max-w-7xl mx-auto">
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
+            Features
+            <span className="flex-1 max-w-[60px] h-px bg-[#d8d0c4]"></span>
+          </div>
+
+          <h2 className="font-display text-[clamp(28px,4vw,42px)] font-normal leading-[1.15] text-[#1a1714] mb-4">
+            Built for modern development
+          </h2>
+          <p className="text-[16px] text-[#6b6358] max-w-[560px] leading-[1.6] mb-12">
+            Every feature designed to make webhook verification effortless and secure.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#d8d0c4] border border-[#d8d0c4] rounded-[10px] overflow-hidden">
+            {[
+              { num: "01", title: "Zero Dependencies", desc: "Lightweight and pure, with no external dependencies to bloat your bundle." },
+              { num: "02", title: "Type Safe", desc: "Full TypeScript support with comprehensive types for peace of mind." },
+              { num: "03", title: "Algorithm Agnostic", desc: "Support for HMAC-SHA256, SHA512, and custom verification algorithms." },
+              { num: "04", title: "Framework Agnostic", desc: "Works with Express, Next.js, Cloudflare Workers, and any modern JS runtime." },
+              { num: "05", title: "Battle Tested", desc: "Production-ready implementations for 20+ webhook platforms." },
+              { num: "06", title: "Self-Healing", desc: "Automatically adapts when webhook providers update their signature schemes." },
+            ].map((feature) => (
+              <div key={feature.num} className="bg-white p-7 transition-colors hover:bg-[#fdfcfb]">
+                <div className="font-mono text-[10px] font-bold text-[#9e9488] uppercase tracking-[0.1em] mb-4">
+                  {feature.num}
+                </div>
+                <h3 className="font-serif text-[16px] font-semibold text-[#1a1714] mb-2 leading-[1.3]">
+                  {feature.title}
+                </h3>
+                <p className="text-[13.5px] text-[#6b6358] leading-[1.55]">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── HOW IT WORKS ─── */}
+      <section className="py-20 px-5vw md:px-20 bg-[#f7f4ef] border-t border-[#d8d0c4]">
+        <div className="max-w-7xl mx-auto">
+          <div className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#9e9488] mb-4 flex items-center gap-2.5">
+            How It Works
+            <span className="flex-1 max-w-[60px] h-px bg-[#d8d0c4]"></span>
+          </div>
+
+          <h2 className="font-display text-[clamp(28px,4vw,42px)] font-normal leading-[1.15] text-[#1a1714] mb-4">
+            Integration in minutes, not days
+          </h2>
+
+          <div className="max-w-[780px] border border-[#d8d0c4] rounded-[10px] overflow-hidden bg-white">
+            {[
+              {
+                num: "1",
+                title: "Import the library",
+                desc: "Add @hookflo/tern to your project. Zero setup required.",
+                code: 'import { WebhookVerifier } from "@hookflo/tern"',
+              },
+              {
+                num: "2",
+                title: "Verify webhooks",
+                desc: "Call the verify method with your webhook payload and secret.",
+                code: 'const valid = await WebhookVerifier.verify(payload, secret)',
+              },
+              {
+                num: "3",
+                title: "Process safely",
+                desc: "Webhooks are verified and ready to process securely.",
+                code: 'if (valid) { // Handle webhook }',
+              },
+            ].map((step, idx) => (
+              <div key={step.num} className={`grid grid-cols-[64px_1fr] ${idx !== 2 ? "border-b border-[#d8d0c4]" : ""}`}>
+                <div className="flex items-start justify-center pt-6 font-display text-[22px] italic text-[#9e9488] border-r border-[#d8d0c4]">
+                  {step.num}
+                </div>
+                <div className="p-5.5">
+                  <h3 className="font-serif text-[15px] font-semibold text-[#1a1714] mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-[13.5px] text-[#6b6358] leading-[1.55] mb-3">
+                    {step.desc}
+                  </p>
+                  <code className="font-mono text-[11px] bg-[#f0ebe2] border border-[#d8d0c4] rounded-[5px] px-3.5 py-2.5 text-[#3d3830] block leading-[1.6]">
+                    {step.code}
+                  </code>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA ─── */}
+      <section className="py-20 px-5vw md:px-20 bg-[#1a1714]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-center">
+          <div>
+            <h2 className="font-display text-[clamp(28px,4vw,44px)] font-normal text-[#f7f4ef] leading-[1.15]">
+              Ready to secure your webhooks? <em className="italic opacity-70">Start now.</em>
+            </h2>
+            <p className="text-[15px] text-[rgba(247,244,239,0.55)] mt-2.5 leading-[1.55]">
+              Tern is open source and ready for production. Join developers building secure webhook systems.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <button className="font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#1a1714] bg-[#f7f4ef] border-none px-7 py-3.25 rounded cursor-pointer transition-opacity hover:opacity-88 text-center whitespace-nowrap">
+              Get Started
+            </button>
+            <a href="https://github.com/Hookflo/tern" className="font-mono text-[11px] text-[rgba(247,244,239,0.5)] no-underline text-center transition-colors hover:text-[rgba(247,244,239,0.85)]">
+              Or explore on GitHub
             </a>
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Hero */}
-      <main>
-        <section id="home" className="border-b">
-          <div className="max-w-7xl mx-auto px-8 py-20">
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground">
-                    <Cpu className="w-4 h-4" />
-                    Self-healing
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent-2 text-accent-2-foreground">
-                    Autonomous
-                  </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-accent-3 text-accent-3-foreground">
-                    Algorithm-agnostic
-                  </span>
-                </div>
-
-                <h1
-                  className={` ${geistMono.className} font-mono  text-5xl md:text-6xl font-light tracking-tight`}
-                >
-                  Verify less,
-                  <br />
-                  <span className="text-primary">build more.</span>
-                </h1>
-
-                <p className="mt-6 text-lg leading-relaxed text-muted-foreground max-w-xl">
-                  Tern is the next-generation webhook verification framework
-                  that adapts, heals, and scales automatically. Zero
-                  maintenance, infinite possibilities.
-                </p>
-
-                <div className="mt-4 flex gap-3">
-                  <Link href="#demo">
-                    <Button className="rounded-none">Try it live</Button>
-                  </Link>
-                  <a
-                    href="https://github.com/Hookflo/tern"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Button variant="outline" className="rounded-none">
-                      <Github className="w-5 h-5" />
-                      View on GitHub
-                    </Button>
-                  </a>
-                </div>
-
-                <div
-                  className={`${geistMono.className} mt-6 rounded-xl border bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md px-5 py-3 flex items-center gap-3 text-sm tracking-tight hover:shadow-lg hover:border-primary/30 transition-all max-w-sm`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className={` text-lg  select-none ${doto.className}`}>
-                      &gt;
-                    </span>
-                    <span className="text-muted-foreground select-none">
-                      npm i
-                    </span>
-                    <span className=" text-primary font-semibold">
-                      @hookflo/tern
-                    </span>
-                  </div>
-                  <div className="ml-auto opacity-80 group-hover:opacity-100 transition-opacity">
-                    <CopyCommand command="npm install @hookflo/tern" />
-                  </div>
-                </div>
-                {/* Stats Section */}
-                <div className="mt-8 flex flex-wrap  gap-6 sm:gap-10 text-center">
-                  <div className="flex flex-col text-left">
-                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
-                      20+
-                    </span>
-                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
-                      Platforms supported
-                    </span>
-                  </div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
-                      0
-                    </span>
-                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
-                      Deps required
-                    </span>
-                  </div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-2xl sm:text-3xl font-semibold leading-none text-foreground">
-                      ∞
-                    </span>
-                    <span className="text-xs sm:text-sm text-muted-foreground mt-1">
-                      Scale & resilience
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Code preview card */}
-              <div className="rounded-2xl border bg-card shadow-sm">
-                <div className="flex items-center justify-between px-5 py-3 border-b">
-                  <div className="flex gap-2">
-                    <span className="w-3 h-3 rounded-full bg-destructive/80" />
-                    <span className="w-3 h-3 rounded-full bg-chart-4/80" />
-                    <span className="w-3 h-3 rounded-full bg-chart-5/80" />
-                  </div>
-                  <span className="text-xs text-muted-foreground font-mono">
-                    webhook-verification.ts
-                  </span>
-                </div>
-                <pre className="p-6 text-sm leading-relaxed font-mono overflow-auto whitespace-pre-wrap break-words max-h-80 text-muted-foreground">
-                  {`import { WebhookVerificationService } from '@hookflo/tern'
-
-const result = await WebhookVerificationService
-  .verifyWithPlatformConfig(request, 'stripe', 'whsec_your_secret')
-
-if (result.isValid) {
-  console.log('Webhook verified autonomously!', result.payload)
-}`}
-                </pre>
-              </div>
-            </div>
+      {/* ─── FOOTER ─── */}
+      <footer className="bg-[#1a1714] border-t border-[rgba(255,255,255,0.07)] py-7 px-5vw md:px-20">
+        <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
+          <div className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[rgba(247,244,239,0.5)]">
+            Tern
           </div>
-        </section>
-
-        <UseCaseSection />
-
-        {/* Features */}
-        <section id="features" className="py-24 border-b">
-          <div className="max-w-6xl mx-auto px-8">
-            <header className="max-w-3xl">
-              <h2 className="text-4xl tracking-tight text-balance">
-                {" "}
-                Why Tern leads the future
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Most verifiers break when platforms change. Tern evolves with
-                them, automatically healing and adapting to keep your systems
-                running.
-              </p>
-            </header>
-            <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {features.map((feature) => (
-                <FeatureCard
-                  key={feature.title}
-                  icon={feature.icon}
-                  title={feature.title}
-                  body={feature.body}
-                  bgColor={feature.bgColor}
-                  fgColor={feature.fgColor}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Live Demo */}
-        {/* <section id="demo" className="py-24 border-b">
-          <div className="max-w-7xl mx-auto px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-4xl font-bold tracking-tight">Try the live demo</h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                Simulate a webhook request and verify it using Tern. Use our sample payload or bring your own.
-              </p>
-            </div>
-
-            <div className="mt-10">
-              <LiveDemo />
-            </div>
-          </div>
-        </section> */}
-
-        <TernBottomBanner />
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t">
-        <div className="max-w-7xl mx-auto px-8 py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <Feather className="w-7 h-7 text-primary " />
-              <span className="font-semibold">Tern</span>
-            </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
+          <ul className="flex gap-5 list-none">
+            <li>
               <a
                 href="https://github.com/Hookflo/tern/blob/main/README.md"
-                className="hover:text-foreground"
+                className="font-mono text-[10px] text-[rgba(247,244,239,0.35)] no-underline tracking-[0.06em] transition-colors hover:text-[rgba(247,244,239,0.7)]"
               >
-                README.md
+                Docs
               </a>
-              <a href="https://hookflo.com" className="hover:text-foreground">
-                Hookflo
-              </a>
-              <a
-                href="https://github.com/Hookflo/tern"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-foreground"
-              >
+            </li>
+            <li>
+              <a href="https://github.com/Hookflo" className="font-mono text-[10px] text-[rgba(247,244,239,0.35)] no-underline tracking-[0.06em] transition-colors hover:text-[rgba(247,244,239,0.7)]">
                 GitHub
               </a>
-              <a
-                href="https://github.com/Hookflo/tern/blob/main/LICENSE"
-                className="hover:text-foreground"
-              >
-                MIT License
+            </li>
+            <li>
+              <a href="https://hookflo.com" className="font-mono text-[10px] text-[rgba(247,244,239,0.35)] no-underline tracking-[0.06em] transition-colors hover:text-[rgba(247,244,239,0.7)]">
+                Hookflo
               </a>
-            </div>
-          </div>
-          <div className="mt-10 pt-6 border-t text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Tern by Hookflo. The self-healing
-            webhook verification framework.
+            </li>
+          </ul>
+          <div className="font-mono text-[10px] text-[rgba(247,244,239,0.25)] tracking-[0.04em]">
+            © 2024 Tern by Hookflo. MIT License.
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
 
-function FeatureCard({
-  icon,
-  title,
-  body,
-  bgColor,
-  fgColor,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-  bgColor: string;
-  fgColor: string;
-}) {
-  return (
-    <div className="bg-card border rounded-2xl p-6 hover:shadow-sm transition-shadow">
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-        style={{ background: bgColor, color: fgColor }}
-      >
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-muted-foreground leading-relaxed">{body}</p>
+      <style>{`
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        * {
+          font-family: inherit;
+        }
+        
+        body {
+          margin: 0;
+          padding: 0;
+        }
+      `}</style>
     </div>
   );
 }
