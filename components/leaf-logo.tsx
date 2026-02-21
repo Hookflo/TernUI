@@ -1,3 +1,5 @@
+'use client';
+
 export function LeafLogo({ className = "w-7 h-7" }: { className?: string }) {
   return (
     <svg

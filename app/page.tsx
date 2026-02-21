@@ -1,6 +1,6 @@
 'use client';
 
-import { LeafLogo } from '@/components/leaf-logo';
+import { LeafLogo } from '../components/leaf-logo';
 import { Copy } from 'lucide-react';
 import Link from 'next/link';
 
