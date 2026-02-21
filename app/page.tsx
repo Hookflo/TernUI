@@ -299,18 +299,20 @@ const css = `
 // ─── DATA ──────────────────────────────────────────────────────────────────────
 
 const PLATFORMS = [
-  { name: "Stripe", icon: "🔷", bg: "#f0f9f4", verified: true },
-  { name: "Clerk", icon: "🏛", bg: "#f5f0fa", verified: true },
-  { name: "GitHub", icon: "🐙", bg: "#f0f5ff", verified: true },
-  { name: "Supabase", icon: "⚡", bg: "#f0fcf7", verified: true },
-  { name: "Shopify", icon: "🔶", bg: "#fff5f0", verified: true },
-  { name: "Polar", icon: "🟣", bg: "#f5f5f0", verified: true },
-  { name: "Dodo Payments", icon: "💳", bg: "#f0f5fa", verified: true },
-  { name: "GitLab", icon: "🦊", bg: "#fafafa", verified: true },
-  { name: "Vercel", icon: "▲", bg: "#f0f9ff", verified: true },
-  { name: "Razorpay", icon: "💠", bg: "#f0f8ff", verified: true },
-  { name: "Custom HMAC", icon: "⚙️", bg: "#f5f5f5", verified: true },
-  { name: "More", icon: "＋", bg: "#fafafa", verified: false },
+  { name: "Stripe", icon: "/Stripe.svg", bg: "#f0f9f4", verified: true },
+  { name: "Clerk", icon: "/clerk.svg", bg: "#f5f0fa", verified: true },
+  { name: "GitHub", icon: "/github.svg", bg: "#f0f5ff", verified: true },
+  { name: "Shopify", icon: "/shopify.svg", bg: "#fff5f0", verified: true },
+  { name: "Polar", icon: "/polar.svg", bg: "#f5f5f0", verified: true },
+  { name: "Dodo Payments", icon: "/dodo.svg", bg: "#f0f5fa", verified: true },
+  { name: "GitLab", icon: "/gitlab.svg", bg: "#fafafa", verified: true },
+  { name: "Vercel", icon: "/vercel.svg", bg: "#f0f9ff", verified: true },
+  { name: "Replicate", icon: "/replicate.svg", bg: "#f0f8ff", verified: true },
+  { name: "Razorpay", icon: "/razorpay.svg", bg: "#f0f8ff", verified: true },
+  { name: "WorkOS", icon: "/workos.svg", bg: "#f5f5f5", verified: true },
+  { name: "Fal AI", icon: "/fal.svg", bg: "#f0f8ff", verified: true },
+  { name: "LemonSqueezy", icon: "/lemonsqueezy.svg", bg: "#f5f5f0", verified: true },
+  { name: "Paddle", icon: "/paddle.svg", bg: "#fafafa", verified: true },
 ];
 
 const MIDDLEWARES = [
@@ -712,7 +714,9 @@ export default function HomePage() {
           <div className="t-platforms-grid">
             {PLATFORMS.map((p) => (
               <div className="t-platform-chip" key={p.name}>
-                <div className="t-platform-icon" style={{ background: p.bg }}>{p.icon}</div>
+                <div className="t-platform-icon" style={{ background: p.bg }}>
+                  <img src={`/assets${p.icon}`} alt={`${p.name} logo`} style={{ width: "20px", height: "20px", objectFit: "contain" }} />
+                </div>
                 {p.name}
                 {p.verified
                   ? <div className="t-platform-dot" />
