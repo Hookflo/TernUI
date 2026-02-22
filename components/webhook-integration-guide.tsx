@@ -192,6 +192,71 @@ if (result.isValid) {
 }`;
 }
 
+// ─── SYNTAX HIGHLIGHTER ──────────────────────────────────────────────────────
+
+function highlightCode(code: string): JSX.Element {
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+
+  // Keywords (purple)
+  const keywords = /\b(import|from|const|export|async|await|function|return|if|else|new|as|interface|type|let|var)\b/g;
+  // Strings (green)
+  const strings = /('([^'\\]|\\.)*'|"([^"\\]|\\.)*"|`([^`\\]|\\.)*`)/g;
+  // Numbers (orange)
+  const numbers = /\b(\d+)\b/g;
+  // Comments (gray)
+  const comments = /(\/\/.*|\/\*[\s\S]*?\*\/)/g;
+  // Functions/Classes (blue)
+  const functions = /\b([A-Z][a-zA-Z0-9]*(?=\(|\.)|[a-z][a-zA-Z0-9]*(?=\())\b/g;
+  // Properties (yellow)
+  const properties = /\.\b([a-zA-Z_$][a-zA-Z0-9_$]*)\b/g;
+
+  // Create regex that matches all patterns
+  const allPatterns = /\b(import|from|const|export|async|await|function|return|if|else|new|as|interface|type|let|var)\b|('([^'\\]|\\.)*'|"([^"\\]|\\.)*"|`([^`\\]|\\.)*`)|\/\/.*|\/\*[\s\S]*?\*\/|\b\d+\b|\b[A-Z][a-zA-Z0-9]*|\.\b[a-zA-Z_$][a-zA-Z0-9_$]*\b/g;
+
+  let match;
+  const regex = new RegExp(allPatterns.source, 'g');
+
+  while ((match = regex.exec(code)) !== null) {
+    // Add text before match
+    if (match.index > lastIndex) {
+      parts.push(code.slice(lastIndex, match.index));
+    }
+
+    const text = match[0];
+    let className = '';
+
+    if (/^(import|from|const|export|async|await|function|return|if|else|new|as|interface|type|let|var)$/.test(text)) {
+      className = 'skw'; // keyword (purple)
+    } else if (/^['"`]/.test(text)) {
+      className = 'sstr'; // string (green)
+    } else if (/^\/\/|^\/\*/.test(text)) {
+      className = 'scm'; // comment (gray)
+    } else if (/^\d+$/.test(text)) {
+      className = 'snum'; // number (orange)
+    } else if (/^[A-Z]/.test(text)) {
+      className = 'sfn'; // Class/function (blue)
+    } else if (/^\./.test(text)) {
+      className = 'sprop'; // property (yellow)
+    }
+
+    parts.push(
+      <span key={`${lastIndex}-${match.index}`} className={className}>
+        {text}
+      </span>
+    );
+
+    lastIndex = regex.lastIndex;
+  }
+
+  // Add remaining text
+  if (lastIndex < code.length) {
+    parts.push(code.slice(lastIndex));
+  }
+
+  return <>{parts}</>;
+}
+
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 
 export default function WebhookIntegrationGuide() {
@@ -350,7 +415,7 @@ export default function WebhookIntegrationGuide() {
 
             {/* code — hugs content, no artificial min-height */}
             <pre className="t-webhook-code-pre">
-              <code>{codeSnippet}</code>
+              <code>{highlightCode(codeSnippet)}</code>
             </pre>
 
             {/* status bar */}
@@ -571,14 +636,26 @@ export default function WebhookIntegrationGuide() {
         /* code pre — no artificial extra space */
         .t-webhook-code-pre {
           flex: 1; margin: 0;
-          padding: 16px 20px;
+          padding: 18px 20px;
           font-family: var(--mono); font-size: 12px;
-          line-height: 1.7; color: #f8f8f2;
-          overflow-x: auto; overflow-y: auto;
-          white-space: pre;
+          line-height: 1.75; color: #f8f8f2;
+          overflow-x: auto;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
           background: var(--ink);
+          max-height: none;
+          min-height: auto;
         }
         .t-webhook-code-pre code { font-family:inherit; font-size:inherit; color:inherit; }
+        
+        /* syntax highlighting colors */
+        .t-webhook-code-pre .skw { color: #c792ea; }
+        .t-webhook-code-pre .sstr { color: #c3e88d; }
+        .t-webhook-code-pre .scm { color: #546e7a; font-style: italic; }
+        .t-webhook-code-pre .snum { color: #ffcb6b; }
+        .t-webhook-code-pre .sfn { color: #82aaff; }
+        .t-webhook-code-pre .sprop { color: #ffcb6b; }
 
         /* status bar */
         .t-webhook-statusbar {
