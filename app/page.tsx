@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Feather } from "lucide-react";
 import PlatformCodePopover from "@/components/platform-code-popover";
+import WebhookIntegrationGuide from "@/components/webhook-integration-guide";
 
 // ─── INLINE STYLES (same design system as HTML) ───────────────────────────────
 const css = `
@@ -551,6 +552,7 @@ export default function HomePage() {
 
         <ul className="t-nav-links">
           <li><a href="#how">How it works</a></li>
+          <li><a href="#usage">Usage</a></li>
           <li><a href="#platforms">Platforms</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#middleware">Frameworks</a></li>
@@ -820,6 +822,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── WEBHOOK INTEGRATION GUIDE ── */}
+      <div id="usage">
+        <WebhookIntegrationGuide />
+      </div>
 
       {/* ── PLATFORMS ── */}
       <section className="t-platforms-section t-section" id="platforms">
