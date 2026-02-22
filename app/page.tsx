@@ -577,7 +577,7 @@ export default function HomePage() {
             </h1>
 
             <p className="t-hero-desc fade-up-3">
-              Tern is a zero-dependency TypeScript framework for webhook signature verification. One API, every platform. No boilerplate, no fragile hand-rolled crypto.
+              Tern is a zero-dependency TypeScript framework for webhook signature verification. One SDK, every platform. No boilerplate, no fragile hand-rolled crypto.
             </p>
             <div className="t-actions fade-up-4">
               <a href="#how" className="t-btn-primary">Get started</a>

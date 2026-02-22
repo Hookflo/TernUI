@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Lora, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -290,6 +291,7 @@ export default function RootLayout({
           <rect width="100%" height="100%" filter="url(#noise-filter)"></rect>
         </svg>
         {children}
+        <Analytics/>
       </body>
     </html>
   );
