@@ -620,11 +620,11 @@ export default function HomePage() {
               </div>
               <div className="t-code-body">
                 <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
-                <div><span className="ck">import</span> <span className="ct">{"{ platform, webhooksecret }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
+                <div><span className="ck">import</span> <span className="ct">{"{ platform }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
                 <div>&nbsp;</div>
                 <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
                 <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
-                <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">webhooksecret</span><span className="ct">(),</span></div>
+                <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">process.env.WEBHOOK_SECRET!</span><span className="ct">,</span></div>
                 <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
                 <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
                 <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
@@ -708,11 +708,11 @@ export default function HomePage() {
               <div className="t-diff-code after">
                 {[
                   { t: "add", p: "+", c: <><span className="dkw">import</span>{" { createWebhookHandler } "}<span className="dkw">from</span>{" "}<span className="dstr">'@hookflo/tern/nextjs'</span></> },
-                  { t: "add", p: "+", c: <><span className="dkw">import</span>{" { platform, webhooksecret } "}<span className="dkw">from</span>{" "}<span className="dstr">'../flags'</span></> },
+                  { t: "add", p: "+", c: <><span className="dkw">import</span>{" { platform } "}<span className="dkw">from</span>{" "}<span className="dstr">'../flags'</span></> },
                   { t: "emp" },
                   { t: "add", p: "+", c: <><span className="dkw">export const</span>{" POST = "}<span className="dfn">createWebhookHandler</span>{"({"}</> },
                   { t: "add", p: "+", c: <>{" platform: "}<span className="dkw">await</span>{" "}<span className="dfn">platform</span>{"(),"}</> },
-                  { t: "add", p: "+", c: <>{" secret:   "}<span className="dkw">await</span>{" "}<span className="dfn">webhooksecret</span>{"(),"}</> },
+                  { t: "add", p: "+", c: <>{" secret:   "}<span className="dfn">process.env.WEBHOOK_SECRET!</span>{","}</> },
                   { t: "add", p: "+", c: <>{" handler: "}<span className="dkw">async</span>{" (payload) => {"}</> },
                   { t: "neu", p: " ", c: <><span className="dcm">{"    // verified ✓ — handle your event"}</span></> },
                   { t: "add", p: "+", c: <>{"  }"}</> },
@@ -763,7 +763,7 @@ export default function HomePage() {
               <div className="t-flag-eyebrow">Vercel Feature Flags × Tern</div>
               <h3 className="t-flag-title">Switch platforms with<br /><em>a single flag flip.</em></h3>
               <p className="t-flag-desc">
-                No code change. No redeployment. Set your platform and webhook secret via Vercel feature flags — Tern reads them at runtime. Switch from Clerk to Stripe to GitHub without touching your codebase.
+                No code change. No redeployment. Set your platform via Vercel feature flags — Tern reads them at runtime. Switch from Clerk to Stripe to GitHub without touching your codebase.
               </p>
             </div>
             <div className="t-flag-ui">
@@ -772,13 +772,6 @@ export default function HomePage() {
                   <div style={{ flex: 1 }}>
                     <div className="t-flag-key">PLATFORM</div>
                     <div className="t-flag-val">clerk → stripe</div>
-                  </div>
-                  <div className="t-flag-toggle" />
-                </div>
-                <div className="t-flag-row">
-                  <div style={{ flex: 1 }}>
-                    <div className="t-flag-key">WEBHOOK_SECRET</div>
-                    <div className="t-flag-val">whsec_••••••••</div>
                   </div>
                   <div className="t-flag-toggle" />
                 </div>
@@ -898,12 +891,12 @@ export default function HomePage() {
               <div className="t-step-body">
                 <div className="t-step-title">Use feature flags to switch platforms</div>
                 <div className="t-step-desc">
-                  With the Next.js adapter, pass <code className="t-inline-code">platform</code> and <code className="t-inline-code">secret</code> from Vercel feature flags. Change platforms at runtime — zero code changes, zero redeployments.
+                  With the Next.js adapter, pass <code className="t-inline-code">platform</code> from Vercel feature flags. Change platforms at runtime — zero code changes, zero redeployments.
                 </div>
                 <div className="t-step-code">
                   <span className="skw">export const</span>{" POST = "}<span className="sfn">createWebhookHandler</span>{"({\n"}
                   {"  platform: "}<span className="skw">await</span>{" "}<span className="sfn">platform</span>{"(),  "}<span className="scm">// from @vercel/flags</span>{"\n"}
-                  {"  secret:   "}<span className="skw">await</span>{" "}<span className="sfn">webhooksecret</span>{"(),\n"}
+                  {"  secret:   "}{" "}<span className="sfn">process.env.WEBHOOK_SECRET!,</span>{"\n"}
                   {"  handler:  "}<span className="skw">async</span>{" (payload) => { "}<span className="scm">/* ... */</span>{" }\n"}
                   {"})"}
                 </div>
