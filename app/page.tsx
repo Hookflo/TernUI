@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Feather } from "lucide-react";
-import PlatformCodePopover from "@/components/platform-code-popover";
 import WebhookIntegrationGuide from "@/components/webhook-integration-guide";
 
 // ─── INLINE STYLES (same design system as HTML) ───────────────────────────────
@@ -237,20 +236,6 @@ const css = `
   .t-platform-dot { margin-left:auto; width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
   .t-platform-soon { margin-left:auto; font-size:8px; color:var(--ink4); letter-spacing:.06em; }
   
-  /* PLATFORM POPOVER */
-  .t-platform-popover-container { position:relative; display:inline-block; }
-  .t-platform-popover { position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%); background:white; border:1px solid var(--border); border-radius:8px; box-shadow:0 8px 24px rgba(26,23,20,.12); z-index:1000; min-width:340px; max-width:380px; animation:popoverFadeIn .2s ease; }
-  @keyframes popoverFadeIn { from { opacity:0; transform:translateX(-50%) translateY(4px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
-  .t-popover-header { padding:14px 16px; border-bottom:1px solid var(--border); }
-  .t-popover-platform-name { font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink); text-transform:uppercase; letter-spacing:.06em; }
-  .t-popover-code-block { padding:14px 16px; background:var(--paper2); border-bottom:1px solid var(--border); overflow:hidden; }
-  .t-popover-code-pre { margin:0; font-family:var(--mono); font-size:9.5px; color:var(--ink2); line-height:1.6; white-space:pre-wrap; word-wrap:break-word; overflow-wrap:break-word; }
-  .t-popover-footer { padding:12px 16px; display:flex; align-items:center; justify-content:flex-end; }
-  .t-popover-copy-btn { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.04em; color:var(--ink2); background:transparent; border:1px solid var(--border); border-radius:4px; padding:6px 10px; cursor:pointer; transition:all .2s; }
-  .t-popover-copy-btn:hover { background:var(--paper2); border-color:var(--border2); color:var(--ink); }
-  .t-popover-icon { width:14px; height:14px; }
-  @media(max-width:768px) { .t-platform-popover { display:none; } }
-
   /* FEATURES */
   .t-features-section { background:white; border-top:1px solid var(--border); }
   .t-features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
@@ -335,65 +320,6 @@ const PLATFORMS = [
   { name: "Paddle", icon: "/paddle.svg", bg: "#fafafa", verified: true },
 ];
 
-const PLATFORM_SNIPPETS: Record<string, { import: string; usage: string }> = {
-  Stripe: {
-    import: `import { verifyStripeWebhook } from '@hookflo/tern/stripe'`,
-    usage: `const event = await verifyStripeWebhook(request, secret)`,
-  },
-  Clerk: {
-    import: `import { verifyClerkWebhook } from '@hookflo/tern/clerk'`,
-    usage: `const event = await verifyClerkWebhook(request, secret)`,
-  },
-  GitHub: {
-    import: `import { verifyGitHubWebhook } from '@hookflo/tern/github'`,
-    usage: `const event = await verifyGitHubWebhook(request, secret)`,
-  },
-  Shopify: {
-    import: `import { verifyShopifyWebhook } from '@hookflo/tern/shopify'`,
-    usage: `const event = await verifyShopifyWebhook(request, secret)`,
-  },
-  Polar: {
-    import: `import { verifyPolarWebhook } from '@hookflo/tern/polar'`,
-    usage: `const event = await verifyPolarWebhook(request, secret)`,
-  },
-  "Dodo Payments": {
-    import: `import { verifyDodoWebhook } from '@hookflo/tern/dodo'`,
-    usage: `const event = await verifyDodoWebhook(request, secret)`,
-  },
-  GitLab: {
-    import: `import { verifyGitLabWebhook } from '@hookflo/tern/gitlab'`,
-    usage: `const event = await verifyGitLabWebhook(request, secret)`,
-  },
-  Vercel: {
-    import: `import { verifyVercelWebhook } from '@hookflo/tern/vercel'`,
-    usage: `const event = await verifyVercelWebhook(request, secret)`,
-  },
-  Replicate: {
-    import: `import { verifyReplicateWebhook } from '@hookflo/tern/replicate'`,
-    usage: `const event = await verifyReplicateWebhook(request, secret)`,
-  },
-  Razorpay: {
-    import: `import { verifyRazorpayWebhook } from '@hookflo/tern/razorpay'`,
-    usage: `const event = await verifyRazorpayWebhook(request, secret)`,
-  },
-  WorkOS: {
-    import: `import { verifyWorkOSWebhook } from '@hookflo/tern/workos'`,
-    usage: `const event = await verifyWorkOSWebhook(request, secret)`,
-  },
-  "Fal AI": {
-    import: `import { verifyFalWebhook } from '@hookflo/tern/fal'`,
-    usage: `const event = await verifyFalWebhook(request, secret)`,
-  },
-  LemonSqueezy: {
-    import: `import { verifyLemonWebhook } from '@hookflo/tern/lemon'`,
-    usage: `const event = await verifyLemonWebhook(request, secret)`,
-  },
-  Paddle: {
-    import: `import { verifyPaddleWebhook } from '@hookflo/tern/paddle'`,
-    usage: `const event = await verifyPaddleWebhook(request, secret)`,
-  },
-};
-
 const MIDDLEWARES = [
   {
     name: "@hookflo/tern/nextjs",
@@ -404,13 +330,13 @@ const MIDDLEWARES = [
   {
     name: "@hookflo/tern/express",
     badge: "stable",
-    import: `import { ternMiddleware } from '@hookflo/tern/express'`,
+    import: `import { createWebhookMiddleware } from '@hookflo/tern/express'`,
     desc: "Express.js middleware. Drop-in request verification before your route handler runs.",
   },
   {
     name: "@hookflo/tern/cloudflare",
     badge: "beta",
-    import: `import { createWorkerHandler } from '@hookflo/tern/cloudflare'`,
+    import: `import { createWebhookHandler } from '@hookflo/tern/cloudflare'`,
     desc: "Cloudflare Workers adapter using the Web Crypto API. Edge-native, zero Node.js dependencies.",
   },
   {
@@ -492,18 +418,11 @@ const FEATURES = [
 
 interface PlatformChipItemProps {
   platform: (typeof PLATFORMS)[0];
-  snippet?: { import: string; usage: string };
 }
 
-function PlatformChipItem({ platform, snippet }: PlatformChipItemProps) {
-  const [isHovering, setIsHovering] = useState(false);
-
+function PlatformChipItem({ platform }: PlatformChipItemProps) {
   return (
-    <div
-      className="t-platform-popover-container"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+    <div>
       <div className="t-platform-chip">
         <div className="t-platform-icon">
           <img
@@ -517,13 +436,6 @@ function PlatformChipItem({ platform, snippet }: PlatformChipItemProps) {
           ? <div className="t-platform-dot" />
           : <span className="t-platform-soon">soon</span>}
       </div>
-      {snippet && (
-        <PlatformCodePopover
-          platformName={platform.name}
-          snippet={snippet}
-          isVisible={isHovering}
-        />
-      )}
     </div>
   );
 }
@@ -831,7 +743,7 @@ export default function HomePage() {
           </p>
           <div className="t-platforms-grid">
             {PLATFORMS.map((p) => (
-              <PlatformChipItem key={p.name} platform={p} snippet={PLATFORM_SNIPPETS[p.name]} />
+              <PlatformChipItem key={p.name} platform={p} />
             ))}
           </div>
           <p style={{ marginTop: 20, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink4)" }}>
