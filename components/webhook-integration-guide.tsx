@@ -28,6 +28,8 @@ const PLATFORMS: PlatformConfig[] = [
   { id: 'falai', name: 'Fal AI', svgName: 'fal.svg', secretEnv: 'FAL_WEBHOOK_SECRET' },
   { id: 'lemonsqueezy', name: 'LemonSqueezy', svgName: 'lemonsqueezy.svg', secretEnv: 'LEMONSQUEEZY_WEBHOOK_SECRET' },
   { id: 'paddle', name: 'Paddle', svgName: 'paddle.svg', secretEnv: 'PADDLE_WEBHOOK_SECRET' },
+  { id: 'doppler', name: 'Doppler', svgName: 'doppler.svg', secretEnv: 'DOPPLER_WEBHOOK_SECRET' },
+  { id: 'sentry', name: 'Sentry', svgName: 'sentry.svg', secretEnv: 'SENTRY_WEBHOOK_SECRET' }
 ];
 
 const FRAMEWORKS: { id: Framework; label: string }[] = [
@@ -57,6 +59,7 @@ export const POST = createWebhookHandler({
   },
   handler: async (payload) => {
     // ✓ verified — handle your event
+    // payload.id can be stored for deduplication
     return { received: true };
   },
 });`;
@@ -68,6 +71,7 @@ export const POST = createWebhookHandler({
   secret:   process.env.${secretEnv}!,
   handler:  async (payload) => {
     // ✓ verified — handle your event
+    // payload.id can be stored for deduplication
     return { received: true };
   },
 });`;
@@ -92,6 +96,7 @@ app.post('/webhooks/custom',
   }),
   (req, res) => {
     // ✓ req.webhook.payload — verified
+    // req.webhook.payload.id can be stored for deduplication
     res.json({ received: true });
   }
 );`;
@@ -108,6 +113,7 @@ app.post('/webhooks/${id}',
   }),
   (req, res) => {
     // ✓ req.webhook.payload — verified
+    // req.webhook.payload.id can be stored for deduplication
     res.json({ received: true });
   }
 );`;
@@ -128,6 +134,7 @@ export default {
     },
     handler: async (payload, env) => {
       // ✓ verified — edge-native Web Crypto
+      // payload.id can be stored for deduplication
       return { received: true };
     },
   }),
@@ -141,6 +148,7 @@ export default {
     secretEnv: '${secretEnv}',
     handler:   async (payload, env) => {
       // ✓ verified — edge-native Web Crypto
+      // payload.id can be stored for deduplication
       return { received: true };
     },
   }),
@@ -165,6 +173,7 @@ const result = await WebhookVerificationService.verify(request, {
 
 if (result.isValid) {
   // ✓ result.payload — cryptographically verified
+  // result.payload.id can be stored for deduplication
   console.log(result.payload);
 }`;
   return `import { WebhookVerificationService } from '@hookflo/tern';
@@ -180,6 +189,7 @@ const result = await WebhookVerificationService
 
 if (result.isValid) {
   // ✓ result.payload — cryptographically verified
+  // result.payload.id can be stored for deduplication
   console.log(result.payload);
 }`;
 }
@@ -503,6 +513,7 @@ export default function WebhookIntegrationGuide() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 5px 6px 0 var(--border);
+          min-width: 0;
         }
         @media(max-width:860px){ .t-webhook-grid { grid-template-columns: 1fr; } }
 
@@ -594,6 +605,7 @@ export default function WebhookIntegrationGuide() {
           display: flex;
           flex-direction: column;
           background: var(--ink);
+          min-width: 0;
         }
 
         /* titlebar — window chrome + tabs + copy */
@@ -679,6 +691,63 @@ export default function WebhookIntegrationGuide() {
           line-height: 1.75;
           overflow-x: auto;
           overflow-y: auto;
+          min-width: 0;
+        }
+
+        @media(max-width:640px) {
+          .t-webhook-platforms {
+            padding: 8px;
+            gap: 6px;
+          }
+          .t-webhook-platform-card {
+            width: calc(50% - 3px);
+            min-width: 0;
+          }
+          .t-webhook-add-custom {
+            width: calc(50% - 3px);
+            margin-top: 0;
+          }
+          .t-webhook-platform-name {
+            font-size: 10px;
+          }
+
+          .t-code-titlebar {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            height: auto;
+            padding: 8px 10px;
+            row-gap: 8px;
+          }
+          .t-wh-dots {
+            order: 1;
+            margin-right: 0;
+          }
+          .t-framework-tabs {
+            order: 3;
+            grid-column: 1 / -1;
+            height: 34px;
+            min-width: 0;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 0 -10px -8px;
+            padding: 0 10px;
+          }
+          .t-framework-tab {
+            height: 34px;
+            padding: 0 10px;
+            top: 0;
+          }
+          .t-copy-btn {
+            order: 2;
+            margin-left: auto;
+          }
+          .t-code-content {
+            padding: 14px;
+          }
+          .t-code-status {
+            padding: 8px 12px;
+          }
         }
 
         /* status bar */
