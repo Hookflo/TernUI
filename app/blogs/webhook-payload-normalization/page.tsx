@@ -20,7 +20,7 @@ export default function Page() {
             Webhook Payload Normalization
           </h1>
           <p className="mt-3 text-pretty text-base text-muted-foreground">
-            Normalize webhook payloads across platforms like Stripe, Razorpay, PayPal and more. one schema, consistent
+            Normalize webhook payloads across platforms like Stripe, Razorpay, Polar and more. one schema, consistent
             handlers, zero rewrites.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function Page() {
         {/* The Problem */}
         <Section id="the-problem" title="The Problem">
           <p className="text-pretty">
-            Your app integrates with Stripe for payments. Then a customer wants Razorpay. Another wants PayPal. Each
+            Your app integrates with Stripe for payments. Then a customer wants Razorpay. Another wants Polar. Each
             platform sends webhooks in completely different formats:
           </p>
 
@@ -89,7 +89,7 @@ export default function Page() {
             {`import { normalize } from '@hookflo/tern';
 
 app.post('/webhooks/:platform', async (req, res) => {
-  // Works with Stripe, Razorpay, PayPal, Square...
+  // Works with Stripe, Razorpay, Polar, Square...
   const payment = normalize(req.body, {
     platform: req.params.platform,
     category: 'payments'
@@ -279,7 +279,7 @@ logger.debug('Full webhook payload:', result.raw);`}
             <div className="rounded-lg border border-border bg-card p-4">
               <h4 className="text-sm font-semibold">Payments</h4>
               <p className="mt-2 text-sm text-muted-foreground">
-                Platforms: Stripe, PayPal, Square, Razorpay, Adyen, Braintree, Paddle, Mollie
+                Platforms: Stripe, Polar, Square, Razorpay, Adyen, Braintree, Paddle, Mollie
               </p>
             </div>
             <div className="rounded-lg border border-border bg-card p-4">
@@ -322,7 +322,7 @@ const payment = normalize(webhookPayload, {
             <li>
               <div className="text-sm font-medium">Use consistent data everywhere</div>
               <CodeBlock language="ts" className="mt-2">
-                {`// Works with Stripe, Razorpay, PayPal, Square...
+                {`// Works with Stripe, Razorpay, Polar, Square...
 console.log(payment.transaction_id);
 console.log(payment.amount);
 console.log(payment.status);`}

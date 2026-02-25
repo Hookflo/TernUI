@@ -176,3 +176,8 @@ code, pre {
   }
 }
 
+
+
+::-webkit-scrollbar {
+  width: 1px;
+}
