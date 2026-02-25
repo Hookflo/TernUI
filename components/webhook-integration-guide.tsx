@@ -28,6 +28,10 @@ const PLATFORMS: PlatformConfig[] = [
   { id: 'falai', name: 'Fal AI', svgName: 'fal.svg', secretEnv: 'FAL_WEBHOOK_SECRET' },
   { id: 'lemonsqueezy', name: 'LemonSqueezy', svgName: 'lemonsqueezy.svg', secretEnv: 'LEMONSQUEEZY_WEBHOOK_SECRET' },
   { id: 'paddle', name: 'Paddle', svgName: 'paddle.svg', secretEnv: 'PADDLE_WEBHOOK_SECRET' },
+  { id: 'twilio', name: 'Twilio', svgName: 'twilio.svg', secretEnv: 'TWILIO_WEBHOOK_SECRET' },
+  { id: 'sendgrid', name: 'SendGrid', svgName: 'sendgrid.svg', secretEnv: 'SENDGRID_WEBHOOK_SECRET' },
+  { id: 'paypal', name: 'PayPal', svgName: 'paypal.svg', secretEnv: 'PAYPAL_WEBHOOK_SECRET' },
+  { id: 'discord', name: 'Discord', svgName: 'discord.svg', secretEnv: 'DISCORD_WEBHOOK_SECRET' },
 ];
 
 const FRAMEWORKS: { id: Framework; label: string }[] = [
@@ -710,24 +714,34 @@ export default function WebhookIntegrationGuide() {
           }
 
           .t-code-titlebar {
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
             height: auto;
             padding: 8px 10px;
             row-gap: 8px;
           }
           .t-wh-dots {
+            order: 1;
             margin-right: 0;
           }
           .t-framework-tabs {
-            order: 2;
-            flex: 1 1 100%;
+            order: 3;
+            grid-column: 1 / -1;
+            height: 34px;
             min-width: 0;
-          }
-          .t-framework-tab {
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 0 -10px -8px;
             padding: 0 10px;
           }
+          .t-framework-tab {
+            height: 34px;
+            padding: 0 10px;
+            top: 0;
+          }
           .t-copy-btn {
-            order: 1;
+            order: 2;
             margin-left: auto;
           }
           .t-code-content {
