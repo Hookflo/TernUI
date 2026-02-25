@@ -316,10 +316,16 @@ const PLATFORMS = [
   { name: "Razorpay", icon: "/razorpay.svg", bg: "#f0f8ff", verified: true },
   { name: "WorkOS", icon: "/workos.svg", bg: "#f5f5f5", verified: true },
   { name: "Fal AI", icon: "/fal.svg", bg: "#f0f8ff", verified: true },
-  { name: "LemonSqueezy", icon: "/lemonsqueezy.svg", bg: "#f5f5f0", verified: true },
+  {
+    name: "LemonSqueezy",
+    icon: "/lemonsqueezy.svg",
+    bg: "#f5f5f0",
+    verified: true,
+  },
   { name: "Paddle", icon: "/paddle.svg", bg: "#fafafa", verified: true },
   { name: "Doppler", icon: "/doppler.svg", bg: "#fff1f3", verified: true },
   { name: "Sentry", icon: "/sentry.svg", bg: "#eff6ff", verified: true },
+  { name: "Grafana", icon: "/grafana.svg", bg: "#eff6ff", verified: true },
 ];
 
 const MIDDLEWARES = [
@@ -356,7 +362,12 @@ const FEATURES = [
     desc: "HMAC-SHA256, SHA1, SHA512, or custom. Tern decouples platform logic from signing logic — add any platform without touching core code.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M9 2L2 6v6l7 4 7-4V6L9 2z" stroke="#1a1714" strokeWidth="1.3" strokeLinejoin="round" />
+        <path
+          d="M9 2L2 6v6l7 4 7-4V6L9 2z"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -367,7 +378,13 @@ const FEATURES = [
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
         <circle cx="9" cy="9" r="7" stroke="#1a1714" strokeWidth="1.3" />
-        <path d="M6 9l2 2 4-4" stroke="#1a1714" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M6 9l2 2 4-4"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -377,8 +394,21 @@ const FEATURES = [
     desc: "Comprehensive TypeScript types throughout. Catch wrong platform names and missing secrets at compile time, not in production.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <rect x="2" y="2" width="14" height="14" rx="2" stroke="#1a1714" strokeWidth="1.3" />
-        <path d="M5 9h8M9 5v8" stroke="#1a1714" strokeWidth="1.3" strokeLinecap="round" />
+        <rect
+          x="2"
+          y="2"
+          width="14"
+          height="14"
+          rx="2"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+        />
+        <path
+          d="M5 9h8M9 5v8"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
       </svg>
     ),
   },
@@ -388,8 +418,18 @@ const FEATURES = [
     desc: "Express, Next.js App Router, Cloudflare Workers, Deno — Tern normalizes the request interface so your code works everywhere.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M3 9c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6" stroke="#1a1714" strokeWidth="1.3" strokeLinecap="round" />
-        <path d="M9 6v3l2 2" stroke="#1a1714" strokeWidth="1.3" strokeLinecap="round" />
+        <path
+          d="M3 9c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
+        <path
+          d="M9 6v3l2 2"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
       </svg>
     ),
   },
@@ -399,7 +439,12 @@ const FEATURES = [
     desc: "Using a provider we don't support yet? Supply a signatureConfig object and verify any HMAC webhook — no library update needed.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M5 4h8v2L9 10l4 4H5v-2l4-4-4-4V4z" stroke="#1a1714" strokeWidth="1.3" strokeLinejoin="round" />
+        <path
+          d="M5 4h8v2L9 10l4 4H5v-2l4-4-4-4V4z"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
   },
@@ -409,7 +454,12 @@ const FEATURES = [
     desc: "All comparisons use constant-time equality to prevent timing attacks. Replay protection via configurable timestamp tolerance is on by default.",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M9 2v4M9 12v4M2 9h4M12 9h4" stroke="#1a1714" strokeWidth="1.3" strokeLinecap="round" />
+        <path
+          d="M9 2v4M9 12v4M2 9h4M12 9h4"
+          stroke="#1a1714"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
         <circle cx="9" cy="9" r="3" stroke="#1a1714" strokeWidth="1.3" />
       </svg>
     ),
@@ -434,9 +484,11 @@ function PlatformChipItem({ platform }: PlatformChipItemProps) {
           />
         </div>
         {platform.name}
-        {platform.verified
-          ? <div className="t-platform-dot" />
-          : <span className="t-platform-soon">soon</span>}
+        {platform.verified ? (
+          <div className="t-platform-dot" />
+        ) : (
+          <span className="t-platform-soon">soon</span>
+        )}
       </div>
     </div>
   );
@@ -458,21 +510,36 @@ export default function HomePage() {
       {/* ── NAV ── */}
       <nav className="t-nav">
         <Link href="/" className="t-nav-logo">
-          <div >
+          <div>
             <Feather className="w-7 h-7 text-orange-500 -mr-1 " />
           </div>
           <span className="t-nav-name">Tern</span>
         </Link>
 
         <ul className="t-nav-links">
-          <li><a href="#how">How it works</a></li>
-          <li><a href="#usage">Usage</a></li>
-          <li><a href="#platforms">Platforms</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#middleware">Frameworks</a></li>
+          <li>
+            <a href="#how">How it works</a>
+          </li>
+          <li>
+            <a href="#usage">Usage</a>
+          </li>
+          <li>
+            <a href="#platforms">Platforms</a>
+          </li>
+          <li>
+            <a href="#features">Features</a>
+          </li>
+          <li>
+            <a href="#middleware">Frameworks</a>
+          </li>
         </ul>
 
-        <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-nav-gh">
+        <a
+          href="https://github.com/Hookflo/tern"
+          target="_blank"
+          rel="noreferrer"
+          className="t-nav-gh"
+        >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
           </svg>
@@ -485,20 +552,38 @@ export default function HomePage() {
         <div className="t-hero">
           {/* Left */}
           <div>
-            <div className="t-eyebrow fade-up-1">Webhook Verification Framework</div>
+            <div className="t-eyebrow fade-up-1">
+              Webhook Verification Framework
+            </div>
             <h1 className="t-h1 fade-up-2">
-              Verify Every Webhook,<br /> <em>Across Every Platform.</em><br />
+              Verify Every Webhook,
+              <br /> <em>Across Every Platform.</em>
+              <br />
             </h1>
 
             <p className="t-hero-desc fade-up-3">
-              Tern is a zero-dependency TypeScript framework for webhook signature verification. One SDK, every platform. No boilerplate, no fragile hand-rolled crypto.
+              Tern is a zero-dependency TypeScript framework for webhook
+              signature verification. One SDK, every platform. No boilerplate,
+              no fragile hand-rolled crypto.
             </p>
             <div className="t-actions fade-up-4">
-              <a href="#how" className="t-btn-primary">Get started</a>
-              <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-secondary">
+              <a href="#how" className="t-btn-primary">
+                Get started
+              </a>
+              <a
+                href="https://github.com/Hookflo/tern"
+                target="_blank"
+                rel="noreferrer"
+                className="t-btn-secondary"
+              >
                 View on GitHub
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                  <path
+                    d="M2 10L10 2M10 2H4M10 2v6"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </a>
             </div>
@@ -509,12 +594,31 @@ export default function HomePage() {
               <button className="t-copy-btn" onClick={copyInstall} title="Copy">
                 {copied ? (
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7l3.5 3.5L12 4" stroke="#1a6b3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M2 7l3.5 3.5L12 4"
+                      stroke="#1a6b3c"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 ) : (
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <rect x="4.5" y="1" width="8" height="9" rx="1" stroke="currentColor" strokeWidth="1.2" />
-                    <path d="M1 5h4v8h7v-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                    <rect
+                      x="4.5"
+                      y="1"
+                      width="8"
+                      height="9"
+                      rx="1"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
+                    <path
+                      d="M1 5h4v8h7v-3"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                    />
                   </svg>
                 )}
               </button>
@@ -530,19 +634,58 @@ export default function HomePage() {
                   <div className="t-dot" style={{ background: "#ffbd2e" }} />
                   <div className="t-dot" style={{ background: "#29c440" }} />
                 </div>
-                <span className="t-code-filename">app/api/webhooks/route.ts</span>
+                <span className="t-code-filename">
+                  app/api/webhooks/route.ts
+                </span>
               </div>
               <div className="t-code-body">
-                <div><span className="ck">import</span> <span className="ct">{"{ createWebhookHandler }"}</span> <span className="ck">from</span> <span className="cs">'@hookflo/tern/nextjs'</span></div>
-                <div><span className="ck">import</span> <span className="ct">{"{ platform }"}</span> <span className="ck">from</span> <span className="cs">'../flags'</span></div>
+                <div>
+                  <span className="ck">import</span>{" "}
+                  <span className="ct">{"{ createWebhookHandler }"}</span>{" "}
+                  <span className="ck">from</span>{" "}
+                  <span className="cs">'@hookflo/tern/nextjs'</span>
+                </div>
+                <div>
+                  <span className="ck">import</span>{" "}
+                  <span className="ct">{"{ platform }"}</span>{" "}
+                  <span className="ck">from</span>{" "}
+                  <span className="cs">'../flags'</span>
+                </div>
                 <div>&nbsp;</div>
-                <div><span className="ck">export const</span> <span className="ct">POST</span> <span className="ck">=</span> <span className="cf">createWebhookHandler</span><span className="ct">{"({"}</span></div>
-                <div><span className="ct">&nbsp;&nbsp;platform:</span> <span className="ck">await</span> <span className="cf">platform</span><span className="ct">(),</span></div>
-                <div><span className="ct">&nbsp;&nbsp;secret: &nbsp;</span><span className="ck">await</span> <span className="cf">process.env.WEBHOOK_SECRET!</span><span className="ct">,</span></div>
-                <div><span className="ct">&nbsp;&nbsp;handler: </span><span className="ck">async</span> <span className="ct">(payload) =&gt; {"{"}</span></div>
-                <div><span className="cc">&nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event</span></div>
-                <div><span className="ct">&nbsp;&nbsp;{"}"}</span></div>
-                <div><span className="ct">{"})"}</span></div>
+                <div>
+                  <span className="ck">export const</span>{" "}
+                  <span className="ct">POST</span> <span className="ck">=</span>{" "}
+                  <span className="cf">createWebhookHandler</span>
+                  <span className="ct">{"({"}</span>
+                </div>
+                <div>
+                  <span className="ct">&nbsp;&nbsp;platform:</span>{" "}
+                  <span className="ck">await</span>{" "}
+                  <span className="cf">platform</span>
+                  <span className="ct">(),</span>
+                </div>
+                <div>
+                  <span className="ct">&nbsp;&nbsp;secret: &nbsp;</span>
+                  <span className="ck">await</span>{" "}
+                  <span className="cf">process.env.WEBHOOK_SECRET!</span>
+                  <span className="ct">,</span>
+                </div>
+                <div>
+                  <span className="ct">&nbsp;&nbsp;handler: </span>
+                  <span className="ck">async</span>{" "}
+                  <span className="ct">(payload) =&gt; {"{"}</span>
+                </div>
+                <div>
+                  <span className="cc">
+                    &nbsp;&nbsp;&nbsp;&nbsp;// verified ✓ — handle your event
+                  </span>
+                </div>
+                <div>
+                  <span className="ct">&nbsp;&nbsp;{"}"}</span>
+                </div>
+                <div>
+                  <span className="ct">{"})"}</span>
+                </div>
               </div>
             </div>
             <div className="t-hero-stats">
@@ -566,38 +709,272 @@ export default function HomePage() {
       <section className="t-diff-section t-section">
         <div className="t-section-inner">
           <div className="t-section-label">Before &amp; After</div>
-          <h2 className="t-h2">Your webhook handler,<br /><em>minus the boilerplate.</em></h2>
-          <p className="t-section-desc">Clerk webhook verification today vs with Tern. Same security, a fraction of the code.</p>
+          <h2 className="t-h2">
+            Your webhook handler,
+            <br />
+            <em>minus the boilerplate.</em>
+          </h2>
+          <p className="t-section-desc">
+            Clerk webhook verification today vs with Tern. Same security, a
+            fraction of the code.
+          </p>
 
           <div className="t-diff-grid">
             {/* BEFORE */}
             <div>
               <div className="t-diff-label before">
-                <div className="t-diff-dot" style={{ background: "var(--red)" }} />
+                <div
+                  className="t-diff-dot"
+                  style={{ background: "var(--red)" }}
+                />
                 Before — Clerk (manual)
                 <span className="t-diff-lc">~22 lines</span>
               </div>
               <div className="t-diff-code">
                 {[
-                  { t: "rem", p: "−", c: <><span className="dkw">import</span>{" { Webhook } "}<span className="dkw">from</span>{" "}<span className="dstr">'svix'</span></> },
-                  { t: "rem", p: "−", c: <><span className="dkw">import</span>{" { headers } "}<span className="dkw">from</span>{" "}<span className="dstr">'next/headers'</span></> },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        <span className="dkw">import</span>
+                        {" { Webhook } "}
+                        <span className="dkw">from</span>{" "}
+                        <span className="dstr">'svix'</span>
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        <span className="dkw">import</span>
+                        {" { headers } "}
+                        <span className="dkw">from</span>{" "}
+                        <span className="dstr">'next/headers'</span>
+                      </>
+                    ),
+                  },
                   { t: "emp" },
-                  { t: "rem", p: "−", c: <><span className="dkw">export async function</span>{" "}<span className="dfn">POST</span>{"(req: Request) {"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" SECRET = process.env."}<span className="dobj">CLERK_WEBHOOK_SECRET</span></> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">if</span>{"(!SECRET) "}<span className="dkw">throw new</span>{" "}<span className="dfn">Error</span>{"("}<span className="dstr">'Missing secret'</span>{")"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" h = "}<span className="dkw">await</span>{" "}<span className="dfn">headers</span>{"()"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" svix_id = h."}<span className="dfn">get</span>{"("}<span className="dstr">"svix-id"</span>{")"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" svix_ts = h."}<span className="dfn">get</span>{"("}<span className="dstr">"svix-timestamp"</span>{")"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" svix_sig = h."}<span className="dfn">get</span>{"("}<span className="dstr">"svix-signature"</span>{")"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">if</span>{"(!svix_id || !svix_ts || !svix_sig)"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">return new</span>{" "}<span className="dfn">Response</span>{"("}<span className="dstr">'Bad headers'</span>{", { status: 400 })"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" body = JSON."}<span className="dfn">stringify</span>{"("}<span className="dkw">await</span>{" req."}<span className="dfn">json</span>{"())"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">const</span>{" wh = "}<span className="dkw">new</span>{" "}<span className="dfn">Webhook</span>{"(SECRET)"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">let</span>{" evt"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dkw">try</span>{" { evt = wh."}<span className="dfn">verify</span>{"(body, {"}</> },
-                  { t: "rem", p: "−", c: <>{" "}<span className="dstr">"svix-id"</span>{": svix_id, "}<span className="dstr">"svix-signature"</span>{": svix_sig })"}</> },
-                  { t: "rem", p: "−", c: <>{" } "}<span className="dkw">catch</span>{" (err) { "}<span className="dkw">return new</span>{" "}<span className="dfn">Response</span>{"("}<span className="dstr">'Invalid'</span>{", {status:400}) }"}</> },
-                  { t: "neu", p: " ", c: <><span className="dcm">{"  // finally... handle event"}</span></> },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        <span className="dkw">export async function</span>{" "}
+                        <span className="dfn">POST</span>
+                        {"(req: Request) {"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" SECRET = process.env."}
+                        <span className="dobj">CLERK_WEBHOOK_SECRET</span>
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">if</span>
+                        {"(!SECRET) "}
+                        <span className="dkw">throw new</span>{" "}
+                        <span className="dfn">Error</span>
+                        {"("}
+                        <span className="dstr">'Missing secret'</span>
+                        {")"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" h = "}
+                        <span className="dkw">await</span>{" "}
+                        <span className="dfn">headers</span>
+                        {"()"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" svix_id = h."}
+                        <span className="dfn">get</span>
+                        {"("}
+                        <span className="dstr">"svix-id"</span>
+                        {")"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" svix_ts = h."}
+                        <span className="dfn">get</span>
+                        {"("}
+                        <span className="dstr">"svix-timestamp"</span>
+                        {")"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" svix_sig = h."}
+                        <span className="dfn">get</span>
+                        {"("}
+                        <span className="dstr">"svix-signature"</span>
+                        {")"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">if</span>
+                        {"(!svix_id || !svix_ts || !svix_sig)"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">return new</span>{" "}
+                        <span className="dfn">Response</span>
+                        {"("}
+                        <span className="dstr">'Bad headers'</span>
+                        {", { status: 400 })"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" body = JSON."}
+                        <span className="dfn">stringify</span>
+                        {"("}
+                        <span className="dkw">await</span>
+                        {" req."}
+                        <span className="dfn">json</span>
+                        {"())"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">const</span>
+                        {" wh = "}
+                        <span className="dkw">new</span>{" "}
+                        <span className="dfn">Webhook</span>
+                        {"(SECRET)"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">let</span>
+                        {" evt"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dkw">try</span>
+                        {" { evt = wh."}
+                        <span className="dfn">verify</span>
+                        {"(body, {"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" "}
+                        <span className="dstr">"svix-id"</span>
+                        {": svix_id, "}
+                        <span className="dstr">"svix-signature"</span>
+                        {": svix_sig })"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "rem",
+                    p: "−",
+                    c: (
+                      <>
+                        {" } "}
+                        <span className="dkw">catch</span>
+                        {" (err) { "}
+                        <span className="dkw">return new</span>{" "}
+                        <span className="dfn">Response</span>
+                        {"("}
+                        <span className="dstr">'Invalid'</span>
+                        {", {status:400}) }"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "neu",
+                    p: " ",
+                    c: (
+                      <>
+                        <span className="dcm">
+                          {"  // finally... handle event"}
+                        </span>
+                      </>
+                    ),
+                  },
                   { t: "neu", p: " ", c: <>{"}"}</> },
                 ].map((line, i) =>
                   line.t === "emp" ? (
@@ -607,7 +984,7 @@ export default function HomePage() {
                       <span className="dp">{line.p}</span>
                       <span className="dc">{line.c}</span>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -615,20 +992,97 @@ export default function HomePage() {
             {/* AFTER */}
             <div>
               <div className="t-diff-label after">
-                <div className="t-diff-dot" style={{ background: "var(--green)" }} />
+                <div
+                  className="t-diff-dot"
+                  style={{ background: "var(--green)" }}
+                />
                 After — With Tern
                 <span className="t-diff-lc">8 lines. done.</span>
               </div>
               <div className="t-diff-code after">
                 {[
-                  { t: "add", p: "+", c: <><span className="dkw">import</span>{" { createWebhookHandler } "}<span className="dkw">from</span>{" "}<span className="dstr">'@hookflo/tern/nextjs'</span></> },
-                  { t: "add", p: "+", c: <><span className="dkw">import</span>{" { platform } "}<span className="dkw">from</span>{" "}<span className="dstr">'../flags'</span></> },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        <span className="dkw">import</span>
+                        {" { createWebhookHandler } "}
+                        <span className="dkw">from</span>{" "}
+                        <span className="dstr">'@hookflo/tern/nextjs'</span>
+                      </>
+                    ),
+                  },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        <span className="dkw">import</span>
+                        {" { platform } "}
+                        <span className="dkw">from</span>{" "}
+                        <span className="dstr">'../flags'</span>
+                      </>
+                    ),
+                  },
                   { t: "emp" },
-                  { t: "add", p: "+", c: <><span className="dkw">export const</span>{" POST = "}<span className="dfn">createWebhookHandler</span>{"({"}</> },
-                  { t: "add", p: "+", c: <>{" platform: "}<span className="dkw">await</span>{" "}<span className="dfn">platform</span>{"(),"}</> },
-                  { t: "add", p: "+", c: <>{" secret:   "}<span className="dfn">process.env.WEBHOOK_SECRET!</span>{","}</> },
-                  { t: "add", p: "+", c: <>{" handler: "}<span className="dkw">async</span>{" (payload) => {"}</> },
-                  { t: "neu", p: " ", c: <><span className="dcm">{"    // verified ✓ — handle your event"}</span></> },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        <span className="dkw">export const</span>
+                        {" POST = "}
+                        <span className="dfn">createWebhookHandler</span>
+                        {"({"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        {" platform: "}
+                        <span className="dkw">await</span>{" "}
+                        <span className="dfn">platform</span>
+                        {"(),"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        {" secret:   "}
+                        <span className="dfn">process.env.WEBHOOK_SECRET!</span>
+                        {","}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "add",
+                    p: "+",
+                    c: (
+                      <>
+                        {" handler: "}
+                        <span className="dkw">async</span>
+                        {" (payload) => {"}
+                      </>
+                    ),
+                  },
+                  {
+                    t: "neu",
+                    p: " ",
+                    c: (
+                      <>
+                        <span className="dcm">
+                          {"    // verified ✓ — handle your event"}
+                        </span>
+                      </>
+                    ),
+                  },
                   { t: "add", p: "+", c: <>{"  }"}</> },
                   { t: "add", p: "+", c: <>{"})"}</> },
                   ...Array(10).fill({ t: "emp" }),
@@ -640,7 +1094,7 @@ export default function HomePage() {
                       <span className="dp">{line.p}</span>
                       <span className="dc">{line.c}</span>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>
@@ -675,9 +1129,15 @@ export default function HomePage() {
           <div className="t-flag-card">
             <div className="t-flag-top">
               <div className="t-flag-eyebrow">Vercel Feature Flags × Tern</div>
-              <h3 className="t-flag-title">Switch platforms with<br /><em>a single flag flip.</em></h3>
+              <h3 className="t-flag-title">
+                Switch platforms with
+                <br />
+                <em>a single flag flip.</em>
+              </h3>
               <p className="t-flag-desc">
-                No code change. No redeployment. Set your platform via Vercel feature flags — Tern reads them at runtime. Switch from Clerk to Stripe to GitHub without touching your codebase.
+                No code change. No redeployment. Set your platform via Vercel
+                feature flags — Tern reads them at runtime. Switch from Clerk to
+                Stripe to GitHub without touching your codebase.
               </p>
             </div>
             <div className="t-flag-ui">
@@ -692,13 +1152,21 @@ export default function HomePage() {
               </div>
               <div className="t-flag-arrow">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M4 10h12M12 6l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 that's it
               </div>
               <div className="t-flag-result">
                 <div className="t-flag-result-label">Result</div>
-                <div className="t-flag-result-val">✓ Verified — no redeploy</div>
+                <div className="t-flag-result-val">
+                  ✓ Verified — no redeploy
+                </div>
               </div>
             </div>
           </div>
@@ -709,16 +1177,23 @@ export default function HomePage() {
       <section className="t-mw-section t-section" id="middleware">
         <div className="t-section-inner">
           <div className="t-section-label">Framework Adapters</div>
-          <h2 className="t-h2">Works wherever<br /><em>your code runs.</em></h2>
+          <h2 className="t-h2">
+            Works wherever
+            <br />
+            <em>your code runs.</em>
+          </h2>
           <p className="t-section-desc" style={{ marginBottom: 32 }}>
-            Purpose-built adapters for every major runtime. Same verification logic, native integration.
+            Purpose-built adapters for every major runtime. Same verification
+            logic, native integration.
           </p>
           <div className="t-mw-grid">
             {MIDDLEWARES.map((mw) => (
               <div className="t-mw-card" key={mw.name}>
                 <div className="t-mw-card-head">
                   <span className="t-mw-card-name">{mw.name}</span>
-                  <span className={`t-mw-card-badge ${mw.badge}`}>{mw.badge}</span>
+                  <span className={`t-mw-card-badge ${mw.badge}`}>
+                    {mw.badge}
+                  </span>
                 </div>
                 <div className="t-mw-card-body">
                   <div className="t-mw-card-import">{mw.import}</div>
@@ -739,17 +1214,30 @@ export default function HomePage() {
       <section className="t-platforms-section t-section" id="platforms">
         <div className="t-section-inner">
           <div className="t-section-label">Supported Platforms</div>
-          <h2 className="t-h2">Works with the tools<br /><em>you already use.</em></h2>
+          <h2 className="t-h2">
+            Works with the tools
+            <br />
+            <em>you already use.</em>
+          </h2>
           <p className="t-section-desc" style={{ marginBottom: 32 }}>
-            Verified implementations — not guesswork. Each platform is tested against real webhook payloads.
+            Verified implementations — not guesswork. Each platform is tested
+            against real webhook payloads.
           </p>
           <div className="t-platforms-grid">
             {PLATFORMS.map((p) => (
               <PlatformChipItem key={p.name} platform={p} />
             ))}
           </div>
-          <p style={{ marginTop: 20, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink4)" }}>
-            ● verified &nbsp;&nbsp; Custom config lets you verify <em>any</em> HMAC-based webhook without waiting for built-in support.
+          <p
+            style={{
+              marginTop: 20,
+              fontFamily: "var(--mono)",
+              fontSize: 11,
+              color: "var(--ink4)",
+            }}
+          >
+            ● verified &nbsp;&nbsp; Custom config lets you verify <em>any</em>{" "}
+            HMAC-based webhook without waiting for built-in support.
           </p>
         </div>
       </section>
@@ -759,7 +1247,9 @@ export default function HomePage() {
         <div className="t-section-inner">
           <div className="t-section-label">Features</div>
           <h2 className="t-h2">Built for the long run.</h2>
-          <p className="t-section-desc" style={{ marginBottom: 36 }}>No magic, no bloat. Just the right abstractions in the right places.</p>
+          <p className="t-section-desc" style={{ marginBottom: 36 }}>
+            No magic, no bloat. Just the right abstractions in the right places.
+          </p>
           <div className="t-features-grid">
             {FEATURES.map((f) => (
               <div className="t-feature-card" key={f.num}>
@@ -777,13 +1267,20 @@ export default function HomePage() {
       <section className="t-how-section t-section" id="how">
         <div className="t-section-inner">
           <div className="t-section-label">How it works</div>
-          <h2 className="t-h2">Up and running<br /><em>in three steps.</em></h2>
+          <h2 className="t-h2">
+            Up and running
+            <br />
+            <em>in three steps.</em>
+          </h2>
           <div className="t-steps">
             <div className="t-step">
               <div className="t-step-num">1</div>
               <div className="t-step-body">
                 <div className="t-step-title">Install</div>
-                <div className="t-step-desc">One package, zero transitive dependencies. Works in Node.js, Next.js, Cloudflare Workers, Deno.</div>
+                <div className="t-step-desc">
+                  One package, zero transitive dependencies. Works in Node.js,
+                  Next.js, Cloudflare Workers, Deno.
+                </div>
                 <div className="t-step-code">npm install @hookflo/tern</div>
               </div>
             </div>
@@ -791,27 +1288,65 @@ export default function HomePage() {
               <div className="t-step-num">2</div>
               <div className="t-step-body">
                 <div className="t-step-title">Verify with your platform</div>
-                <div className="t-step-desc">Pass the request, platform name, and secret. Tern handles header parsing, timing validation, and HMAC comparison.</div>
+                <div className="t-step-desc">
+                  Pass the request, platform name, and secret. Tern handles
+                  header parsing, timing validation, and HMAC comparison.
+                </div>
                 <div className="t-step-code">
-                  <span className="skw">import</span>{" { WebhookVerificationService } "}<span className="skw">from</span>{" "}<span className="sstr">'@hookflo/tern'</span>{"\n\n"}
-                  <span className="skw">const</span>{" result = "}<span className="skw">await</span>{" WebhookVerificationService\n"}
-                  {"  ."}<span className="sfn">verifyWithPlatformConfig</span>{"(request, "}<span className="sstr">'clerk'</span>{", process.env."}<span className="sobj">WEBHOOK_SECRET</span>{")\n\n"}
-                  <span className="skw">if</span>{" (result.isValid) { "}<span className="scm">// handle your event</span>{" }"}
+                  <span className="skw">import</span>
+                  {" { WebhookVerificationService } "}
+                  <span className="skw">from</span>{" "}
+                  <span className="sstr">'@hookflo/tern'</span>
+                  {"\n\n"}
+                  <span className="skw">const</span>
+                  {" result = "}
+                  <span className="skw">await</span>
+                  {" WebhookVerificationService\n"}
+                  {"  ."}
+                  <span className="sfn">verifyWithPlatformConfig</span>
+                  {"(request, "}
+                  <span className="sstr">'clerk'</span>
+                  {", process.env."}
+                  <span className="sobj">WEBHOOK_SECRET</span>
+                  {")\n\n"}
+                  <span className="skw">if</span>
+                  {" (result.isValid) { "}
+                  <span className="scm">// handle your event</span>
+                  {" }"}
                 </div>
               </div>
             </div>
             <div className="t-step">
               <div className="t-step-num">3</div>
               <div className="t-step-body">
-                <div className="t-step-title">Use feature flags to switch platforms</div>
+                <div className="t-step-title">
+                  Use feature flags to switch platforms
+                </div>
                 <div className="t-step-desc">
-                  With the Next.js adapter, pass <code className="t-inline-code">platform</code> from Vercel feature flags. Change platforms at runtime — zero code changes, zero redeployments.
+                  With the Next.js adapter, pass{" "}
+                  <code className="t-inline-code">platform</code> from Vercel
+                  feature flags. Change platforms at runtime — zero code
+                  changes, zero redeployments.
                 </div>
                 <div className="t-step-code">
-                  <span className="skw">export const</span>{" POST = "}<span className="sfn">createWebhookHandler</span>{"({\n"}
-                  {"  platform: "}<span className="skw">await</span>{" "}<span className="sfn">platform</span>{"(),  "}<span className="scm">// from @vercel/flags</span>{"\n"}
-                  {"  secret:   "}{" "}<span className="sfn">process.env.WEBHOOK_SECRET!,</span>{"\n"}
-                  {"  handler:  "}<span className="skw">async</span>{" (payload) => { "}<span className="scm">/* ... */</span>{" }\n"}
+                  <span className="skw">export const</span>
+                  {" POST = "}
+                  <span className="sfn">createWebhookHandler</span>
+                  {"({\n"}
+                  {"  platform: "}
+                  <span className="skw">await</span>{" "}
+                  <span className="sfn">platform</span>
+                  {"(),  "}
+                  <span className="scm">// from @vercel/flags</span>
+                  {"\n"}
+                  {"  secret:   "}{" "}
+                  <span className="sfn">process.env.WEBHOOK_SECRET!,</span>
+                  {"\n"}
+                  {"  handler:  "}
+                  <span className="skw">async</span>
+                  {" (payload) => { "}
+                  <span className="scm">/* ... */</span>
+                  {" }\n"}
                   {"})"}
                 </div>
               </div>
@@ -825,15 +1360,29 @@ export default function HomePage() {
         <div className="t-cta-inner">
           <div>
             <h2 className="t-cta-title">
-              Ready to delete<br /><em>your webhook boilerplate?</em>
+              Ready to delete
+              <br />
+              <em>your webhook boilerplate?</em>
             </h2>
-            <p className="t-cta-desc">Open source. MIT licensed. Built and maintained at Hookflo.</p>
+            <p className="t-cta-desc">
+              Open source. MIT licensed. Built and maintained at Hookflo.
+            </p>
           </div>
           <div className="t-cta-actions">
-            <a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer" className="t-btn-cta">
+            <a
+              href="https://github.com/Hookflo/tern"
+              target="_blank"
+              rel="noreferrer"
+              className="t-btn-cta"
+            >
               ⭐ Star on GitHub
             </a>
-            <a href="https://github.com/Hookflo/tern/blob/main/README.md" target="_blank" rel="noreferrer" className="t-btn-cta-sec">
+            <a
+              href="https://github.com/Hookflo/tern/blob/main/README.md"
+              target="_blank"
+              rel="noreferrer"
+              className="t-btn-cta-sec"
+            >
               Read the docs →
             </a>
           </div>
@@ -845,10 +1394,38 @@ export default function HomePage() {
         <div className="t-footer-inner">
           <div className="t-footer-logo">Tern by Hookflo</div>
           <ul className="t-footer-links">
-            <li><a href="https://github.com/Hookflo/tern/blob/main/README.md" target="_blank" rel="noreferrer">Docs</a></li>
-            <li><a href="https://github.com/Hookflo/tern" target="_blank" rel="noreferrer">GitHub</a></li>
-            <li><a href="https://hookflo.com" target="_blank" rel="noreferrer">Hookflo</a></li>
-            <li><a href="https://github.com/Hookflo/tern/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a></li>
+            <li>
+              <a
+                href="https://github.com/Hookflo/tern/blob/main/README.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Docs
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/Hookflo/tern"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://hookflo.com" target="_blank" rel="noreferrer">
+                Hookflo
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/Hookflo/tern/blob/main/LICENSE"
+                target="_blank"
+                rel="noreferrer"
+              >
+                MIT License
+              </a>
+            </li>
           </ul>
           <div className="t-footer-copy">© 2025 Hookflo. Open source.</div>
         </div>
