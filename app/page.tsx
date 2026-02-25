@@ -318,10 +318,8 @@ const PLATFORMS = [
   { name: "Fal AI", icon: "/fal.svg", bg: "#f0f8ff", verified: true },
   { name: "LemonSqueezy", icon: "/lemonsqueezy.svg", bg: "#f5f5f0", verified: true },
   { name: "Paddle", icon: "/paddle.svg", bg: "#fafafa", verified: true },
-  { name: "Twilio", icon: "/twilio.svg", bg: "#fff1f3", verified: true },
-  { name: "SendGrid", icon: "/sendgrid.svg", bg: "#eff6ff", verified: true },
-  { name: "PayPal", icon: "/paypal.svg", bg: "#eff6ff", verified: true },
-  { name: "Discord", icon: "/discord.svg", bg: "#eef2ff", verified: true },
+  { name: "Doppler", icon: "/doppler.svg", bg: "#fff1f3", verified: true },
+  { name: "Sentry", icon: "/sentry.svg", bg: "#eff6ff", verified: true },
 ];
 
 const MIDDLEWARES = [

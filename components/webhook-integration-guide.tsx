@@ -28,10 +28,8 @@ const PLATFORMS: PlatformConfig[] = [
   { id: 'falai', name: 'Fal AI', svgName: 'fal.svg', secretEnv: 'FAL_WEBHOOK_SECRET' },
   { id: 'lemonsqueezy', name: 'LemonSqueezy', svgName: 'lemonsqueezy.svg', secretEnv: 'LEMONSQUEEZY_WEBHOOK_SECRET' },
   { id: 'paddle', name: 'Paddle', svgName: 'paddle.svg', secretEnv: 'PADDLE_WEBHOOK_SECRET' },
-  { id: 'twilio', name: 'Twilio', svgName: 'twilio.svg', secretEnv: 'TWILIO_WEBHOOK_SECRET' },
-  { id: 'sendgrid', name: 'SendGrid', svgName: 'sendgrid.svg', secretEnv: 'SENDGRID_WEBHOOK_SECRET' },
-  { id: 'paypal', name: 'PayPal', svgName: 'paypal.svg', secretEnv: 'PAYPAL_WEBHOOK_SECRET' },
-  { id: 'discord', name: 'Discord', svgName: 'discord.svg', secretEnv: 'DISCORD_WEBHOOK_SECRET' },
+  { id: 'doppler', name: 'Doppler', svgName: 'doppler.svg', secretEnv: 'DOPPLER_WEBHOOK_SECRET' },
+  { id: 'sentry', name: 'Sentry', svgName: 'sentry.svg', secretEnv: 'SENTRY_WEBHOOK_SECRET' }
 ];
 
 const FRAMEWORKS: { id: Framework; label: string }[] = [
