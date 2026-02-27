@@ -70,7 +70,7 @@ export default function ReplicatePage() {
             background: "white", display: "flex", alignItems: "center", justifyContent: "center",
             boxShadow: "2px 3px 0 var(--border)",
           }}>
-       <img src="/assets/replicate.svg" alt="Fal AI" style={{ width: 20, height: 20 }} />
+            <img src="/assets/replicate.svg" alt="Replicate" style={{ width: 20, height: 20 }} />
           </div>
           <div style={{ fontFamily: "var(--mono)", fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink3)" }}>
             Replicate — Platform Guide
@@ -84,7 +84,7 @@ export default function ReplicatePage() {
           <em>without the confusion.</em>
         </h1>
         <p className="t-hero-desc">
-          Replicate uses Ed25519 — not HMAC. The webhook secret requires an API
+          Replicate uses HMAC-SHA256. The webhook secret requires an API
           call, not a dashboard copy. Tern handles verification. Here's
           everything you need.
         </p>
@@ -96,12 +96,6 @@ export default function ReplicatePage() {
           <div
             style={{ display: "grid", gap: 16, gridTemplateColumns: "1fr 1fr", maxWidth: 720 }}
           >
-            <div className="t-crit-box">
-              <div className="t-crit-box-title">Ed25519, not HMAC</div>
-              Unlike Stripe or Clerk, Replicate signs with Ed25519 public key
-              cryptography. Tern handles it — just pass the secret from the API
-              call below.
-            </div>
             <div className="t-warn-box">
               <div className="t-warn-box-title">
                 Secret requires an API call
@@ -220,15 +214,15 @@ export default function ReplicatePage() {
         style={{ background: "white", borderTop: "1px solid var(--border)" }}
       >
         <div className="t-section-inner">
-          <div className="t-section-label">Also uses Ed25519</div>
+          <div className="t-section-label">Uses Ed25519 instead</div>
           <Link href="/platforms/falai" style={{ textDecoration: "none" }}>
             <div className="t-card" style={{ maxWidth: 280 }}>
               <div style={{ fontFamily: "var(--mono)", fontSize: 12, fontWeight: 700, color: "var(--ink)", marginBottom: 8 }}>
                 Fal AI
               </div>
               <div style={{ fontSize: 13, color: "var(--ink3)", lineHeight: 1.5 }}>
-                Also Ed25519. Pass empty string for secret — Tern auto-fetches
-                the JWKS.
+                Uses Ed25519, not HMAC. Pass empty string for secret — Tern
+                auto-fetches the JWKS.
               </div>
               <div style={{ marginTop: 10, fontFamily: "var(--mono)", fontSize: 11, color: "var(--green)" }}>
                 View guide →
