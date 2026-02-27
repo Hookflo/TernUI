@@ -1,29 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Lora, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
-
-const lora = Lora({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-lora",
-  weight: ["400", "500", "600"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains-mono",
-  weight: ["400", "500", "700"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-instrument-serif",
-  weight: ["400"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tern.hookflo.com"),
@@ -164,7 +142,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} scroll-smooth antialiased`}
+      className="scroll-smooth antialiased"
     >
       <head>
         {/* Additional SEO tags */}
