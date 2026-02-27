@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { Feather } from "lucide-react";
 import WebhookIntegrationGuide from "@/components/webhook-integration-guide";
-
+// import AnnouncementBanner from "@/components/announcement-banner";
+// import BeyondVerificationSection from "@/components/beyond-verification";
 // ─── INLINE STYLES (same design system as HTML) ───────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap');
@@ -238,7 +239,22 @@ const css = `
   
   /* FEATURES */
   .t-features-section { background:white; border-top:1px solid var(--border); }
-  .t-features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.t-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f0ebe2;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--paper2)   0px,
+    var(--paper2)   4px,
+    var(--border)   4px,
+    var(--border)   5px
+  );
+}
   .t-feature-card { background:white; padding:28px 28px 24px; transition:background .2s; }
   .t-feature-card:hover { background:#fdfcfb; }
   .t-feature-num { font-family:var(--mono); font-size:10px; font-weight:700; color:var(--ink4); letter-spacing:.1em; margin-bottom:16px; }
@@ -343,7 +359,7 @@ const MIDDLEWARES = [
   },
   {
     name: "@hookflo/tern/cloudflare",
-    badge: "beta",
+    badge: "stable",
     import: `import { createWebhookHandler } from '@hookflo/tern/cloudflare'`,
     desc: "Cloudflare Workers adapter using the Web Crypto API. Edge-native, zero Node.js dependencies.",
   },
@@ -508,6 +524,7 @@ export default function HomePage() {
       <style>{css}</style>
 
       {/* ── NAV ── */}
+      {/* <AnnouncementBanner /> */}
       <nav className="t-nav">
         <Link href="/" className="t-nav-logo">
           <div>
@@ -532,6 +549,11 @@ export default function HomePage() {
           <li>
             <a href="#middleware">Frameworks</a>
           </li>
+          {/* <li>
+            <a href="/upstash" style={{ color: "#10b981", fontWeight: 700 }}>
+              ● Reliable Delivery
+            </a>
+          </li> */}
         </ul>
 
         <a
@@ -690,7 +712,7 @@ export default function HomePage() {
             </div>
             <div className="t-hero-stats">
               <div className="t-hero-stat">
-                <div className="t-hero-stat-val">10+</div>
+                <div className="t-hero-stat-val">15+</div>
                 <div className="t-hero-stat-lbl">Platforms</div>
               </div>
               <div className="t-hero-stat">
@@ -1355,6 +1377,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* <BeyondVerificationSection /> */}
       {/* ── CTA ── */}
       <section className="t-cta-section">
         <div className="t-cta-inner">

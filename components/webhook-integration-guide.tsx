@@ -129,6 +129,7 @@ const FRAMEWORKS: { id: Framework; label: string }[] = [
 
 function buildSnippet(platform: PlatformConfig, framework: Framework): string {
   const { id, secretEnv, isCustom } = platform;
+  const isFalai = id === "falai";
 
   if (framework === "nextjs") {
     if (isCustom)
@@ -137,7 +138,7 @@ function buildSnippet(platform: PlatformConfig, framework: Framework): string {
 // app/api/webhooks/route.ts
 export const POST = createWebhookHandler({
   platform: 'custom',
-  secret:   process.env.${secretEnv}!,
+  secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
   signatureConfig: {
     algorithm:       'hmac-sha256',
     signatureHeader: 'x-signature',
@@ -155,7 +156,7 @@ export const POST = createWebhookHandler({
 // app/api/webhooks/${id}/route.ts
 export const POST = createWebhookHandler({
   platform: '${id}',
-  secret:   process.env.${secretEnv}!,
+  secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
   handler:  async (payload) => {
     // ✓ verified — handle your event
     // payload.id can be stored for deduplication
@@ -175,7 +176,7 @@ const app = express();
 app.post('/webhooks/custom',
   createWebhookMiddleware({
     platform: 'custom',
-    secret:   process.env.${secretEnv}!,
+    secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
     signatureConfig: {
       algorithm:       'hmac-sha256',
       signatureHeader: 'x-signature',
@@ -189,22 +190,22 @@ app.post('/webhooks/custom',
   }
 );`;
     return `import express from 'express';
-import { createWebhookMiddleware } from '@hookflo/tern/express';
+  import { createWebhookMiddleware } from '@hookflo/tern/express';
 
-const app = express();
+  const app = express();
 
-// Register before app.use(express.json())
-app.post('/webhooks/${id}',
-  createWebhookMiddleware({
+  // Register before app.use(express.json())
+  app.post('/webhooks/${id}',
+    createWebhookMiddleware({
     platform: '${id}',
-    secret:   process.env.${secretEnv}!,
-  }),
-  (req, res) => {
+    secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
+    }),
+    (req, res) => {
     // ✓ req.webhook.payload — verified
     // req.webhook.payload.id can be stored for deduplication
     res.json({ received: true });
-  }
-);`;
+    }
+  );`;
   }
 
   if (framework === "cloudflare") {
@@ -215,7 +216,7 @@ app.post('/webhooks/${id}',
 export default {
   fetch: createWebhookHandler({
     platform:  'custom',
-    secretEnv: '${secretEnv}',
+    secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
     signatureConfig: {
       algorithm:       'hmac-sha256',
       signatureHeader: 'x-signature',
@@ -234,7 +235,7 @@ export default {
 export default {
   fetch: createWebhookHandler({
     platform:  '${id}',
-    secretEnv: '${secretEnv}',
+    secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
     handler:   async (payload, env) => {
       // ✓ verified — edge-native Web Crypto
       // payload.id can be stored for deduplication
@@ -251,7 +252,7 @@ export default {
 // Works in Node.js, Deno, Bun — any runtime
 const result = await WebhookVerificationService.verify(request, {
   platform: 'custom',
-  secret:   process.env.${secretEnv}!,
+  secret:   ${isFalai ? '""' : `process.env.${secretEnv}!`},
   signatureConfig: {
     algorithm:       'hmac-sha256',
     signatureHeader: 'x-signature',
@@ -273,7 +274,7 @@ const result = await WebhookVerificationService
   .verifyWithPlatformConfig(
     request,
     '${id}',
-    process.env.${secretEnv}!,
+     ${isFalai ? '""' : `process.env.${secretEnv}!`},
     300, // toleranceInSeconds
   );
 
