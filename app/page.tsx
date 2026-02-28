@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Feather } from "lucide-react";
+import { Feather, Copy, Check } from "lucide-react";
 import WebhookIntegrationGuide from "@/components/webhook-integration-guide";
 // import AnnouncementBanner from "@/components/announcement-banner";
 // import BeyondVerificationSection from "@/components/beyond-verification";
@@ -60,6 +60,67 @@ const css = `
   .t-nav-gh:hover { background:var(--ink); color:var(--paper); }
   @media(max-width:640px){ .t-nav-links { display:none; } }
 
+  /* FRAMEWORKS DROPDOWN */
+  .t-nav-frameworks-wrap { position: relative; }
+  .t-nav-frameworks-btn {
+    display: flex; align-items: center; gap: 4px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: var(--ink3); background: none; border: none; cursor: pointer; padding: 0;
+    transition: color .2s;
+  }
+  .t-nav-frameworks-btn:hover { color: var(--ink); }
+  .t-nav-frameworks-btn:hover .t-fw-chevron { color: var(--ink); }
+  .t-fw-chevron {
+    color: var(--ink4); transition: transform .2s, color .2s;
+    display: flex; align-items: center;
+  }
+  .t-fw-chevron.open { transform: rotate(180deg); }
+
+  .t-fw-dropdown {
+    position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%);
+    background: white; border: 1.5px solid var(--border2); border-radius: 10px;
+    padding: 8px; min-width: 220px;
+    box-shadow: 4px 6px 0 var(--border), 0 16px 40px rgba(26,23,20,.10);
+    opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 200;
+  }
+  .t-fw-dropdown.open {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  /* little arrow */
+  .t-fw-dropdown::before {
+    content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 7px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: var(--border2);
+  }
+  .t-fw-dropdown::after {
+    content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 6px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: white;
+  }
+
+  .t-fw-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 7px;
+    text-decoration: none; color: var(--ink2);
+    transition: background .15s;
+    cursor: pointer;
+  }
+  .t-fw-item:hover { background: var(--paper2); }
+  .t-fw-icon {
+    width: 32px; height: 32px; border-radius: 7px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background: white;
+  }
+  .t-fw-item-text {}
+  .t-fw-item-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ink); letter-spacing: .04em; }
+  .t-fw-item-desc { font-family: var(--mono); font-size: 9px; color: var(--ink4); margin-top: 2px; letter-spacing: .04em; }
+  .t-fw-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
   /* HERO */
   .t-hero {
     padding: clamp(60px,10vw,120px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
@@ -106,15 +167,30 @@ const css = `
   .t-btn-secondary:hover { color:var(--ink); border-color:var(--ink); }
 
   .t-install { display:flex; align-items:center; gap:12px; margin-top:28px; }
-  .t-install-cmd {
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:var(--mono); font-size:12px; font-weight:500;
-    color:var(--ink2); background:var(--paper2); border:1px solid var(--border);
-    padding:8px 16px; border-radius:4px;
-  }
+.t-install-cmd {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  color: var(--ink2); background: var(--paper2); border: 1px solid var(--border);
+  padding: 12px 16px; border-radius: 4px;
+}
+/* remove the old .t-install wrapper rules — no longer needed */
   .t-install-cmd span { color:var(--ink4); }
   .t-copy-btn { background:none; border:none; cursor:pointer; color:var(--ink4); padding:2px; transition:color .2s; display:flex; align-items:center; }
   .t-copy-btn:hover { color:var(--ink); }
+
+  /* OPEN SOURCE BADGE */
+  .t-oss-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: white; border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 14px;
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: var(--ink3); letter-spacing: .04em;
+    text-decoration: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .t-oss-badge:hover { border-color: var(--border2); box-shadow: 2px 3px 0 var(--border); }
+  .t-oss-badge svg { flex-shrink: 0; }
+  .t-oss-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: #40aa54; flex-shrink: 0; }
 
   /* CODE CARD */
   .t-code-card { background:var(--ink); border-radius:10px; overflow:hidden; box-shadow:6px 8px 0 var(--border2), 0 20px 60px rgba(26,23,20,.12); }
@@ -482,8 +558,160 @@ const FEATURES = [
   },
 ];
 
-// ─── COMPONENT ─────────────────────────────────────────────────────────────────
+// ─── Open Source SVG Logo ──────────────────────────────────────────────────────
+const OpenSourceLogo = ({ width = 80 }: { width?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height={(60 / 120) * width}
+    width={width}
+    viewBox="-13.28 -21.779 119.998 60"
+  >
+    <path
+      d="M46.72-18.665c-9.22 0-16.69 7.473-16.69 16.692 0 7.155 4.504 13.256 10.83 15.63L44.703 3.4A5.74 5.74 0 0 1 46.719-7.71a5.74 5.74 0 0 1 2.015 11.111l3.847 10.257c6.326-2.373 10.83-8.475 10.83-15.63 0-9.218-7.473-16.69-16.692-16.69z"
+      fill="#40aa54"
+      stroke="#20552a"
+      strokeWidth="1.032"
+      strokeLinejoin="round"
+    />
+    <path d="M2.56 25.538c0 1.284-1.048 2.357-2.358 2.357-1.336 0-2.358-1.074-2.358-2.357v-3.406c0-1.283 1.048-2.358 2.358-2.358S2.56 20.85 2.56 22.132v3.402zm2.358 0v-3.406c0-2.646-1.86-4.454-4.716-4.454s-4.716 1.78-4.716 4.45v3.405c0 2.672 1.86 4.454 4.716 4.454s4.716-1.78 4.716-4.45zm8.382-.264c0 1.284-1.02 2.358-2.357 2.358-1.3 0-2.358-1.074-2.358-2.358v-2.88c0-1.284 1.048-2.36 2.358-2.36 1.336 0 2.358 1.075 2.358 2.36v2.88zm2.36 0v-2.88c0-2.646-1.887-4.454-4.533-4.454-1.546 0-2.28.865-2.62.865-.105 0-.184-.105-.184-.29V18.2c0-.183-.08-.263-.262-.263H6.5c-.183 0-.262.08-.262.263v17.16c0 .183.08.262.262.262h1.834c.183 0 .262-.08.262-.263v-6.21c0-.184.08-.288.2-.288.235 0 1.02.865 2.54.865 2.437 0 4.323-1.885 4.323-4.454zm7.754-2.88h-4.19c-.236 0-.262-.105-.262-.394 0-1.152 1.1-2.227 2.36-2.227 1.23 0 2.357 1.048 2.357 2.174-.001.315-.027.447-.263.447zm2.62 1.57V22.13c0-2.384-2.095-4.454-4.715-4.454s-4.715 2.07-4.715 4.454v3.406c0 2.672 1.86 4.454 4.716 4.454 1.39 0 2.49-.367 3.275-1.1s1.1-1.415 1.1-1.6c0-.078-.053-.13-.158-.183l-1.65-.84c-.052-.026-.105-.052-.157-.052-.157 0-.393.42-.97 1.1-.288.34-.812.576-1.44.576-1.336 0-2.358-1.074-2.358-2.357V24.49c0-.183.078-.262.262-.262h6.55a.22.22 0 0 0 .262-.26zm10.297 5.763h-1.833a.22.22 0 0 1-.262-.262v-7.073c0-1.285-1.022-2.36-2.358-2.36-1.3 0-2.358 1.074-2.358 2.36v7.073a.22.22 0 0 1-.262.262h-1.834c-.184 0-.262-.078-.262-.262V18.2c0-.184.08-.263.262-.263h1.572c.183 0 .262.08.262.263v.314c0 .183.078.288.183.288.34 0 1.074-.865 2.62-.865 2.646 0 4.532 1.81 4.532 4.454v7.073a.22.22 0 0 1-.26.264zm6.812-8.724c0 1.074.812 1.572 2.62 1.965 3.013.655 4.69 1.048 4.69 3.25 0 2.227-1.625 3.772-4.166 3.772h-.812c-2.437 0-4.035-1.467-4.035-2.28 0-.078.053-.13.184-.183l1.022-.497c.052-.026.104-.026.13-.026.08 0 .13.052.2.13.68.76 1.205 1.467 2.488 1.467h.812c1.467 0 2.4-.838 2.4-1.913 0-.97-.812-1.546-2.568-1.912-3.04-.63-4.69-.944-4.69-3.25 0-2.15 1.598-3.64 4.035-3.64h.812c2.384 0 4.008 1.44 4.008 2.227 0 .08-.078.13-.183.183l-.996.497c-.052.026-.078.026-.105.026-.08 0-.13-.052-.2-.132-.733-.785-1.335-1.413-2.514-1.413h-.812c-1.516-.004-2.328.653-2.328 1.725zm15.77 4.69c0 1.52-1.232 2.804-2.803 2.804s-2.777-1.284-2.777-2.804v-3.536c0-1.546 1.18-2.777 2.777-2.777 1.57 0 2.803 1.284 2.803 2.777zm1.78 0v-3.536c0-2.542-1.807-4.27-4.584-4.27s-4.533 1.677-4.533 4.27v3.536c0 2.594 1.755 4.297 4.533 4.297s4.586-1.73 4.586-4.298zm10.22 4.034h-.97c-.183 0-.262-.078-.262-.262V28.34c0-.183-.104-.288-.21-.288-.235 0-.497.42-.97.89-.525.497-1.3.785-2.175.785-2.384 0-4.27-1.755-4.27-4.297V18.4c0-.183.08-.262.263-.262h1.23a.22.22 0 0 1 .262.262v7.02c0 1.52 1.232 2.803 2.778 2.803 1.624 0 2.83-1.258 2.83-2.803V18.4a.22.22 0 0 1 .262-.262h1.232a.22.22 0 0 1 .262.262v11.056a.22.22 0 0 1-.26.264zm8.2-9.72c-.21 0-.55-.078-.996-.078-1.597 0-2.777 1.204-2.777 2.75v6.785a.22.22 0 0 1-.262.262H73.82a.22.22 0 0 1-.262-.262V18.4a.22.22 0 0 1 .261-.262h.97a.22.22 0 0 1 .262.262v1.3c0 .184.105.288.2.288.288 0 .707-.655 1.65-1.415a2.26 2.26 0 0 1 1.205-.445h.97a.22.22 0 0 1 .262.262v1.337c-.004.214-.054.264-.237.264zm8.775 7.675c0 .838-1.598 2.305-4.06 2.305-2.777 0-4.533-1.702-4.533-4.297v-3.536c0-2.594 1.756-4.27 4.533-4.27 2.437 0 4.087 1.39 4.087 2.254 0 .078-.08.157-.184.2l-1.1.55c-.052.026-.08.026-.105.026-.078 0-.13-.026-.21-.104-.786-.734-1.3-1.442-2.49-1.442-1.598 0-2.777 1.232-2.777 2.777v3.536c0 1.52 1.205 2.804 2.777 2.804.63 0 1.258-.262 1.73-.708.55-.523.785-.9.942-.9.026 0 .08 0 .13.026l1.1.55c.124.054.152.105.152.2zm8.277-5.16a.22.22 0 0 1-.262.262h-5.056c-.183 0-.262-.08-.262-.262v-.366c0-1.546 1.18-2.777 2.777-2.777 1.572 0 2.803 1.284 2.803 2.777v.366zm1.784 1.232v-1.598c0-2.253-2.044-4.27-4.585-4.27-1.336 0-2.437.472-3.3 1.39-.786.838-1.23 1.912-1.23 2.882v3.536c0 2.594 1.755 4.297 4.532 4.297 2.463 0 4.06-1.467 4.06-2.304 0-.105-.026-.158-.157-.2l-1.1-.55c-.052-.026-.104-.026-.13-.026-.158 0-.393.367-.944.9-.47.447-1.1.708-1.73.708-1.572 0-2.777-1.284-2.777-2.804v-1.415a.22.22 0 0 1 .262-.262h6.838c.187-.008.264-.085.264-.268z" />
+  </svg>
+);
 
+// ─── Next.js Icon SVG ──────────────────────────────────────────────────────────
+const NextjsIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 180 180" fill="none">
+    <mask
+      id="nextjs-mask"
+      style={{ maskType: "alpha" }}
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="180"
+      height="180"
+    >
+      <circle cx="90" cy="90" r="90" fill="black" />
+    </mask>
+    <g mask="url(#nextjs-mask)">
+      <circle cx="90" cy="90" r="90" fill="black" />
+      <path
+        d="M149.508 157.52L69.142 54H54V125.97H66.1V69.3L139.754 164.36C143.167 162.149 146.398 159.693 149.508 157.52Z"
+        fill="url(#nextjs-grad1)"
+      />
+      <rect x="115" y="54" width="12" height="72" fill="url(#nextjs-grad2)" />
+    </g>
+    <defs>
+      <linearGradient
+        id="nextjs-grad1"
+        x1="109"
+        y1="116.5"
+        x2="144.5"
+        y2="160.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="nextjs-grad2"
+        x1="121"
+        y1="54"
+        x2="120.799"
+        y2="106.875"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="white" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+// ─── Cloudflare Icon SVG ───────────────────────────────────────────────────────
+const CloudflareIcon = () => (
+  <svg width="20" height="12" viewBox="0 0 109 44" fill="none">
+    <path
+      d="M84.4 18.6C82.7 12 76.8 7 69.7 7c-5.3 0-10 2.5-13 6.4C54.5 12.2 51.8 11 48.9 11c-5.9 0-10.8 3.9-12.4 9.3C31.8 21.2 28 25.4 28 30.5c0 5.8 4.7 10.5 10.5 10.5h44.9C90 41 95 36 95 30c0-5.4-4-9.9-10.6-11.4z"
+      fill="#f6821f"
+    />
+    <path
+      d="M73.5 30.5c0-.3 0-.6.1-.9l-15.1 1.2c-1.4.1-2.5-1-2.5-2.4v-.1c0-1.3 1-2.3 2.3-2.4l15.6-1.2c-1.4-3.2-4.6-5.4-8.3-5.4-3.1 0-5.8 1.5-7.4 3.8-1-.5-2.2-.8-3.4-.8-4 0-7.2 3.2-7.2 7.2s3.2 7.2 7.2 7.2h18.5c3.4 0 6.2-2.8 6.2-6.2 0-3.1-2.3-5.7-5.4-6.1.1.4.1.7.1 1.1 0 2.3-1.9 4.2-4.2 4.2-.1 0-.5 0-.5-.2z"
+      fill="#faae40"
+    />
+  </svg>
+);
+
+// ─── FRAMEWORKS DROPDOWN COMPONENT ────────────────────────────────────────────
+function FrameworksDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="t-nav-frameworks-wrap" ref={ref}>
+      <button
+        className="t-nav-frameworks-btn"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        Frameworks
+        <span className={`t-fw-chevron${open ? " open" : ""}`}>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+
+      <div className={`t-fw-dropdown${open ? " open" : ""}`}>
+        <a
+          href="/framework/nextjs"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div className="t-fw-icon" style={{ background: "#000" }}>
+            <NextjsIcon />
+          </div>
+          <div className="t-fw-item-text">
+            <div className="t-fw-item-name">Next.js</div>
+            <div className="t-fw-item-desc">App Router · Edge · RSC</div>
+          </div>
+        </a>
+
+        <div className="t-fw-divider" />
+
+        <a
+          href="/framework/cloudflare"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div className="t-fw-icon" style={{ background: "#fff4e6" }}>
+            <CloudflareIcon />
+          </div>
+          <div className="t-fw-item-text">
+            <div className="t-fw-item-name">Cloudflare</div>
+            <div className="t-fw-item-desc">Workers · Pages · Edge</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// ─── PLATFORM CHIP ─────────────────────────────────────────────────────────────
 interface PlatformChipItemProps {
   platform: (typeof PLATFORMS)[0];
 }
@@ -546,14 +774,10 @@ export default function HomePage() {
           <li>
             <a href="#features">Features</a>
           </li>
+          {/* ── FRAMEWORKS DROPDOWN (replaces simple anchor) ── */}
           <li>
-            <a href="#middleware">Frameworks</a>
+            <FrameworksDropdown />
           </li>
-          {/* <li>
-            <a href="/upstash" style={{ color: "#10b981", fontWeight: 700 }}>
-              ● Reliable Delivery
-            </a>
-          </li> */}
         </ul>
 
         <a
@@ -609,41 +833,52 @@ export default function HomePage() {
                 </svg>
               </a>
             </div>
-            <div className="t-install fade-up-5">
-              <div className="t-install-cmd">
-                <span>$</span> npm i @hookflo/tern
+            <div
+              className="fade-up-5 items-center align-middle"
+              style={{
+                display: "flex",
+                gap: 10,
+                flexWrap: "wrap-reverse",
+                alignItems: "center",
+                marginTop: 28,
+              }}
+            >
+              {/* OSS badge */}
+              <div className="t-oss-badge">
+                <OpenSourceLogo width={60} />
+                <div
+                  style={{
+                    width: 1,
+                    height: 20,
+                    background: "var(--border)",
+                    flexShrink: 0,
+                  }}
+                />
+                <div className="t-oss-badge-dot" />
+                MIT Licensed
               </div>
-              <button className="t-copy-btn" onClick={copyInstall} title="Copy">
-                {copied ? (
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M2 7l3.5 3.5L12 4"
-                      stroke="#1a6b3c"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : (
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <rect
-                      x="4.5"
-                      y="1"
-                      width="8"
-                      height="9"
-                      rx="1"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                    />
-                    <path
-                      d="M1 5h4v8h7v-3"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                )}
-              </button>
+
+              {/* Install cmd — copy button inside */}
+              <div className="t-install-cmd">
+                <span style={{ color: "var(--ink4)" }}>$</span>
+                npm i @hookflo/tern
+                <button
+                  className="t-copy-btn"
+                  onClick={copyInstall}
+                  title="Copy"
+                  style={{
+                    marginLeft: 2,
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {copied ? (
+                    <Check size={13} strokeWidth={2.2} color="#1a6b3c" />
+                  ) : (
+                    <Copy size={13} strokeWidth={1.8} />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 
