@@ -311,6 +311,7 @@ export function UpstashPage() {
             alignItems: "center",
             gap: 12,
             flexWrap: "wrap",
+            marginBottom:32
           }}
         >
           {/* Tern logo */}
@@ -436,7 +437,7 @@ export function UpstashPage() {
       </div>
 
       {/* ── BYOK BANNER ── */}
-      <section className="t-section" style={{ paddingTop: 0 }}>
+      <section className="t-section" style={{ paddingTop:0, marginTop:60 }}>
         <div className="t-section-inner">
           <div className="up-byok">
             <div className="up-byok-top">
