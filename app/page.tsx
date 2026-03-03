@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Feather, Copy, Check } from "lucide-react";
 import WebhookIntegrationGuide from "@/components/webhook-integration-guide";
-// import AnnouncementBanner from "@/components/announcement-banner";
-// import BeyondVerificationSection from "@/components/beyond-verification";
+import AnnouncementBanner from "@/components/announcement-banner";
+import BeyondVerificationSection from "@/components/beyond-verification";
 // ─── INLINE STYLES (same design system as HTML) ───────────────────────────────
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap');
@@ -752,7 +752,7 @@ export default function HomePage() {
       <style>{css}</style>
 
       {/* ── NAV ── */}
-      {/* <AnnouncementBanner /> */}
+      <AnnouncementBanner />
       <nav className="t-nav">
         <Link href="/" className="t-nav-logo">
           <div>
@@ -1612,7 +1612,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* <BeyondVerificationSection /> */}
+      <BeyondVerificationSection />
       {/* ── CTA ── */}
       <section className="t-cta-section">
         <div className="t-cta-inner">
