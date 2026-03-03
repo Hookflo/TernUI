@@ -1429,7 +1429,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+      <BeyondVerificationSection />
       {/* ── MIDDLEWARE / FRAMEWORK ADAPTERS ── */}
       <section className="t-mw-section t-section" id="middleware">
         <div className="t-section-inner">
@@ -1612,7 +1612,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <BeyondVerificationSection />
       {/* ── CTA ── */}
       <section className="t-cta-section">
         <div className="t-cta-inner">

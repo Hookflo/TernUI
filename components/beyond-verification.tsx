@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-// ─── ADDITIVE SECTION ─────────────────────────────────────────────────────────
-// Drop this component into the existing page.tsx BEFORE the CTA section.
-
 const SECTION_CSS = `
   .bv-section { background:var(--paper); border-top:1px solid var(--border); }
   .bv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-bottom:48px; }
@@ -18,7 +15,6 @@ const SECTION_CSS = `
   .bv-card-link { margin-top:16px; font-family:var(--mono); font-size:11px; color:var(--green); display:inline-flex; align-items:center; gap:4px; }
   .bv-new-badge { font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:20px; background:var(--green-bg); color:var(--green); }
 
-  /* Platform + Framework quick links */
   .bv-sub-label { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink4); margin-bottom:14px; margin-top:0; display:flex; align-items:center; gap:8px; }
   .bv-sub-label::after { content:''; flex:1; height:1px; background:var(--border); max-width:40px; }
   .bv-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
@@ -31,6 +27,52 @@ const SECTION_CSS = `
   }
   .bv-chip:hover { border-color:var(--border2); box-shadow:2px 3px 0 var(--border); transform:translateY(-1px); color:var(--ink); }
   .bv-chip-dot { width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; }
+
+  /* Closing loop quote */
+  .bv-loop-quote {
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:white;
+    padding:28px 32px;
+    margin-bottom:48px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .bv-loop-line {
+    width:3px;
+    height:48px;
+    background:var(--green);
+    border-radius:2px;
+    flex-shrink:0;
+  }
+  .bv-loop-text {
+    flex:1;
+    min-width:200px;
+  }
+  .bv-loop-text strong {
+    font-family:var(--serif);
+    font-size:17px;
+    font-weight:600;
+    color:var(--ink);
+    display:block;
+    margin-bottom:5px;
+    font-style:italic;
+  }
+  .bv-loop-text span {
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink4);
+    line-height:1.6;
+  }
+
+  @media (max-width: 640px) {
+    .bv-grid { grid-template-columns:1fr; }
+    .bv-loop-quote { padding:20px; gap:14px; }
+    .bv-loop-line { height:36px; }
+    .bv-loop-text strong { font-size:15px; }
+  }
 `;
 
 const PLATFORMS = [
@@ -45,7 +87,11 @@ const PLATFORMS = [
 
 const FRAMEWORKS = [
   { name: "Next.js App Router", href: "/framework/nextjs", badge: "stable" },
-  { name: "Cloudflare Workers", href: "/framework/cloudflare", badge: "stable" },
+  {
+    name: "Cloudflare Workers",
+    href: "/framework/cloudflare",
+    badge: "stable",
+  },
   { name: "Express", href: "/#middleware", badge: "stable" },
   { name: "Core API", href: "/#middleware", badge: "stable" },
 ];
@@ -64,7 +110,8 @@ export default function BeyondVerificationSection() {
           </h2>
           <p className="t-section-desc" style={{ marginBottom: 32 }}>
             Once your signature is verified, Tern can queue delivery, retry
-            failures, and recover from a dead-letter queue — automatically.
+            failures, recover from a dead-letter queue, and alert you when
+            things go wrong — automatically.
           </p>
 
           <div className="bv-grid">
@@ -72,8 +119,8 @@ export default function BeyondVerificationSection() {
               <div className="bv-card-num">01</div>
               <div className="bv-card-title">Cross-platform verification</div>
               <div className="bv-card-desc">
-                16 platforms. One SDK. HMAC-SHA256, Ed25519, SHA1 — Tern
-                handles the algorithm. You write the handler.
+                16 platforms. One SDK. HMAC-SHA256, Ed25519, SHA1 — Tern handles
+                the algorithm. You write the handler.
               </div>
             </div>
 
@@ -88,7 +135,9 @@ export default function BeyondVerificationSection() {
                 letter queue for anything exhausted. Bring Your Own Upstash
                 account — your data, your stack.
               </div>
-              <div className="bv-card-link">Learn about reliable delivery →</div>
+              <div className="bv-card-link">
+                Learn about reliable delivery →
+              </div>
             </Link>
 
             <div className="bv-card" style={{ cursor: "default" }}>
@@ -98,14 +147,72 @@ export default function BeyondVerificationSection() {
                 Next.js App Router, Cloudflare Workers, Express. Same
                 verification logic, native integration for each runtime.
               </div>
-              <div style={{ display: "flex", gap: 8, marginTop: 16, flexWrap: "wrap" }}>
-                <Link href="/framework/nextjs" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid var(--border2)", paddingBottom: 1 }}>Next.js →</Link>
-                <Link href="/framework/cloudflare" style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid var(--border2)", paddingBottom: 1 }}>Cloudflare →</Link>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  marginTop: 16,
+                  flexWrap: "wrap",
+                }}
+              >
+                <Link
+                  href="/framework/nextjs"
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    color: "var(--accent)",
+                    textDecoration: "none",
+                    borderBottom: "1px solid var(--border2)",
+                    paddingBottom: 1,
+                  }}
+                >
+                  Next.js →
+                </Link>
+                <Link
+                  href="/framework/cloudflare"
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 11,
+                    color: "var(--accent)",
+                    textDecoration: "none",
+                    borderBottom: "1px solid var(--border2)",
+                    paddingBottom: 1,
+                  }}
+                >
+                  Cloudflare →
+                </Link>
+              </div>
+            </div>
+
+            <div className="bv-card">
+              <div className="bv-card-num">04</div>
+              <div className="bv-card-title">
+                Alerting
+                <span className="bv-new-badge">New</span>
+              </div>
+              <div className="bv-card-desc">
+                Get notified on Slack or Discord when webhook events fail, land
+                in the dead-letter queue, or get replayed. Know the moment
+                something goes wrong — before your users do.
               </div>
             </div>
           </div>
 
-          {/* Fix 4 — Platform quick links */}
+          {/* Closing the loop quote */}
+          <div className="bv-loop-quote">
+            <div className="bv-loop-line" />
+            <div className="bv-loop-text">
+              <strong>
+                The full loop of inbound webhook handling — closed.
+              </strong>
+              <span>
+                Verify the signature. Queue the event. Retry on failure. Replay
+                from the dead-letter queue. Get alerted when it matters. Every
+                step handled, nothing left to wire up yourself.
+              </span>
+            </div>
+          </div>
+
           <div className="bv-sub-label">Platforms</div>
           <div className="bv-chips">
             {PLATFORMS.map((p) => (
@@ -116,14 +223,30 @@ export default function BeyondVerificationSection() {
             ))}
           </div>
 
-          {/* Fix 4 — Framework quick links */}
           <div className="bv-sub-label">Frameworks</div>
           <div className="bv-chips">
             {FRAMEWORKS.map((f) => (
               <Link href={f.href} className="bv-chip" key={f.name}>
-                <span className="bv-chip-dot" style={{ background: f.badge === "beta" ? "#f59e0b" : "var(--green)" }} />
+                <span
+                  className="bv-chip-dot"
+                  style={{
+                    background: f.badge === "beta" ? "#f59e0b" : "var(--green)",
+                  }}
+                />
                 {f.name}
-                <span style={{ fontFamily: "var(--mono)", fontSize: 9, color: "var(--ink4)", background: "var(--paper2)", border: "1px solid var(--border)", borderRadius: 10, padding: "1px 6px" }}>{f.badge}</span>
+                <span
+                  style={{
+                    fontFamily: "var(--mono)",
+                    fontSize: 9,
+                    color: "var(--ink4)",
+                    background: "var(--paper2)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 10,
+                    padding: "1px 6px",
+                  }}
+                >
+                  {f.badge}
+                </span>
               </Link>
             ))}
           </div>
