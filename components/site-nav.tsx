@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Feather } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { NextjsIcon } from "@/app/page";
 
 // Copy the nav CSS from page.tsx — added here so it works standalone
 const NAV_CSS = `
@@ -132,9 +133,13 @@ function FrameworksDropdown() {
       </button>
 
       <div className={`t-fw-dropdown${open ? " open" : ""}`}>
-        <Link href="/framework/nextjs" className="t-fw-item" onClick={() => setOpen(false)}>
+        <Link
+          href="/framework/nextjs"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
           <div className="t-fw-icon" style={{ background: "#000" }}>
-            <img src="/assets/nextjs.svg" alt="Next.js" style={{ width: 24, height: 24 }} />
+         <NextjsIcon/>
           </div>
           <div>
             <div className="t-fw-item-name">Next.js</div>
@@ -144,9 +149,20 @@ function FrameworksDropdown() {
 
         <div className="t-fw-divider" />
 
-        <Link href="/framework/hono" className="t-fw-item" onClick={() => setOpen(false)}>
-          <div className="t-fw-icon" style={{ background: "#fff7ed", color: "#c2410c" }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>H</span>
+        <Link
+          href="/framework/hono"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="t-fw-icon"
+            style={{ background: "#fff7ed", color: "#c2410c" }}
+          >
+            <img
+              src="/assets/hono.svg"
+              alt="Hono"
+              style={{ width: 24, height: 24 }}
+            />
           </div>
           <div>
             <div className="t-fw-item-name">Hono</div>
@@ -213,9 +229,6 @@ export default function SiteNav() {
               <span className="t-nav-new-dot" />
               Reliable Delivery
             </Link>
-          </li>
-          <li>
-            <div className="t-nav-divider" />
           </li>
         </ul>
 

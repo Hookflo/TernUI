@@ -15,6 +15,12 @@ const PAGE_CSS = `
   .ho-list-row { background:white; border:1px solid var(--border); border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px; }
   .ho-list-dot { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; }
   .ho-list-txt { font-family:var(--mono); font-size:11px; color:var(--ink2); }
+
+  /* Runtime grid */
+  .ho-runtime-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; margin-top:32px; max-width:760px; }
+  .ho-runtime-card { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; display:flex; align-items:center; gap:10px; }
+  .ho-runtime-dot { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; }
+  .ho-runtime-name { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--ink2); }
 `;
 
 const TABS = [
@@ -33,12 +39,13 @@ app.post('/webhooks/stripe', createWebhookHandler({
   platform: 'stripe',
   secret: process.env.WEBHOOK_SECRET!,
   handler: async (payload) => {
-    // verified payload
+    // verified payload — handle your event
     return { received: true, type: payload.type }
   }
 }))
 
 export default app`,
+
   `import { Hono } from 'hono'
 import { createWebhookHandler } from '@hookflo/tern/hono'
 
@@ -51,29 +58,38 @@ app.post('/webhooks/stripe', createWebhookHandler({
     token: process.env.QSTASH_TOKEN!,
     signingKey: process.env.QSTASH_CURRENT_SIGNING_KEY!,
     nextSigningKey: process.env.QSTASH_NEXT_SIGNING_KEY!,
-    retries: 5,
+    retries: 3,
+  },
+  alerts: {
+    slack: { webhookUrl: process.env.SLACK_WEBHOOK_URL! },
+    discord: { webhookUrl: process.env.DISCORD_WEBHOOK_URL! },
   },
   handler: async (payload) => {
+    // queued, retried on failure, alerted on DLQ
     return { received: true, id: payload.id }
   }
 }))
 
 export default app`,
+
   `import { createTernControls } from '@hookflo/tern/upstash'
 
 const controls = createTernControls({
   token: process.env.QSTASH_TOKEN!
 })
 
+// inspect failed events
 export async function getDlq() {
   const failed = await controls.dlq()
   return { count: failed.length, events: failed }
 }
 
+// replay a specific failed event
 export async function replay(dlqId: string) {
   return controls.replay(dlqId)
 }
 
+// cancel a scheduled or queued message
 export async function cancel(msgId: string) {
   return controls.cancel(msgId)
 }`,
@@ -110,17 +126,18 @@ export default function HonoPage() {
                 height: 44,
                 borderRadius: 7,
                 border: "1.5px solid var(--border2)",
-                background: "#fff7ed",
+                background: "white",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 boxShadow: "2px 3px 0 var(--border)",
-                color: "#c2410c",
-                fontFamily: "var(--mono)",
-                fontWeight: 700,
               }}
             >
-              H
+              <img
+                src="/assets/hono.svg"
+                alt="Cloudflare"
+                style={{ width: 32, height: 32 }}
+              />
             </div>
             <div
               style={{
@@ -160,11 +177,11 @@ export default function HonoPage() {
           </div>
           <div className="t-install">
             <div className="t-install-cmd">
-              <span>$</span> npm i @hookflo/tern hono
+              <span>$</span> npm i @hookflo/tern
             </div>
             <button
               className="t-copy-btn"
-              onClick={() => copy("npm i @hookflo/tern hono")}
+              onClick={() => copy("npm i @hookflo/tern")}
               title="Copy"
             >
               {copied ? "✓" : "⎘"}
@@ -173,10 +190,11 @@ export default function HonoPage() {
         </div>
 
         <div>
-          <CodeBlock code={CODE[1]} filename="src/index.ts" />
+          <CodeBlock code={CODE[0]} filename="src/index.ts" />
         </div>
       </div>
 
+      {/* Usage */}
       <section
         className="t-section"
         style={{ background: "white", borderTop: "1px solid var(--border)" }}
@@ -218,6 +236,7 @@ export default function HonoPage() {
         </div>
       </section>
 
+      {/* Reliability */}
       <section className="t-section" style={{ background: "var(--paper2)" }}>
         <div className="t-section-inner">
           <div className="t-section-label">Reliability</div>
@@ -231,7 +250,11 @@ export default function HonoPage() {
             dead-letter visibility, and replay APIs so webhook processing stays
             durable under load.
           </p>
-          <Link href="/upstash" className="t-btn-primary" style={{ marginTop: 18 }}>
+          <Link
+            href="/upstash"
+            className="t-btn-primary"
+            style={{ marginTop: 18 }}
+          >
             Explore Reliable Delivery
           </Link>
         </div>
