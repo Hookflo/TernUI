@@ -58,6 +58,8 @@ const css = `
     text-decoration:none; transition:background .2s, color .2s;
   }
   .t-nav-gh:hover { background:var(--ink); color:var(--paper); }
+  .t-nav-new { display:inline-flex; align-items:center; gap:5px; color:#059669 !important; font-weight:700 !important; }
+  .t-nav-new-dot { display:inline-block; width:5px; height:5px; background:#059669; border-radius:50%; }
   @media(max-width:640px){ .t-nav-links { display:none; } }
 
   /* FRAMEWORKS DROPDOWN */
@@ -440,6 +442,12 @@ const MIDDLEWARES = [
     desc: "Cloudflare Workers adapter using the Web Crypto API. Edge-native, zero Node.js dependencies.",
   },
   {
+    name: "@hookflo/tern/hono",
+    badge: "stable",
+    import: `import { createWebhookHandler } from '@hookflo/tern/hono'`,
+    desc: "Hono adapter for Node.js and edge runtimes. Tiny footprint, fast routing, and consistent request verification.",
+  },
+  {
     name: "Core API",
     badge: "stable",
     import: `import { WebhookVerificationService } from '@hookflo/tern'`,
@@ -578,7 +586,7 @@ const OpenSourceLogo = ({ width = 80 }: { width?: number }) => (
 );
 
 // ─── Next.js Icon SVG ──────────────────────────────────────────────────────────
-const NextjsIcon = () => (
+export const NextjsIcon = () => (
   <svg width="18" height="18" viewBox="0 0 180 180" fill="none">
     <mask
       id="nextjs-mask"
@@ -623,20 +631,6 @@ const NextjsIcon = () => (
         <stop offset="1" stopColor="white" stopOpacity="0" />
       </linearGradient>
     </defs>
-  </svg>
-);
-
-// ─── Cloudflare Icon SVG ───────────────────────────────────────────────────────
-const CloudflareIcon = () => (
-  <svg width="20" height="12" viewBox="0 0 109 44" fill="none">
-    <path
-      d="M84.4 18.6C82.7 12 76.8 7 69.7 7c-5.3 0-10 2.5-13 6.4C54.5 12.2 51.8 11 48.9 11c-5.9 0-10.8 3.9-12.4 9.3C31.8 21.2 28 25.4 28 30.5c0 5.8 4.7 10.5 10.5 10.5h44.9C90 41 95 36 95 30c0-5.4-4-9.9-10.6-11.4z"
-      fill="#f6821f"
-    />
-    <path
-      d="M73.5 30.5c0-.3 0-.6.1-.9l-15.1 1.2c-1.4.1-2.5-1-2.5-2.4v-.1c0-1.3 1-2.3 2.3-2.4l15.6-1.2c-1.4-3.2-4.6-5.4-8.3-5.4-3.1 0-5.8 1.5-7.4 3.8-1-.5-2.2-.8-3.4-.8-4 0-7.2 3.2-7.2 7.2s3.2 7.2 7.2 7.2h18.5c3.4 0 6.2-2.8 6.2-6.2 0-3.1-2.3-5.7-5.4-6.1.1.4.1.7.1 1.1 0 2.3-1.9 4.2-4.2 4.2-.1 0-.5 0-.5-.2z"
-      fill="#faae40"
-    />
   </svg>
 );
 
@@ -694,12 +688,36 @@ function FrameworksDropdown() {
         <div className="t-fw-divider" />
 
         <a
+          href="/framework/hono"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div className="t-fw-icon" style={{ background: "#fff7ed" }}>
+            <img
+              src="/assets/hono.svg"
+              alt="Hono"
+              style={{ width: 24, height: 24 }}
+            />
+          </div>
+          <div className="t-fw-item-text">
+            <div className="t-fw-item-name">Hono</div>
+            <div className="t-fw-item-desc">Fast · Edge-ready · TS-first</div>
+          </div>
+        </a>
+
+        <div className="t-fw-divider" />
+
+        <a
           href="/framework/cloudflare"
           className="t-fw-item"
           onClick={() => setOpen(false)}
         >
           <div className="t-fw-icon" style={{ background: "#fff4e6" }}>
-            <CloudflareIcon />
+            <img
+              src="/assets/cloudflare.svg"
+              alt="Hono"
+              style={{ width: 24, height: 24 }}
+            />
           </div>
           <div className="t-fw-item-text">
             <div className="t-fw-item-name">Cloudflare</div>
@@ -777,6 +795,12 @@ export default function HomePage() {
           {/* ── FRAMEWORKS DROPDOWN (replaces simple anchor) ── */}
           <li>
             <FrameworksDropdown />
+          </li>
+          <li>
+            <a href="/upstash" className="t-nav-new">
+              <span className="t-nav-new-dot" />
+              Reliable Delivery
+            </a>
           </li>
         </ul>
 
