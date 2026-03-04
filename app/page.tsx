@@ -58,6 +58,8 @@ const css = `
     text-decoration:none; transition:background .2s, color .2s;
   }
   .t-nav-gh:hover { background:var(--ink); color:var(--paper); }
+  .t-nav-new { display:inline-flex; align-items:center; gap:5px; color:#059669 !important; font-weight:700 !important; }
+  .t-nav-new-dot { display:inline-block; width:5px; height:5px; background:#059669; border-radius:50%; }
   @media(max-width:640px){ .t-nav-links { display:none; } }
 
   /* FRAMEWORKS DROPDOWN */
@@ -440,6 +442,12 @@ const MIDDLEWARES = [
     desc: "Cloudflare Workers adapter using the Web Crypto API. Edge-native, zero Node.js dependencies.",
   },
   {
+    name: "@hookflo/tern/hono",
+    badge: "stable",
+    import: `import { createWebhookHandler } from '@hookflo/tern/hono'`,
+    desc: "Hono adapter for Node.js and edge runtimes. Tiny footprint, fast routing, and consistent request verification.",
+  },
+  {
     name: "Core API",
     badge: "stable",
     import: `import { WebhookVerificationService } from '@hookflo/tern'`,
@@ -694,6 +702,24 @@ function FrameworksDropdown() {
         <div className="t-fw-divider" />
 
         <a
+          href="/framework/hono"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div className="t-fw-icon" style={{ background: "#fff7ed" }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "#c2410c" }}>
+              H
+            </span>
+          </div>
+          <div className="t-fw-item-text">
+            <div className="t-fw-item-name">Hono</div>
+            <div className="t-fw-item-desc">Fast · Edge-ready · TS-first</div>
+          </div>
+        </a>
+
+        <div className="t-fw-divider" />
+
+        <a
           href="/framework/cloudflare"
           className="t-fw-item"
           onClick={() => setOpen(false)}
@@ -777,6 +803,12 @@ export default function HomePage() {
           {/* ── FRAMEWORKS DROPDOWN (replaces simple anchor) ── */}
           <li>
             <FrameworksDropdown />
+          </li>
+          <li>
+            <a href="/upstash" className="t-nav-new">
+              <span className="t-nav-new-dot" />
+              Reliable Delivery
+            </a>
           </li>
         </ul>
 

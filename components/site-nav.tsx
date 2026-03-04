@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Feather } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 // Copy the nav CSS from page.tsx — added here so it works standalone
 const NAV_CSS = `
@@ -30,9 +31,152 @@ const NAV_CSS = `
   }
   .t-nav-gh:hover { background:#1a1714; color:#f7f4ef; }
   .t-nav-divider { width:1px; height:16px; background:#d8d0c4; }
+  .t-nav-frameworks-wrap { position: relative; }
+  .t-nav-frameworks-btn {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    color: #6b6358; background: none; border: none; cursor: pointer; padding: 0;
+    transition: color .2s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .t-nav-frameworks-btn:hover,
+  .t-nav-frameworks-btn.t-nav-active { color: #1a1714; }
+  .t-nav-frameworks-btn:hover .t-fw-chevron,
+  .t-nav-frameworks-btn.t-nav-active .t-fw-chevron { color: #1a1714; }
+  .t-fw-chevron {
+    color: #9e9488; transition: transform .2s, color .2s;
+    display: flex; align-items: center;
+  }
+  .t-fw-chevron.open { transform: rotate(180deg); }
+  .t-fw-dropdown {
+    position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%);
+    background: white; border: 1.5px solid #c4baad; border-radius: 10px;
+    padding: 8px; min-width: 220px;
+    box-shadow: 4px 6px 0 #d8d0c4, 0 16px 40px rgba(26,23,20,.10);
+    opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 200;
+  }
+  .t-fw-dropdown.open {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .t-fw-dropdown::before {
+    content: ''; position: absolute; top: -7px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 7px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: #c4baad;
+  }
+  .t-fw-dropdown::after {
+    content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+    width: 10px; height: 6px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: white;
+  }
+  .t-fw-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 7px;
+    text-decoration: none; color: #3d3830;
+    transition: background .15s;
+    cursor: pointer;
+  }
+  .t-fw-item:hover { background: #f0ebe2; }
+  .t-fw-icon {
+    width: 32px; height: 32px; border-radius: 7px; border: 1px solid #d8d0c4;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    background: white;
+  }
+  .t-fw-item-name { font-size: 11px; font-weight: 700; color: #1a1714; letter-spacing: .04em; }
+  .t-fw-item-desc { font-size: 9px; color: #9e9488; margin-top: 2px; letter-spacing: .04em; }
+  .t-fw-divider { height: 1px; background: #d8d0c4; margin: 6px 0; }
   @media(max-width:900px){ .t-nav-hide { display:none; } }
   @media(max-width:640px){ .t-nav-links { display:none; } }
 `;
+
+function FrameworksDropdown() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const frameworkActive = pathname.startsWith("/framework/");
+
+  return (
+    <div className="t-nav-frameworks-wrap" ref={ref}>
+      <button
+        className={`t-nav-frameworks-btn${frameworkActive ? " t-nav-active" : ""}`}
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        Frameworks
+        <span className={`t-fw-chevron${open ? " open" : ""}`}>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path
+              d="M1 1l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+
+      <div className={`t-fw-dropdown${open ? " open" : ""}`}>
+        <Link href="/framework/nextjs" className="t-fw-item" onClick={() => setOpen(false)}>
+          <div className="t-fw-icon" style={{ background: "#000" }}>
+            <img src="/assets/nextjs.svg" alt="Next.js" style={{ width: 24, height: 24 }} />
+          </div>
+          <div>
+            <div className="t-fw-item-name">Next.js</div>
+            <div className="t-fw-item-desc">App Router · Edge · RSC</div>
+          </div>
+        </Link>
+
+        <div className="t-fw-divider" />
+
+        <Link href="/framework/hono" className="t-fw-item" onClick={() => setOpen(false)}>
+          <div className="t-fw-icon" style={{ background: "#fff7ed", color: "#c2410c" }}>
+            <span style={{ fontSize: 14, fontWeight: 700 }}>H</span>
+          </div>
+          <div>
+            <div className="t-fw-item-name">Hono</div>
+            <div className="t-fw-item-desc">Fast · Edge-ready · TS-first</div>
+          </div>
+        </Link>
+
+        <div className="t-fw-divider" />
+
+        <Link
+          href="/framework/cloudflare"
+          className="t-fw-item"
+          onClick={() => setOpen(false)}
+        >
+          <div className="t-fw-icon" style={{ background: "#fff4e6" }}>
+            <img
+              src="/assets/cloudflare.svg"
+              alt="Cloudflare"
+              style={{ width: 24, height: 24 }}
+            />
+          </div>
+          <div>
+            <div className="t-fw-item-name">Cloudflare</div>
+            <div className="t-fw-item-desc">Workers · Pages · Edge</div>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function SiteNav() {
   const pathname = usePathname();
@@ -58,8 +202,8 @@ export default function SiteNav() {
           <li className="t-nav-hide">
             <a href="/#platforms">Platforms</a>
           </li>
-          <li className="t-nav-hide">
-            <a href="/#middleware">Frameworks</a>
+          <li>
+            <FrameworksDropdown />
           </li>
           <li>
             <Link
