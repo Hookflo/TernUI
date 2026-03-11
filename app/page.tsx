@@ -48,16 +48,19 @@ const css = `
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
   .t-nav-name { font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
-  .t-nav-links { display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0; }
+  .t-nav-links { display:flex; align-items:baseline; gap:28px; list-style:none; margin:0; padding:0; }
   .t-nav-links a { font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:0.06em; color:var(--ink3); text-decoration:none; transition:color .2s; }
   .t-nav-links a:hover { color:var(--ink); }
-  .t-nav-gh {
-    display:flex; align-items:center; gap:6px;
-    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.06em;
-    color:var(--ink); border:1.5px solid var(--ink); padding:6px 14px; border-radius:4px;
-    text-decoration:none; transition:background .2s, color .2s;
+.t-nav-gh {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: 13px; font-weight: 600;
+ background: var(--ink);
+    padding: 8px 18px; border-radius: 10px;
+    text-decoration: none;
+    transition: opacity .2s, transform .15s;
+    box-shadow: 0 2px 8px rgba(28,24,20,.2);
   }
-  .t-nav-gh:hover { background:var(--ink); color:var(--paper); }
+  .t-nav-gh:hover { opacity: .85; transform: translateY(-1px); }
   .t-nav-new { display:inline-flex; align-items:center; gap:5px; color:#059669 !important; font-weight:700 !important; }
   .t-nav-new-dot { display:inline-block; width:5px; height:5px; background:#059669; border-radius:50%; }
   @media(max-width:640px){ .t-nav-links { display:none; } }
@@ -151,22 +154,27 @@ const css = `
   .t-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 
   .t-btn-primary {
-    font-family:var(--mono); font-size:12px; font-weight:700;
-    letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--paper); background:var(--ink); border:none;
-    padding:12px 24px; border-radius:4px; cursor:pointer; text-decoration:none;
-    transition:opacity .2s, transform .15s; display:inline-block;
+    font-family: var(--sans); font-size: 14px; font-weight: 700;
+    color: var(--paper); background: var(--ink);
+    padding: 13px 26px; border-radius: 12px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 16px rgba(28,24,20,.25);
+    display: inline-flex; align-items: center; gap: 8px;
   }
-  .t-btn-primary:hover { opacity:.85; transform:translateY(-1px); }
+  .t-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(28,24,20,.3); }
 
-  .t-btn-secondary {
-    font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:0.06em;
-    color:var(--ink2); text-decoration:none;
-    display:inline-flex; align-items:center; gap:6px;
-    border-bottom:1px solid var(--border2); padding-bottom:2px;
-    transition:border-color .2s, color .2s;
+ .t-btn-secondary {
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    color: var(--ink2); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 13px 20px; border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: white;
+    transition: border-color .2s, background .2s, transform .15s;
+    box-shadow: 0 1px 4px rgba(28,24,20,.06);
   }
-  .t-btn-secondary:hover { color:var(--ink); border-color:var(--ink); }
+  .t-btn-secondary:hover { border-color: var(--border2); background: var(--sand); transform: translateY(-1px); }
 
   .t-install { display:flex; align-items:center; gap:12px; margin-top:28px; }
 .t-install-cmd {
@@ -391,6 +399,36 @@ const css = `
   .fade-up-5 { animation:fadeUp .5s ease .30s both; }
   .fade-up-r { animation:fadeUp .5s ease .20s both; }
 
+   .t-hero-badges {
+    display: flex; align-items: center; gap: 10px;
+    flex-wrap: wrap; margin-top: 28px;
+  }
+     .t-oss-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid var(--border);
+    border-radius: 10px; padding: 8px 14px;
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    color: var(--ink3); letter-spacing: .02em; text-decoration: none;
+    transition: border-color .2s, box-shadow .2s;
+    box-shadow: 0 1px 4px rgba(28,24,20,.05);
+  }
+  .t-oss-badge:hover { border-color: var(--border2); box-shadow: 0 4px 12px rgba(28,24,20,.08); }
+  .t-oss-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+
+  .t-install-cmd {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--ink2); background: white; border: 1px solid var(--border);
+    padding: 10px 14px; border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(28,24,20,.05);
+  }
+  .t-install-cmd .dollar { color: var(--accent); font-weight: 700; }
+  .t-copy-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--ink4); padding: 2px; display: flex; align-items: center;
+    transition: color .2s;
+  }
+  .t-copy-btn:hover { color: var(--green); }
   /* inline code */
   .t-inline-code { font-family:var(--mono); font-size:.88em; background:var(--paper2); border:1px solid var(--border); padding:1px 5px; border-radius:3px; color:var(--ink2); }
 `;
@@ -808,7 +846,7 @@ export default function HomePage() {
           href="https://github.com/Hookflo/tern"
           target="_blank"
           rel="noreferrer"
-          className="t-nav-gh"
+          className="t-nav-gh text-white"
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
@@ -839,6 +877,15 @@ export default function HomePage() {
             <div className="t-actions fade-up-4">
               <a href="#how" className="t-btn-primary">
                 Get started
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M3 7h8M8 4l3 3-3 3"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </a>
               <a
                 href="https://github.com/Hookflo/tern"
@@ -846,7 +893,7 @@ export default function HomePage() {
                 rel="noreferrer"
                 className="t-btn-secondary"
               >
-                View on GitHub
+                Star on GitHub
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path
                     d="M2 10L10 2M10 2H4M10 2v6"
@@ -857,23 +904,13 @@ export default function HomePage() {
                 </svg>
               </a>
             </div>
-            <div
-              className="fade-up-5 items-center align-middle"
-              style={{
-                display: "flex",
-                gap: 10,
-                flexWrap: "wrap-reverse",
-                alignItems: "center",
-                marginTop: 28,
-              }}
-            >
-              {/* OSS badge */}
+            <div className="t-hero-badges fade-up-5">
               <div className="t-oss-badge">
-                <OpenSourceLogo width={60} />
+                <OpenSourceLogo width={56} />
                 <div
                   style={{
                     width: 1,
-                    height: 20,
+                    height: 18,
                     background: "var(--border)",
                     flexShrink: 0,
                   }}
@@ -881,23 +918,16 @@ export default function HomePage() {
                 <div className="t-oss-badge-dot" />
                 MIT Licensed
               </div>
-
-              {/* Install cmd — copy button inside */}
               <div className="t-install-cmd">
-                <span style={{ color: "var(--ink4)" }}>$</span>
+                <span className="dollar">$</span>
                 npm i @hookflo/tern
                 <button
                   className="t-copy-btn"
                   onClick={copyInstall}
                   title="Copy"
-                  style={{
-                    marginLeft: 2,
-                    display: "flex",
-                    alignItems: "center",
-                  }}
                 >
                   {copied ? (
-                    <Check size={13} strokeWidth={2.2} color="#1a6b3c" />
+                    <Check size={13} strokeWidth={2.5} color="#1a7a4a" />
                   ) : (
                     <Copy size={13} strokeWidth={1.8} />
                   )}

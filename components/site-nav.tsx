@@ -19,7 +19,7 @@ const NAV_CSS = `
   }
   .t-nav-logo { display:flex; align-items:center; gap:8px; text-decoration:none; color:#1a1714; }
   .t-nav-name { font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
-  .t-nav-links { display:flex; align-items:center; gap:24px; list-style:none; margin:0; padding:0; }
+  .t-nav-links { display:flex; align-items:baseline; gap:24px; list-style:none; margin:0; padding:0; }
   .t-nav-links a { font-size:11px; font-weight:500; letter-spacing:0.06em; color:#6b6358; text-decoration:none; transition:color .2s; }
   .t-nav-links a:hover, .t-nav-links a.t-nav-active { color:#1a1714; }
   .t-nav-new { display:inline-flex; align-items:center; gap:5px; color:#059669 !important; font-weight:700 !important; }
