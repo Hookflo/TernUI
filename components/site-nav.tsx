@@ -223,6 +223,15 @@ export default function SiteNav() {
           </li>
           <li>
             <Link
+              href="/cli"
+              className={`t-nav-new ${isActive("/cli") ? "t-nav-active" : ""}`}
+            >
+              <span className="t-nav-new-dot" />
+              CLI Tool
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/upstash"
               className={`t-nav-new ${isActive("/upstash") ? "t-nav-active" : ""}`}
             >
