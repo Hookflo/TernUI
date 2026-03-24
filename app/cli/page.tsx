@@ -151,7 +151,7 @@ const CSS = `
 
 /* ── BOXED BORDER (ankar.ai style) ── */
 .hero-box {
-  position: absolute; inset: clamp(16px,5vw,70px); z-index: 2; pointer-events: none;
+  position: absolute; inset: clamp(10px,2.8vw,48px); z-index: 2; pointer-events: none;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 4px;
         background: linear-gradient(135deg, 
@@ -611,20 +611,24 @@ const CSS = `
     padding: 116px 12px 56px;
   }
   .hero-box {
-    inset: 8px;
+    inset: 5px;
     background-attachment: scroll;
   }
   .hero-sub {
     margin-bottom: 28px;
   }
   .hero-actions {
-    width: 100%;
+    width: auto;
     margin-bottom: 28px;
+    gap: 8px;
   }
   .btn-primary,
   .btn-secondary {
-    width: 100%;
+    width: auto;
+    min-width: 172px;
     justify-content: center;
+    font-size: 10px;
+    padding: 10px 16px;
   }
   .install-strip {
     display: grid;
