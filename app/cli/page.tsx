@@ -50,9 +50,9 @@ const CSS = `
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' seed='2' /%3E%3CfeDisplacementMap in='SourceGraphic' scale='35' xChannelSelector='R' yChannelSelector='G' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    background-size: 150px 150px;
-    opacity: 0.7;
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.35;
     pointer-events: none;
     mix-blend-mode: overlay;
   }
@@ -62,11 +62,24 @@ const CSS = `
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-      radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(255,255,255,0.03) 0%, transparent 40%);
+      radial-gradient(circle at 10% 20%, rgba(0,0,0,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 90% 30%, rgba(0,0,0,0.05) 0%, transparent 35%),
+      radial-gradient(circle at 15% 85%, rgba(0,0,0,0.03) 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(0,0,0,0.04) 0%, transparent 40%),
+      radial-gradient(ellipse 1000px 300px at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 100%);
     pointer-events: none;
     mix-blend-mode: multiply;
+  }
+  
+  .cli-hero-lines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  
+  .cli-hero-lines svg {
+    width: 100%; height: 100%;
   }
   
   .cli-hero > * {
@@ -97,29 +110,34 @@ const CSS = `
     gap: 20px; flex-wrap: wrap; margin-bottom: 60px;
   }
   .cli-btn-primary {
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--paper); background: var(--ink); border: none;
-    padding: 14px 32px; border-radius: 6px; cursor: pointer;
-    text-decoration: none; transition: all .2s;
-    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 36px; border-radius: 8px; cursor: pointer;
+    text-decoration: none; transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 4px 12px rgba(26,23,20,.15);
   }
   .cli-btn-primary:hover { 
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(26,23,20,.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(26,23,20,.25);
+    background: #2a2520;
   }
   
   .cli-btn-secondary {
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink); background: transparent; border: 1.5px solid var(--border2);
-    padding: 12px 32px; border-radius: 6px; cursor: pointer;
-    text-decoration: none; transition: all .2s;
-    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink); background: white; border: 1.5px solid var(--border);
+    padding: 12px 36px; border-radius: 8px; cursor: pointer;
+    text-decoration: none; transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 2px 8px rgba(26,23,20,.06);
   }
   .cli-btn-secondary:hover { 
-    border-color: var(--ink3);
-    transform: translateY(-2px);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(44,95,138,.12);
   }
 
   .cli-install {
@@ -174,28 +192,56 @@ const CSS = `
     gap: 24px; margin-bottom: 60px;
   }
   .cli-feature-card {
-    background: var(--paper2); border: 1px solid var(--border);
-    border-radius: 12px; padding: 32px 28px;
-    transition: all .2s;
+    background: linear-gradient(135deg, #fdfbf8 0%, var(--paper2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px 32px;
+    transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
   }
+  
+  .cli-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='3' seed='1' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23cardNoise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    opacity: 0.15;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  
   .cli-feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(26,23,20,.08);
-    border-color: var(--ink3);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(26,23,20,.12), 0 1px 3px rgba(26,23,20,.08);
+    border-color: var(--accent);
+    background: linear-gradient(135deg, white 0%, #fcf9f5 100%);
   }
+  
   .cli-feature-icon {
-    width: 48px; height: 48px;
+    width: 56px; height: 56px;
     display: flex; align-items: center; justify-content: center;
-    background: white; border: 1px solid var(--border);
-    border-radius: 8px; margin-bottom: 20px;
+    background: linear-gradient(135deg, rgba(44,95,138,0.08) 0%, rgba(44,95,138,0.04) 100%);
+    border: 1.5px solid rgba(44,95,138,0.2);
+    border-radius: 12px; margin-bottom: 24px;
     color: var(--accent);
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
   }
+  
   .cli-feature-title {
-    font-family: var(--serif); font-size: 18px; font-weight: 600;
+    font-family: var(--display); font-size: 20px; font-weight: 400;
     color: var(--ink); margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
   }
+  
   .cli-feature-desc {
-    font-size: 14px; color: var(--ink3); line-height: 1.65;
+    font-size: 15px; color: var(--ink3); line-height: 1.65;
+    position: relative;
+    z-index: 2;
   }
 
   /* DASHBOARD SECTION */
@@ -234,14 +280,35 @@ const CSS = `
   }
 
   .cli-dashboard-visual {
-    background: white; border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px;
-    font-family: var(--mono); font-size: 12px;
+    background: linear-gradient(135deg, #fdfbf8 0%, white 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px; 
+    padding: 28px;
+    font-family: var(--mono); font-size: 13px;
     color: var(--ink2); line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(26,23,20,.04);
   }
+  
+  .cli-dashboard-visual::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='dashNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='3' seed='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23dashNoise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    opacity: 0.1;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  
   .cli-dashboard-visual .line {
-    margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    position: relative;
+    z-index: 1;
   }
+  
   .cli-dashboard-visual .key { color: var(--accent); font-weight: 600; }
   .cli-dashboard-visual .val { color: var(--ink3); }
 
@@ -254,23 +321,53 @@ const CSS = `
 
   .cli-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1px; border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; background: var(--border);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px; 
   }
+  
   .cli-stat-card {
-    background: white; padding: 28px;
+    background: linear-gradient(135deg, #fdfbf8 0%, white 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 28px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+  
+  .cli-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='statNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='3' seed='3' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23statNoise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    opacity: 0.12;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  
+  .cli-stat-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(44,95,138,0.1);
+  }
+  
   .cli-stat-value {
-    font-family: var(--display); font-size: 36px; font-style: italic;
+    font-family: var(--display); font-size: 48px; font-style: italic;
     font-weight: 600; color: var(--accent); line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
   }
+  
   .cli-stat-label {
     font-family: var(--mono); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink4);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink3);
+    position: relative;
+    z-index: 2;
   }
 
   /* CTA SECTION */
@@ -351,6 +448,27 @@ export default function CLIPage() {
 
       {/* HERO */}
       <section className="cli-hero">
+        <div className="cli-hero-lines">
+          <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(44,95,138,0.3)" />
+                <stop offset="100%" stopColor="rgba(232,159,216,0.2)" />
+              </linearGradient>
+            </defs>
+            {/* Left diagonal accent lines */}
+            <path d="M 0 200 Q 200 150, 300 180" stroke="url(#lineGrad)" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
+            <path d="M 0 300 Q 250 250, 400 320" stroke="url(#lineGrad)" strokeWidth="0.8" fill="none" vectorEffect="non-scaling-stroke" opacity="0.6" />
+            
+            {/* Right diagonal accent lines */}
+            <path d="M 1200 150 Q 950 200, 800 180" stroke="url(#lineGrad)" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
+            <path d="M 1200 400 Q 900 350, 700 380" stroke="url(#lineGrad)" strokeWidth="0.8" fill="none" vectorEffect="non-scaling-stroke" opacity="0.6" />
+            
+            {/* Subtle grid hints */}
+            <line x1="0" y1="600" x2="600" y2="300" stroke="url(#lineGrad)" strokeWidth="0.5" opacity="0.3" vectorEffect="non-scaling-stroke" />
+            <line x1="1200" y1="600" x2="600" y2="300" stroke="url(#lineGrad)" strokeWidth="0.5" opacity="0.3" vectorEffect="non-scaling-stroke" />
+          </svg>
+        </div>
         <div className="cli-eyebrow">Local Webhook Tunnel</div>
         <h1 className="cli-h1">
           Secure webhooks, <em>zero storage</em>
