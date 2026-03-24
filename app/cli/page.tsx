@@ -30,6 +30,36 @@ const CSS = `
     padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
     max-width: 1400px; margin: 0 auto;
     text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, 
+      #f7f4ef 0%,
+      #fde4d0 15%,
+      #f9cfc8 25%,
+      #f2b5d4 40%,
+      #e89fd8 55%,
+      #d89fdb 65%,
+      #c8addd 75%,
+      #b8c5e0 85%,
+      #a8d8e8 100%);
+    background-attachment: fixed;
+    overflow: hidden;
+  }
+  
+  .cli-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2' /%3E%3CfeDisplacementMap in='SourceGraphic' scale='30' xChannelSelector='R' yChannelSelector='G' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.6;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  
+  .cli-hero > * {
+    position: relative;
+    z-index: 1;
   }
   .cli-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
