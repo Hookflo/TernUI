@@ -438,12 +438,7 @@ const css = `
 const PLATFORMS = [
   { name: "Stripe", icon: "/Stripe.svg", bg: "#f0f9f4", verified: true },
   { name: "Clerk", icon: "/clerk.svg", bg: "#f5f0fa", verified: true },
-  {
-    name: "Standard Webhooks",
-    icon: "/standardwebhooks.svg",
-    bg: "#f4f7ff",
-    verified: true,
-  },
+
   { name: "Linear", icon: "/linear.svg", bg: "#f5f5f5", verified: true },
   { name: "GitHub", icon: "/github.svg", bg: "#f0f5ff", verified: true },
   { name: "Shopify", icon: "/shopify.svg", bg: "#fff5f0", verified: true },
@@ -465,6 +460,12 @@ const PLATFORMS = [
   { name: "Doppler", icon: "/doppler.svg", bg: "#fff1f3", verified: true },
   { name: "Sentry", icon: "/sentry.svg", bg: "#eff6ff", verified: true },
   { name: "Grafana", icon: "/grafana.svg", bg: "#eff6ff", verified: true },
+  {
+    name: "Standard Webhooks",
+    icon: "/standardwebhooks.svg",
+    bg: "#f4f7ff",
+    verified: true,
+  },
 ];
 
 const MIDDLEWARES = [
