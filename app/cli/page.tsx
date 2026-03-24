@@ -820,13 +820,17 @@ $ npx @hookflo/tern-dev --port 3000
                 </div>
                 <span>tern.config.json</span>
               </div>
-              <div className="cli-code-body">{`{
-  <span className="key">"port"</span>: <span className="num">3000</span>,
-  <span className="key">"rateLimit"</span>: <span className="num">100</span>,
-  <span className="key">"allowIp"</span>: [
-    <span className="str">"54.187.174.169"</span>
-  ]
-}`}</div>
+              <div className="cli-code-body">
+                {'{'}
+                <div style={{paddingLeft: '16px'}}>
+                  <div><span className="key">"port"</span>: <span className="num">3000</span>,</div>
+                  <div><span className="key">"rateLimit"</span>: <span className="num">100</span>,</div>
+                  <div><span className="key">"allowIp"</span>: [</div>
+                  <div style={{paddingLeft: '16px'}}><span className="str">"54.187.174.169"</span></div>
+                  <div>]</div>
+                </div>
+                {'}'}
+              </div>
             </div>
           </div>
         </div>
