@@ -27,22 +27,23 @@ const CSS = `
 
   /* HERO */
   .cli-hero {
-    padding: clamp(80px,10vw,140px) clamp(20px,5vw,80px) clamp(60px,8vw,100px);
-    max-width: 1400px; margin: 0 auto;
+    padding: 60px clamp(20px,5vw,80px) 80px;
+    max-width: 1200px; margin: 0 auto;
     text-align: center;
     position: relative;
     background: linear-gradient(135deg, 
       #f7f4ef 0%,
-      #fde4d0 15%,
-      #f9cfc8 25%,
-      #f2b5d4 40%,
-      #e89fd8 55%,
-      #d89fdb 65%,
-      #c8addd 75%,
+      #fde4d0 12%,
+      #f9cfc8 22%,
+      #f2b5d4 35%,
+      #e89fd8 50%,
+      #d89fdb 62%,
+      #c8addd 72%,
       #b8c5e0 85%,
       #a8d8e8 100%);
     background-attachment: fixed;
     overflow: hidden;
+    min-height: auto;
   }
   
   .cli-hero::before {
@@ -94,15 +95,15 @@ const CSS = `
   .cli-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--ink3); }
   
   .cli-h1 {
-    font-family: var(--display); font-size: clamp(42px,6vw,72px);
-    font-weight: 400; line-height: 1.1; letter-spacing: -0.02em;
-    color: var(--ink); margin: 0 auto 24px; max-width: 900px;
+    font-family: var(--display); font-size: clamp(36px,5.5vw,64px);
+    font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--ink); margin: 0 auto 16px; max-width: 850px;
   }
   .cli-h1 em { font-style: italic; color: var(--accent); }
   
   .cli-subtitle {
-    font-size: clamp(16px,2vw,18px); color: var(--ink3);
-    line-height: 1.7; max-width: 700px; margin: 0 auto 48px;
+    font-size: 16px; color: var(--ink2);
+    margin: 0 auto 32px; max-width: 680px; line-height: 1.6;
   }
 
   .cli-actions {
@@ -141,21 +142,40 @@ const CSS = `
   }
 
   .cli-install {
-    background: white; border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px 20px;
-    font-family: var(--mono); font-size: 13px; font-weight: 500;
-    color: var(--ink2); display: inline-flex;
-    align-items: center; gap: 14px; max-width: 520px;
-    margin: 0 auto; box-shadow: 0 2px 8px rgba(26,23,20,.06);
+    background: linear-gradient(135deg, #0f0e0c 0%, #1a1714 100%);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px; padding: 18px 28px;
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    color: #e8e8e0; display: inline-flex;
+    align-items: center; gap: 16px; max-width: 580px;
+    margin: 0 auto; 
+    box-shadow: 0 12px 32px rgba(0,0,0,.25);
   }
-  .cli-install span { color: var(--ink3); }
+  .cli-install span { 
+    color: #6dbfe5;
+    font-weight: 600;
+  }
   .cli-copy-btn {
-    background: none; border: none; cursor: pointer;
-    color: var(--ink4); padding: 4px 8px;
-    display: flex; align-items: center;
-    transition: color .2s;
+    background: rgba(44,95,138,0.2);
+    border: 1px solid rgba(44,95,138,0.4);
+    cursor: pointer;
+    color: #6dbfe5; 
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: flex; 
+    align-items: center;
+    gap: 6px;
+    transition: all .3s;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: auto;
   }
-  .cli-copy-btn:hover { color: var(--ink); }
+  .cli-copy-btn:hover { 
+    background: rgba(44,95,138,0.3);
+    border-color: rgba(44,95,138,0.6);
+    box-shadow: 0 0 12px rgba(109,191,229,.2);
+  }
 
   /* FEATURE SECTION */
   .cli-features {
@@ -192,56 +212,73 @@ const CSS = `
     gap: 24px; margin-bottom: 60px;
   }
   .cli-feature-card {
-    background: linear-gradient(135deg, #fdfbf8 0%, var(--paper2) 100%);
+    background: white;
     border: 1px solid var(--border);
-    border-radius: 16px; padding: 36px 32px;
+    border-radius: 16px; padding: 40px 32px;
     transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
   
   .cli-feature-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: 
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cardNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3' numOctaves='3' seed='1' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23cardNoise)' opacity='1'/%3E%3C/svg%3E");
-    background-size: 100px 100px;
-    opacity: 0.15;
+    top: -12px; right: -12px;
+    width: 80px; height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 15 Q35 5, 60 20' stroke='%232c5f8a' stroke-width='2' fill='none' opacity='0.15' stroke-linecap='round'/%3E%3Cpath d='M5 50 L65 40' stroke='%232c5f8a' stroke-width='1.5' fill='none' opacity='0.1' stroke-linecap='round'/%3E%3Cpath d='M20 70 Q40 65, 70 75' stroke='%23e89fd8' stroke-width='1.5' fill='none' opacity='0.12' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 100%;
+    background-repeat: no-repeat;
     pointer-events: none;
-    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+  
+  .cli-feature-card::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: -16px;
+    width: 100px; height: 100px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q25 10, 50 25' stroke='%23d89fdb' stroke-width='1.5' fill='none' opacity='0.12' stroke-linecap='round'/%3E%3Cpath d='M70 0 L85 60' stroke='%232c5f8a' stroke-width='1' fill='none' opacity='0.08' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
   }
   
   .cli-feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 48px rgba(26,23,20,.12), 0 1px 3px rgba(26,23,20,.08);
+    box-shadow: 0 20px 48px rgba(26,23,20,.14), 0 2px 8px rgba(26,23,20,.06);
     border-color: var(--accent);
-    background: linear-gradient(135deg, white 0%, #fcf9f5 100%);
   }
   
   .cli-feature-icon {
     width: 56px; height: 56px;
     display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(44,95,138,0.08) 0%, rgba(44,95,138,0.04) 100%);
-    border: 1.5px solid rgba(44,95,138,0.2);
+    background: linear-gradient(135deg, rgba(44,95,138,0.1) 0%, rgba(44,95,138,0.05) 100%);
+    border: 1.5px solid rgba(44,95,138,0.25);
     border-radius: 12px; margin-bottom: 24px;
     color: var(--accent);
     font-weight: 600;
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    transition: all .3s ease;
+  }
+  
+  .cli-feature-card:hover .cli-feature-icon {
+    background: linear-gradient(135deg, rgba(44,95,138,0.15) 0%, rgba(44,95,138,0.08) 100%);
+    border-color: var(--accent);
   }
   
   .cli-feature-title {
     font-family: var(--display); font-size: 20px; font-weight: 400;
     color: var(--ink); margin-bottom: 12px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
   }
   
   .cli-feature-desc {
     font-size: 15px; color: var(--ink3); line-height: 1.65;
     position: relative;
-    z-index: 2;
+    z-index: 10;
   }
 
   /* DASHBOARD SECTION */
@@ -400,29 +437,38 @@ const CSS = `
 
   /* CODE BLOCK */
   .cli-code-block {
-    background: var(--ink); border: 1px solid rgba(255,255,255,.1);
-    border-radius: 8px; overflow: hidden;
-    font-family: var(--mono); color: #f8f8f2;
-    font-size: 12px; line-height: 1.75;
-    margin: 32px 0;
+    background: #0f0e0c; border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px; overflow: hidden;
+    font-family: var(--mono); color: #e8e8e0;
+    font-size: 13px; line-height: 1.8;
+    margin: 40px 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
   }
   .cli-code-header {
-    background: #2a2520; padding: 10px 16px;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    display: flex; align-items: center; gap: 8px;
-    font-size: 10px; color: rgba(255,255,255,.3);
-    letter-spacing: 0.04em;
+    background: #1a1714; padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; color: rgba(255,255,255,.35);
+    letter-spacing: 0.05em;
+    font-weight: 500;
   }
   .cli-code-dots {
-    display: flex; gap: 6px;
+    display: flex; gap: 8px;
   }
   .cli-code-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: #555;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #444;
   }
+  .cli-code-dot:nth-child(1) { background: #ff6058; }
+  .cli-code-dot:nth-child(2) { background: #ffbd2e; }
+  .cli-code-dot:nth-child(3) { background: #27c93f; }
   .cli-code-body {
-    padding: 20px 22px; overflow-x: auto; white-space: pre;
+    padding: 24px 28px; overflow-x: auto; white-space: pre;
   }
+  .cli-code-body .str { color: #a6d155; }
+  .cli-code-body .num { color: #d4a574; }
+  .cli-code-body .key { color: #6dbfe5; }
+  .cli-code-body .bool { color: #d9829b; }
 
   /* ANIMATIONS */
   @keyframes fadeUp {
@@ -430,6 +476,37 @@ const CSS = `
     to { opacity: 1; transform: translateY(0); }
   }
   .fade-in { animation: fadeUp .6s ease both; }
+  
+  @keyframes typing {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  
+  .cli-code-terminal {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-weight: 500;
+  }
+  
+  .cli-code-text {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    animation: typing 2.5s steps(50, end) infinite;
+  }
+  
+  .cli-code-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #6dbfe5;
+    animation: blink 1s infinite;
+  }
 `;
 
 export default function CLIPage() {
@@ -661,6 +738,59 @@ $ npx @hookflo/tern-dev --port 3000
         </div>
       </section>
 
+      {/* LIVE DASHBOARD */}
+      <section className="cli-dashboard-section" style={{background: 'linear-gradient(180deg, #f0ebe2 0%, #f7f4ef 100%)'}}>
+        <div className="cli-dashboard-inner">
+          <div className="cli-section-label">Live Dashboard</div>
+          <h2 className="cli-h2">Real-time webhook debugging</h2>
+          <p className="cli-section-desc">Watch every webhook in real-time with full payload inspection, headers, responses, and detailed metrics. The local dashboard at http://localhost:2019 gives you instant visibility.</p>
+
+          <div style={{marginTop: 48, borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border)', boxShadow: '0 12px 40px rgba(26,23,20,.12)'}}>
+            <img src="/tern-dashboard.jpg" alt="Tern CLI Live Dashboard showing real-time webhook events with payload inspection" style={{width: '100%', height: 'auto', display: 'block'}} />
+          </div>
+
+          <div style={{marginTop: 40, background: 'white', border: '1px solid var(--border)', borderRadius: '16px', padding: '32px', boxShadow: '0 4px 12px rgba(26,23,20,.08)'}}>
+            <div style={{fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--ink4)', marginBottom: 24, letterSpacing: '0.05em', fontWeight: 600}}>LIVE EVENTS LOG SAMPLE • 3 webhooks received</div>
+            
+            <div style={{marginBottom: 16, paddingBottom: 16, borderBottom: '1px solid var(--border)'}}>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8}}>
+                <span style={{fontFamily: 'var(--mono)', fontSize: '12px', color: 'var(--ink)', fontWeight: 600}}>POST /stripe/webhook</span>
+                <span style={{background: '#dcfce7', color: '#166534', padding: '4px 10px', borderRadius: '4px', fontFamily: 'var(--mono)', fontSize: '10px', fontWeight: 700}}>200 OK</span>
+              </div>
+              <div style={{display: 'flex', gap: '16px', fontSize: '12px', color: 'var(--ink3)'}}>
+                <span>event_id: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>evt_123abc</code></span>
+                <span>type: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>charge.succeeded</code></span>
+                <span style={{marginLeft: 'auto'}}>2.4ms</span>
+              </div>
+            </div>
+
+            <div style={{marginBottom: 16, paddingBottom: 16, borderBottom: '1px solid var(--border)'}}>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8}}>
+                <span style={{fontFamily: 'var(--mono)', fontSize: '12px', color: 'var(--ink)', fontWeight: 600}}>POST /github/events</span>
+                <span style={{background: '#fecaca', color: '#7f1d1d', padding: '4px 10px', borderRadius: '4px', fontFamily: 'var(--mono)', fontSize: '10px', fontWeight: 700}}>500 Error</span>
+              </div>
+              <div style={{display: 'flex', gap: '16px', fontSize: '12px', color: 'var(--ink3)'}}>
+                <span>event_id: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>evt_456def</code></span>
+                <span>type: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>push</code></span>
+                <span style={{marginLeft: 'auto'}}>45ms</span>
+              </div>
+            </div>
+
+            <div>
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8}}>
+                <span style={{fontFamily: 'var(--mono)', fontSize: '12px', color: 'var(--ink)', fontWeight: 600}}>POST /custom/handler</span>
+                <span style={{background: '#dbeafe', color: '#0c4a6e', padding: '4px 10px', borderRadius: '4px', fontFamily: 'var(--mono)', fontSize: '10px', fontWeight: 700}}>202 Accepted</span>
+              </div>
+              <div style={{display: 'flex', gap: '16px', fontSize: '12px', color: 'var(--ink3)'}}>
+                <span>event_id: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>evt_789ghi</code></span>
+                <span>type: <code style={{color: 'var(--accent)', fontFamily: 'var(--mono)'}}>custom.test</code></span>
+                <span style={{marginLeft: 'auto'}}>1.8ms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CONFIG FILE */}
       <section className="cli-dashboard-section">
         <div className="cli-dashboard-inner">
@@ -681,28 +811,22 @@ $ npx @hookflo/tern-dev --port 3000
               </ul>
             </div>
 
-            <div className="cli-dashboard-visual">
-              <div className="line">
-                <span style={{color: '#c792ea'}}>{`{`}</span>
+            <div className="cli-code-block">
+              <div className="cli-code-header">
+                <div className="cli-code-dots">
+                  <div className="cli-code-dot" />
+                  <div className="cli-code-dot" />
+                  <div className="cli-code-dot" />
+                </div>
+                <span>tern.config.json</span>
               </div>
-              <div className="line" style={{paddingLeft: 16}}>
-                <span style={{color: '#c3e88d'}}>{`"port"`}</span><span>: </span><span style={{color: '#ffcb6b'}}>3000</span><span>,</span>
-              </div>
-              <div className="line" style={{paddingLeft: 16}}>
-                <span style={{color: '#c3e88d'}}>{`"rateLimit"`}</span><span>: </span><span style={{color: '#ffcb6b'}}>100</span><span>,</span>
-              </div>
-              <div className="line" style={{paddingLeft: 16}}>
-                <span style={{color: '#c3e88d'}}>{`"allowIp"`}</span><span>: [</span>
-              </div>
-              <div className="line" style={{paddingLeft: 32}}>
-                <span style={{color: '#ffcb6b'}}>{`"54.187.174.169"`}</span>
-              </div>
-              <div className="line" style={{paddingLeft: 16}}>
-                <span>]</span>
-              </div>
-              <div className="line">
-                <span style={{color: '#c792ea'}}>{`}`}</span>
-              </div>
+              <div className="cli-code-body">{`{
+  <span className="key">"port"</span>: <span className="num">3000</span>,
+  <span className="key">"rateLimit"</span>: <span className="num">100</span>,
+  <span className="key">"allowIp"</span>: [
+    <span className="str">"54.187.174.169"</span>
+  ]
+}`}</div>
             </div>
           </div>
         </div>
@@ -711,12 +835,20 @@ $ npx @hookflo/tern-dev --port 3000
       {/* CTA */}
       <section className="cli-cta">
         <div className="cli-cta-inner">
-          <h2 className="cli-cta-h">Ready to test webhooks locally?</h2>
-          <p className="cli-cta-desc">No account. No ngrok. No storage. Just one command and you're live.</p>
-          <a href="https://github.com/Hookflo/tern-dev" className="cli-cta-btn" target="_blank" rel="noreferrer">
-            <Terminal size={16} />
-            Get Started on GitHub
-          </a>
+          <div style={{marginBottom: 60}}>
+            <h2 className="cli-cta-h">Ready to test webhooks locally?</h2>
+            <p className="cli-cta-desc">No account. No ngrok. No storage. Just one command and you're live.</p>
+          </div>
+          <div style={{display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap'}}>
+            <a href="https://github.com/Hookflo/tern-dev" className="cli-btn-primary" target="_blank" rel="noreferrer" style={{fontSize: '14px', padding: '16px 40px'}}>
+              <Terminal size={18} />
+              Start on GitHub
+            </a>
+            <a href="https://www.npmjs.com/package/@hookflo/tern-dev" className="cli-btn-secondary" target="_blank" rel="noreferrer" style={{fontSize: '14px', padding: '16px 40px'}}>
+              <Download size={18} />
+              View on NPM
+            </a>
+          </div>
         </div>
       </section>
     </div>
