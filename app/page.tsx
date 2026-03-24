@@ -883,8 +883,13 @@ export default function HomePage() {
               no fragile hand-rolled crypto.
             </p>
             <div className="t-actions fade-up-4">
-              <a href="#how" className="t-btn-primary">
-                Get started
+              <a
+                href="https://github.com/Hookflo/tern"
+                target="_blank"
+                rel="noreferrer"
+                className="t-btn-primary"
+              >
+                Star on GitHub
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
                     d="M3 7h8M8 4l3 3-3 3"
@@ -896,7 +901,7 @@ export default function HomePage() {
                 </svg>
               </a>
               <Link href="/cli" className="t-btn-secondary">
-                Open Tern CLI
+                Tern CLI
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path
                     d="M2 10L10 2M10 2H4M10 2v6"
@@ -906,22 +911,6 @@ export default function HomePage() {
                   />
                 </svg>
               </Link>
-              <a
-                href="https://github.com/Hookflo/tern"
-                target="_blank"
-                rel="noreferrer"
-                className="t-btn-secondary"
-              >
-                Star on GitHub
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M2 10L10 2M10 2H4M10 2v6"
-                    stroke="currentColor"
-                    strokeWidth="1.3"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </a>
             </div>
             <div className="t-hero-badges fade-up-5">
               <div className="t-oss-badge">

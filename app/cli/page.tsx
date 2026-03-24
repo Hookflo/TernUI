@@ -277,6 +277,8 @@ const CSS = `
   box-shadow: 0 12px 40px rgba(26,25,22,0.22), 0 2px 6px rgba(26,25,22,0.12);
   max-width: 580px; width: min(100%, 580px);
   border: 1px solid rgba(255,255,255,0.06);
+
+
 }
 .install-prefix {
   padding: 15px 18px;
@@ -905,7 +907,7 @@ export default function CLIPage() {
 
         {/* Boxed border */}
         <div className="hero-box">
-                   <svg id="noice" className=" inset-0 w-full h-full">
+          <svg id="noice" className=" inset-0 w-full h-full">
             <filter id="noise-filter">
               <feTurbulence
                 type="fractalNoise"
@@ -969,26 +971,26 @@ export default function CLIPage() {
             View on NPM
           </a>
         </div>
-
-        <div className="install-strip au au4">
-          <span className="install-prefix">$</span>
-          <span className="install-cmd">{CMD}</span>
-          <button
-            className={`install-copy${copied ? " copied" : ""}`}
-            onClick={handleCopy}
-          >
-            {copied ? (
-              <>
-                <Check size={12} /> Copied
-              </>
-            ) : (
-              <>
-                <Copy size={12} /> Copy
-              </>
-            )}
-          </button>
+        <div className="px-30">
+          <div className="install-strip au au4">
+            <span className="install-prefix">$</span>
+            <span className="install-cmd">{CMD}</span>
+            <button
+              className={`install-copy${copied ? " copied" : ""}`}
+              onClick={handleCopy}
+            >
+              {copied ? (
+                <>
+                  <Check size={12} /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy size={12} /> Copy
+                </>
+              )}
+            </button>
+          </div>
         </div>
-
         <div className="hero-hint text-black">
           three steps to live webhook debugging
         </div>
@@ -1029,24 +1031,22 @@ export default function CLIPage() {
       {/* ── TERMINAL / QUICKSTART ── */}
       <section className="terminal-section">
         <div className="terminal-inner">
-       
-
           <div className="terminal-grid">
             <div>
-                 <div className="section-label">
-            <span className="section-label-dot" />
-            Getting Started
-          </div>
-          <h2 className="section-h2 ">
-            Three steps to <em>live</em>
-          </h2>
+              <div className="section-label">
+                <span className="section-label-dot" />
+                Getting Started
+              </div>
+              <h2 className="section-h2 ">
+                Three steps to <em>live</em>
+              </h2>
               <p
                 style={{
                   fontSize: 14.5,
                   color: "var(--ink3)",
                   lineHeight: 1.7,
                   marginBottom: 8,
-                  marginTop:30
+                  marginTop: 30,
                 }}
               >
                 No installs, no configuration, no account. Run{" "}
@@ -1095,7 +1095,6 @@ export default function CLIPage() {
                 </span>
               </div>
               <div className="term-body">
-                
                 <div className="cli-code-body">{`# 1. Start the tunnel
 $ npx @hookflo/tern-dev --port 3000
 
