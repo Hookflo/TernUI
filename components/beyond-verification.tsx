@@ -82,7 +82,7 @@ const PLATFORMS = [
   { name: "Fal AI", href: "/platforms/falai" },
   { name: "Replicate", href: "/platforms/replicate" },
   { name: "Shopify", href: "/#platforms" },
-  { name: "+ 11 more", href: "/#platforms" },
+  { name: "+ 13 more", href: "/#platforms" },
 ];
 
 const FRAMEWORKS = [
@@ -119,7 +119,7 @@ export default function BeyondVerificationSection() {
               <div className="bv-card-num">01</div>
               <div className="bv-card-title">Cross-platform verification</div>
               <div className="bv-card-desc">
-                16 platforms. One SDK. HMAC-SHA256, Ed25519, SHA1 — Tern handles
+                19 platforms. One SDK. HMAC-SHA256, Ed25519, SHA1 — Tern handles
                 the algorithm. You write the handler.
               </div>
             </div>
