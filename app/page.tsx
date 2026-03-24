@@ -438,6 +438,13 @@ const css = `
 const PLATFORMS = [
   { name: "Stripe", icon: "/Stripe.svg", bg: "#f0f9f4", verified: true },
   { name: "Clerk", icon: "/clerk.svg", bg: "#f5f0fa", verified: true },
+  {
+    name: "Standard Webhooks",
+    icon: "/standardwebhooks.svg",
+    bg: "#f4f7ff",
+    verified: true,
+  },
+  { name: "Linear", icon: "/linear.svg", bg: "#f5f5f5", verified: true },
   { name: "GitHub", icon: "/github.svg", bg: "#f0f5ff", verified: true },
   { name: "Shopify", icon: "/shopify.svg", bg: "#fff5f0", verified: true },
   { name: "Polar", icon: "/polar.svg", bg: "#f5f5f0", verified: true },
@@ -1001,7 +1008,7 @@ export default function HomePage() {
             </div>
             <div className="t-hero-stats">
               <div className="t-hero-stat">
-                <div className="t-hero-stat-val">15+</div>
+                <div className="t-hero-stat-val">19+</div>
                 <div className="t-hero-stat-lbl">Platforms</div>
               </div>
               <div className="t-hero-stat">

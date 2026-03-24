@@ -27,6 +27,18 @@ const PLATFORMS: PlatformConfig[] = [
     secretEnv: "CLERK_WEBHOOK_SECRET",
   },
   {
+    id: "standardwebhooks",
+    name: "Standard Webhooks",
+    svgName: "standardwebhooks.svg",
+    secretEnv: "STANDARDWEBHOOKS_WEBHOOK_SECRET",
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    svgName: "linear.svg",
+    secretEnv: "LINEAR_WEBHOOK_SECRET",
+  },
+  {
     id: "github",
     name: "GitHub",
     svgName: "github.svg",
