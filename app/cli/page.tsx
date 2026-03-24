@@ -50,11 +50,23 @@ const CSS = `
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2' /%3E%3CfeDisplacementMap in='SourceGraphic' scale='30' xChannelSelector='R' yChannelSelector='G' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    opacity: 0.6;
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' seed='2' /%3E%3CfeDisplacementMap in='SourceGraphic' scale='35' xChannelSelector='R' yChannelSelector='G' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    opacity: 0.7;
     pointer-events: none;
     mix-blend-mode: overlay;
+  }
+  
+  .cli-hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(255,255,255,0.03) 0%, transparent 40%);
+    pointer-events: none;
+    mix-blend-mode: multiply;
   }
   
   .cli-hero > * {
