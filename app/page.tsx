@@ -895,6 +895,17 @@ export default function HomePage() {
                   />
                 </svg>
               </a>
+              <Link href="/cli" className="t-btn-secondary">
+                Open Tern CLI
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path
+                    d="M2 10L10 2M10 2H4M10 2v6"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </Link>
               <a
                 href="https://github.com/Hookflo/tern"
                 target="_blank"

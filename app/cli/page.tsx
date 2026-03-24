@@ -52,6 +52,7 @@ const CSS = `
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ── NOISE LAYER (global) ── */
@@ -74,7 +75,7 @@ const CSS = `
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 150px clamp(24px,5vw,80px) 90px;
+  padding: 150px clamp(16px,5vw,80px) 90px;
   text-align: center;
   overflow: hidden;
   isolation: isolate;
@@ -150,7 +151,7 @@ const CSS = `
 
 /* ── BOXED BORDER (ankar.ai style) ── */
 .hero-box {
-  position: absolute; inset: 70px; z-index: 2; pointer-events: none;
+  position: absolute; inset: clamp(16px,5vw,70px); z-index: 2; pointer-events: none;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 4px;
         background: linear-gradient(135deg, 
@@ -274,7 +275,7 @@ const CSS = `
   display: inline-flex; align-items: center;
   background: var(--ink); border-radius: 10px; overflow: hidden;
   box-shadow: 0 12px 40px rgba(26,25,22,0.22), 0 2px 6px rgba(26,25,22,0.12);
-  max-width: 580px; width: 100%;
+  max-width: 580px; width: min(100%, 580px);
   border: 1px solid rgba(255,255,255,0.06);
 }
 .install-prefix {
@@ -284,7 +285,7 @@ const CSS = `
   flex-shrink: 0;
 }
 .install-cmd {
-  flex: 1; padding: 15px 16px;
+  flex: 1; min-width: 0; padding: 15px 16px;
   font-family: var(--mono); font-size: 12.5px; font-weight: 400;
   color: rgba(240,238,232,0.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   background: transparent; border: none; outline: none;
@@ -571,11 +572,22 @@ const CSS = `
   border-top: 1px solid var(--border);
 }
 .flags-inner { max-width: 1360px; margin: 0 auto; }
+.flags-table-wrap {
+  width: 100%;
+  margin-top: 44px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
 
 .flags-table {
-  width: 100%; border-collapse: collapse;
-  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-  margin-top: 44px; background: var(--surface);
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  border: none;
+  background: var(--surface);
 }
 .flags-table th {
   background: var(--bg2); font-family: var(--mono); font-size: 9px;
@@ -593,6 +605,37 @@ const CSS = `
 .flag-type { font-family: var(--mono); font-size: 11px; color: var(--teal); }
 .flag-default { font-family: var(--mono); font-size: 11px; color: var(--ink4); }
 .flag-desc { color: var(--ink2); font-size: 13px; line-height: 1.55; }
+@media(max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 116px 12px 56px;
+  }
+  .hero-box {
+    inset: 8px;
+    background-attachment: scroll;
+  }
+  .hero-sub {
+    margin-bottom: 28px;
+  }
+  .hero-actions {
+    width: 100%;
+    margin-bottom: 28px;
+  }
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .install-strip {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+  }
+  .install-prefix,
+  .install-cmd,
+  .install-copy {
+    padding: 12px;
+  }
+}
 
 /* ═══════════════════════════ CONFIG SECTION ═══════════════════════════ */
 .config-section {
@@ -1225,34 +1268,36 @@ $ npx @hookflo/tern-dev --port 3000
             persistent configuration.
           </p>
 
-          <table className="flags-table">
-            <thead>
-              <tr>
-                <th>Flag</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {flags.map((f, i) => (
-                <tr key={i}>
-                  <td>
-                    <span className="flag-name">{f.name}</span>
-                  </td>
-                  <td>
-                    <span className="flag-type">{f.type}</span>
-                  </td>
-                  <td>
-                    <span className="flag-default">{f.def}</span>
-                  </td>
-                  <td>
-                    <span className="flag-desc">{f.desc}</span>
-                  </td>
+          <div className="flags-table-wrap">
+            <table className="flags-table">
+              <thead>
+                <tr>
+                  <th>Flag</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {flags.map((f, i) => (
+                  <tr key={i}>
+                    <td>
+                      <span className="flag-name">{f.name}</span>
+                    </td>
+                    <td>
+                      <span className="flag-type">{f.type}</span>
+                    </td>
+                    <td>
+                      <span className="flag-default">{f.def}</span>
+                    </td>
+                    <td>
+                      <span className="flag-desc">{f.desc}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
