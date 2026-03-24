@@ -4,7 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Feather } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { NextjsIcon } from "@/app/page";
+
+const NextjsIcon = () => (
+  <svg viewBox="0 0 180 180" fill="white" width="20" height="20">
+    <text x="90" y="110" textAnchor="middle" fontSize="60" fontWeight="bold" fill="white">N</text>
+  </svg>
+);
 
 // Copy the nav CSS from page.tsx — added here so it works standalone
 const NAV_CSS = `
