@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Tern by Hookflo",
     images: [
       {
-        url: "https://tern.hookflo.com/tern-cli-og.svg",
+        url: "https://tern.hookflo.com/tern-cli-og.png",
         width: 1200,
         height: 630,
         alt: "Tern CLI — Instant Local Webhook Tunnel",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Tern CLI — Local Webhook Tunnel. No ngrok. No Account.",
     description:
       "One command. Instant HTTPS tunnel, live dashboard, replay, and DLQ — all in RAM. Zero data leaves your machine.",
-    images: ["https://tern.hookflo.com/tern-cli-og.svg"],
+    images: ["https://tern.hookflo.com/tern-cli-og.png"],
   },
 };
 
